@@ -1,0 +1,42 @@
+[project]
+name = "kundli-engine"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Aditya_Ahlawat", email = "adityaahlawat544@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.14.0",
+    "pyswisseph>=2.10.3.2",
+    "timezonefinder>=9.0.0",
+    "tzdata>=2026.5",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.23,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "kundli"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.168.5",
+    "mypy>=2.4.0",
+    "pytest>=9.1.1",
+    "ruff>=0.17.0",
+]
+
+[tool.ruff]
+line-length = 120
+src = ["src", "tests"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+files = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
