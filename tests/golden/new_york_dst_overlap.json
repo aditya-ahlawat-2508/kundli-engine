@@ -1,0 +1,150 @@
+{
+ "date": "2023-11-05",
+ "expected": {
+  "lagna": {
+   "deg": 6.3276,
+   "sign": 4
+  },
+  "notes": [],
+  "planets": {
+   "Jupiter": {
+    "d10": 5,
+    "d9": 4,
+    "deg": 16.046,
+    "nak": 1,
+    "pada": 1,
+    "retro": true,
+    "sign": 0
+   },
+   "Ketu": {
+    "d10": 6,
+    "d9": 6,
+    "deg": 0.5539,
+    "nak": 13,
+    "pada": 3,
+    "retro": false,
+    "sign": 6
+   },
+   "Mars": {
+    "d10": 1,
+    "d9": 0,
+    "deg": 22.3045,
+    "nak": 15,
+    "pada": 1,
+    "retro": false,
+    "sign": 6
+   },
+   "Mercury": {
+    "d10": 3,
+    "d9": 2,
+    "deg": 28.1112,
+    "nak": 15,
+    "pada": 3,
+    "retro": false,
+    "sign": 6
+   },
+   "Moon": {
+    "d10": 4,
+    "d9": 8,
+    "deg": 16.922,
+    "nak": 8,
+    "pada": 1,
+    "retro": false,
+    "sign": 3
+   },
+   "Rahu": {
+    "d10": 0,
+    "d9": 0,
+    "deg": 0.5539,
+    "nak": 0,
+    "pada": 1,
+    "retro": false,
+    "sign": 0
+   },
+   "Saturn": {
+    "d10": 0,
+    "d9": 7,
+    "deg": 6.3264,
+    "nak": 22,
+    "pada": 4,
+    "retro": false,
+    "sign": 10
+   },
+   "Sun": {
+    "d10": 0,
+    "d9": 11,
+    "deg": 18.3428,
+    "nak": 14,
+    "pada": 4,
+    "retro": false,
+    "sign": 6
+   },
+   "Venus": {
+    "d10": 1,
+    "d9": 9,
+    "deg": 2.3898,
+    "nak": 11,
+    "pada": 2,
+    "retro": false,
+    "sign": 5
+   }
+  },
+  "sav": [
+   23,
+   33,
+   28,
+   30,
+   38,
+   25,
+   26,
+   27,
+   29,
+   26,
+   28,
+   24
+  ],
+  "vimshottari": [
+   [
+    "Mercury",
+    "2023-07-09T08:09:37+00:00"
+   ],
+   [
+    "Ketu",
+    "2040-07-08T14:09:37+00:00"
+   ],
+   [
+    "Venus",
+    "2047-07-09T08:09:37+00:00"
+   ],
+   [
+    "Sun",
+    "2067-07-09T08:09:37+00:00"
+   ],
+   [
+    "Moon",
+    "2073-07-08T20:09:37+00:00"
+   ],
+   [
+    "Mars",
+    "2083-07-09T08:09:37+00:00"
+   ],
+   [
+    "Rahu",
+    "2090-07-09T02:09:37+00:00"
+   ],
+   [
+    "Jupiter",
+    "2108-07-09T14:09:37+00:00"
+   ],
+   [
+    "Saturn",
+    "2124-07-09T14:09:37+00:00"
+   ]
+  ]
+ },
+ "fold": 0,
+ "q": "New York City, United States",
+ "source": "kundli-engine regression snapshot (NOT JHora)",
+ "time": "01:30:00",
+ "why": "DST overlap fold=0"
+}

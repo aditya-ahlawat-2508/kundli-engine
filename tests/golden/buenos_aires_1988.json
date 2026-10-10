@@ -1,0 +1,150 @@
+{
+ "date": "1988-08-08",
+ "expected": {
+  "lagna": {
+   "deg": 0.2047,
+   "sign": 4
+  },
+  "notes": [],
+  "planets": {
+   "Jupiter": {
+    "d10": 0,
+    "d9": 11,
+    "deg": 9.0016,
+    "nak": 2,
+    "pada": 4,
+    "retro": false,
+    "sign": 1
+   },
+   "Ketu": {
+    "d10": 10,
+    "d9": 6,
+    "deg": 20.6841,
+    "nak": 10,
+    "pada": 3,
+    "retro": true,
+    "sign": 4
+   },
+   "Mars": {
+    "d10": 0,
+    "d9": 7,
+    "deg": 15.543,
+    "nak": 25,
+    "pada": 4,
+    "retro": false,
+    "sign": 11
+   },
+   "Mercury": {
+    "d10": 8,
+    "d9": 11,
+    "deg": 28.1019,
+    "nak": 8,
+    "pada": 4,
+    "retro": false,
+    "sign": 3
+   },
+   "Moon": {
+    "d10": 4,
+    "d9": 8,
+    "deg": 6.9601,
+    "nak": 5,
+    "pada": 1,
+    "retro": false,
+    "sign": 2
+   },
+   "Rahu": {
+    "d10": 4,
+    "d9": 0,
+    "deg": 20.6841,
+    "nak": 24,
+    "pada": 1,
+    "retro": true,
+    "sign": 10
+   },
+   "Saturn": {
+    "d10": 8,
+    "d9": 0,
+    "deg": 2.6114,
+    "nak": 18,
+    "pada": 1,
+    "retro": true,
+    "sign": 8
+   },
+   "Sun": {
+    "d10": 6,
+    "d9": 9,
+    "deg": 22.411,
+    "nak": 8,
+    "pada": 2,
+    "retro": false,
+    "sign": 3
+   },
+   "Venus": {
+    "d10": 4,
+    "d9": 8,
+    "deg": 7.5207,
+    "nak": 5,
+    "pada": 1,
+    "retro": false,
+    "sign": 2
+   }
+  },
+  "sav": [
+   38,
+   32,
+   24,
+   21,
+   26,
+   27,
+   30,
+   29,
+   28,
+   27,
+   24,
+   31
+  ],
+  "vimshottari": [
+   [
+    "Rahu",
+    "1988-03-16T18:42:35+00:00"
+   ],
+   [
+    "Jupiter",
+    "2006-03-17T06:42:35+00:00"
+   ],
+   [
+    "Saturn",
+    "2022-03-17T06:42:35+00:00"
+   ],
+   [
+    "Mercury",
+    "2041-03-17T00:42:35+00:00"
+   ],
+   [
+    "Ketu",
+    "2058-03-17T06:42:35+00:00"
+   ],
+   [
+    "Venus",
+    "2065-03-17T00:42:35+00:00"
+   ],
+   [
+    "Sun",
+    "2085-03-17T00:42:35+00:00"
+   ],
+   [
+    "Moon",
+    "2091-03-17T12:42:35+00:00"
+   ],
+   [
+    "Mars",
+    "2101-03-18T00:42:35+00:00"
+   ]
+  ]
+ },
+ "fold": null,
+ "q": "Buenos Aires, Argentina",
+ "source": "kundli-engine regression snapshot (NOT JHora)",
+ "time": "08:08:00",
+ "why": "southern hemisphere"
+}

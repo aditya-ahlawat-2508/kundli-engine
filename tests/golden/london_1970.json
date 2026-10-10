@@ -1,0 +1,150 @@
+{
+ "date": "1970-11-02",
+ "expected": {
+  "lagna": {
+   "deg": 15.5915,
+   "sign": 0
+  },
+  "notes": [],
+  "planets": {
+   "Jupiter": {
+    "d10": 1,
+    "d9": 0,
+    "deg": 21.5708,
+    "nak": 15,
+    "pada": 1,
+    "retro": false,
+    "sign": 6
+   },
+   "Ketu": {
+    "d10": 6,
+    "d9": 1,
+    "deg": 6.4899,
+    "nak": 9,
+    "pada": 2,
+    "retro": true,
+    "sign": 4
+   },
+   "Mars": {
+    "d10": 5,
+    "d9": 1,
+    "deg": 14.9478,
+    "nak": 12,
+    "pada": 2,
+    "retro": false,
+    "sign": 5
+   },
+   "Mercury": {
+    "d10": 0,
+    "d9": 0,
+    "deg": 20.3105,
+    "nak": 15,
+    "pada": 1,
+    "retro": false,
+    "sign": 6
+   },
+   "Moon": {
+    "d10": 0,
+    "d9": 11,
+    "deg": 27.517,
+    "nak": 17,
+    "pada": 4,
+    "retro": false,
+    "sign": 7
+   },
+   "Rahu": {
+    "d10": 0,
+    "d9": 7,
+    "deg": 6.4899,
+    "nak": 22,
+    "pada": 4,
+    "retro": true,
+    "sign": 10
+   },
+   "Saturn": {
+    "d10": 8,
+    "d9": 7,
+    "deg": 26.4236,
+    "nak": 1,
+    "pada": 4,
+    "retro": true,
+    "sign": 0
+   },
+   "Sun": {
+    "d10": 11,
+    "d9": 10,
+    "deg": 16.3864,
+    "nak": 14,
+    "pada": 3,
+    "retro": false,
+    "sign": 6
+   },
+   "Venus": {
+    "d10": 3,
+    "d9": 2,
+    "deg": 28.4505,
+    "nak": 15,
+    "pada": 3,
+    "retro": true,
+    "sign": 6
+   }
+  },
+  "sav": [
+   26,
+   25,
+   31,
+   35,
+   38,
+   32,
+   20,
+   19,
+   25,
+   28,
+   33,
+   25
+  ],
+  "vimshottari": [
+   [
+    "Mercury",
+    "1957-01-01T18:09:32+00:00"
+   ],
+   [
+    "Ketu",
+    "1974-01-02T00:09:32+00:00"
+   ],
+   [
+    "Venus",
+    "1981-01-01T18:09:32+00:00"
+   ],
+   [
+    "Sun",
+    "2001-01-01T18:09:32+00:00"
+   ],
+   [
+    "Moon",
+    "2007-01-02T06:09:32+00:00"
+   ],
+   [
+    "Mars",
+    "2017-01-01T18:09:32+00:00"
+   ],
+   [
+    "Rahu",
+    "2024-01-02T12:09:32+00:00"
+   ],
+   [
+    "Jupiter",
+    "2042-01-02T00:09:32+00:00"
+   ],
+   [
+    "Saturn",
+    "2058-01-02T00:09:32+00:00"
+   ]
+  ]
+ },
+ "fold": null,
+ "q": "London, United Kingdom",
+ "source": "kundli-engine regression snapshot (NOT JHora)",
+ "time": "17:25:00",
+ "why": "UK"
+}

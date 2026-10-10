@@ -1,0 +1,32 @@
+# Timeline scoring weights - versioned and tunable. Output records `weights_version`.
+version: 1
+dasha_level_weights: {maha: 1.0, antar: 0.7, pratyantar: 0.35}
+significator:
+  rules_house: 1.0          # dasha lord rules a house of the life area
+  occupies_house: 0.5       # dasha lord sits in a house of the life area
+  karaka: 0.75              # dasha lord is a natural karaka for the area
+  rules_dusthana: -0.4      # dasha lord rules 6/8/12 (reduces, unless the area itself is that house)
+  strength_scale: 0.5       # multiplier = 1 + strength_scale * (min(shadbala ratio,1.5)-1)
+  yoga_bonus: 0.3           # lord takes part in an effective benefic yoga
+  yoga_malus: -0.3          # lord takes part in an effective malefic yoga/dosha
+transit:
+  jupiter_in_area_house: 0.6      # Jupiter in (or aspecting, 5/7/9) a house of the area, from lagna
+  jupiter_aspect: 0.4
+  saturn_in_area_house: -0.4      # Saturn over a key house: delay/pressure
+  saturn_aspect: -0.15
+  rahu_ketu_in_area_house: -0.2
+  sav_scale: 0.5                  # (SAV bindus of transited sign - 28) / 28 * scale
+  sade_sati_malus: -0.25          # applies to health/wealth/career/marriage
+normalise: {center: 1.8, tanh_scale: 0.6, favourable_above: 62.0, challenging_below: 38.0}  # center = typical raw score across charts (calibrated on a sample, see docs)
+areas:
+  career:     {houses: [10, 6, 2, 11], karakas: [Sun, Saturn, Mercury, Jupiter]}
+  job_change: {houses: [10, 3, 11, 9], karakas: [Mercury, Saturn, Rahu]}
+  marriage:   {houses: [7, 2, 11], karakas: [Venus, Jupiter]}
+  wealth:     {houses: [2, 11, 5, 9], karakas: [Jupiter, Venus]}
+  health:     {houses: [1, 6, 8], karakas: [Sun, Moon]}
+  education:  {houses: [4, 5, 9], karakas: [Mercury, Jupiter]}
+  children:   {houses: [5, 9, 2], karakas: [Jupiter]}
+  property:   {houses: [4, 11, 2], karakas: [Mars, Venus]}
+  travel:     {houses: [9, 12, 3], karakas: [Rahu, Moon]}
+  spirituality: {houses: [9, 12, 5], karakas: [Jupiter, Ketu]}
+  family:     {houses: [2, 4, 5], karakas: [Moon, Jupiter]}

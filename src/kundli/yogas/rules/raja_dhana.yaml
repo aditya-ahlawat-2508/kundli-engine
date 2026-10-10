@@ -1,0 +1,67 @@
+- id: raja_kendra_trikona
+  name: Raja Yoga (kendra-trikona lords related)
+  category: benefic
+  condition: "len(kt_relations()) > 0"
+  planets: "flatten(kt_relations())"
+  detail: "kt_relations()"
+  source: "BPHS ch.36 (Raja yoga adhyaya)"
+  effects_key: raja_yoga
+- id: yogakaraka
+  name: Yogakaraka (lord of a kendra and a trikona)
+  category: benefic
+  condition: "len(yogakarakas()) > 0"
+  planets: "yogakarakas()"
+  detail: "yogakarakas()"
+  source: "BPHS ch.34"
+  effects_key: yogakaraka
+- id: dhana_2_11
+  name: Dhana Yoga (2nd and 11th lords related)
+  category: benefic
+  condition: "related_lords(2, 11)"
+  planets: "[lord(2), lord(11)]"
+  source: "BPHS ch.41 (Dhana yoga)"
+  effects_key: dhana_yoga
+- id: dhana_5_9
+  name: Dhana Yoga (5th and 9th lords related)
+  category: benefic
+  condition: "related_lords(5, 9)"
+  planets: "[lord(5), lord(9)]"
+  source: "BPHS ch.41"
+  effects_key: dhana_yoga
+- id: dhana_1_2
+  name: Dhana Yoga (1st and 2nd lords related)
+  category: benefic
+  condition: "related_lords(1, 2)"
+  planets: "[lord(1), lord(2)]"
+  source: "BPHS ch.41"
+  effects_key: dhana_yoga
+- id: harsha
+  name: Harsha Viparita Raja Yoga (6th lord in dusthana)
+  category: benefic
+  condition: "house(lord(6)) in [6,8,12]"
+  planets: "[lord(6)]"
+  source: "BPHS ch.36 (Viparita Raja)"
+  effects_key: viparita_raja
+- id: sarala
+  name: Sarala Viparita Raja Yoga (8th lord in dusthana)
+  category: benefic
+  condition: "house(lord(8)) in [6,8,12]"
+  planets: "[lord(8)]"
+  source: "BPHS ch.36"
+  effects_key: viparita_raja
+- id: vimala
+  name: Vimala Viparita Raja Yoga (12th lord in dusthana)
+  category: benefic
+  condition: "house(lord(12)) in [6,8,12]"
+  planets: "[lord(12)]"
+  source: "BPHS ch.36"
+  effects_key: viparita_raja
+- id: neecha_bhanga_$p
+  foreach: [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn]
+  name: "Neecha Bhanga Raja Yoga ($P)"
+  category: benefic
+  condition: "len(neecha_bhanga($p)) > 0"
+  planets: "[$p]"
+  detail: "neecha_bhanga($p)"
+  source: "BPHS ch.36 (Neecha bhanga)"
+  effects_key: neecha_bhanga

@@ -1,0 +1,150 @@
+{
+ "date": "1990-03-15",
+ "expected": {
+  "lagna": {
+   "deg": 25.0874,
+   "sign": 7
+  },
+  "notes": [],
+  "planets": {
+   "Jupiter": {
+    "d10": 4,
+    "d9": 8,
+    "deg": 7.6127,
+    "nak": 5,
+    "pada": 1,
+    "retro": false,
+    "sign": 2
+   },
+   "Ketu": {
+    "d10": 6,
+    "d9": 9,
+    "deg": 22.1203,
+    "nak": 8,
+    "pada": 2,
+    "retro": true,
+    "sign": 3
+   },
+   "Mars": {
+    "d10": 7,
+    "d9": 11,
+    "deg": 8.5774,
+    "nak": 20,
+    "pada": 4,
+    "retro": false,
+    "sign": 9
+   },
+   "Mercury": {
+    "d10": 6,
+    "d9": 1,
+    "deg": 26.1053,
+    "nak": 24,
+    "pada": 2,
+    "retro": false,
+    "sign": 10
+   },
+   "Moon": {
+    "d10": 8,
+    "d9": 8,
+    "deg": 7.3175,
+    "nak": 14,
+    "pada": 1,
+    "retro": false,
+    "sign": 6
+   },
+   "Rahu": {
+    "d10": 0,
+    "d9": 3,
+    "deg": 22.1203,
+    "nak": 21,
+    "pada": 4,
+    "retro": true,
+    "sign": 9
+   },
+   "Saturn": {
+    "d10": 5,
+    "d9": 8,
+    "deg": 29.5565,
+    "nak": 20,
+    "pada": 1,
+    "retro": false,
+    "sign": 8
+   },
+   "Sun": {
+    "d10": 7,
+    "d9": 3,
+    "deg": 0.1897,
+    "nak": 24,
+    "pada": 4,
+    "retro": false,
+    "sign": 11
+   },
+   "Venus": {
+    "d10": 9,
+    "d9": 1,
+    "deg": 14.7918,
+    "nak": 21,
+    "pada": 2,
+    "retro": false,
+    "sign": 9
+   }
+  },
+  "sav": [
+   34,
+   22,
+   25,
+   24,
+   29,
+   28,
+   31,
+   34,
+   30,
+   29,
+   26,
+   25
+  ],
+  "vimshottari": [
+   [
+    "Rahu",
+    "1989-04-27T21:02:19+00:00"
+   ],
+   [
+    "Jupiter",
+    "2007-04-28T09:02:19+00:00"
+   ],
+   [
+    "Saturn",
+    "2023-04-28T09:02:19+00:00"
+   ],
+   [
+    "Mercury",
+    "2042-04-28T03:02:19+00:00"
+   ],
+   [
+    "Ketu",
+    "2059-04-28T09:02:19+00:00"
+   ],
+   [
+    "Venus",
+    "2066-04-28T03:02:19+00:00"
+   ],
+   [
+    "Sun",
+    "2086-04-28T03:02:19+00:00"
+   ],
+   [
+    "Moon",
+    "2092-04-27T15:02:19+00:00"
+   ],
+   [
+    "Mars",
+    "2102-04-29T03:02:19+00:00"
+   ]
+  ]
+ },
+ "fold": null,
+ "q": "Kolkata, India",
+ "source": "kundli-engine regression snapshot (NOT JHora)",
+ "time": "00:00:00",
+ "why": "midnight birth"
+}

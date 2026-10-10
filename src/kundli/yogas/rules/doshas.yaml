@@ -1,0 +1,86 @@
+- id: kaal_sarpa
+  name: Kaal Sarpa Yoga
+  category: dosha
+  condition: "kaal_sarpa()"
+  planets: "[rahu, ketu]"
+  source: "Later tradition (not in BPHS) - VERIFY"
+  effects_key: kaal_sarpa
+- id: mangal_lagna
+  name: Mangal (Kuja) Dosha from Lagna
+  category: dosha
+  condition: "house_from(mars, lagna) in [1,2,4,7,8,12]"
+  planets: "[mars]"
+  cancellations:
+    - {id: mars_own_or_exalted, condition: "dignity(mars) in ['own','moolatrikona','exalted']"}
+    - {id: jupiter_conjunct_or_aspects_mars, condition: "conj(jupiter, mars) or aspects(jupiter, mars)"}
+  source: "Traditional (Muhurta/Jataka texts) - VERIFY cancellation list"
+  effects_key: mangal_dosha
+- id: mangal_moon
+  name: Mangal (Kuja) Dosha from Moon
+  category: dosha
+  condition: "house_from(mars, moon) in [1,2,4,7,8,12]"
+  planets: "[mars]"
+  cancellations:
+    - {id: mars_own_or_exalted, condition: "dignity(mars) in ['own','moolatrikona','exalted']"}
+    - {id: jupiter_conjunct_or_aspects_mars, condition: "conj(jupiter, mars) or aspects(jupiter, mars)"}
+  source: "Traditional - VERIFY"
+  effects_key: mangal_dosha
+- id: mangal_venus
+  name: Mangal (Kuja) Dosha from Venus
+  category: dosha
+  condition: "house_from(mars, venus) in [1,2,4,7,8,12]"
+  planets: "[mars, venus]"
+  cancellations:
+    - {id: mars_own_or_exalted, condition: "dignity(mars) in ['own','moolatrikona','exalted']"}
+  source: "Traditional - VERIFY"
+  effects_key: mangal_dosha
+- id: pitru_sun_node
+  name: Pitru Dosha indicator (Sun with Rahu/Ketu)
+  category: dosha
+  condition: "conj(sun, rahu) or conj(sun, ketu)"
+  planets: "[sun]"
+  source: "Traditional indicator (not a BPHS yoga) - VERIFY"
+  effects_key: pitru_dosha
+- id: pitru_ninth
+  name: Pitru Dosha indicator (9th house/lord afflicted by nodes)
+  category: dosha
+  condition: "house(rahu) == 9 or house(ketu) == 9 or conj(lord(9), rahu) or conj(lord(9), ketu)"
+  source: "Traditional indicator - VERIFY"
+  effects_key: pitru_dosha
+- id: guru_chandala
+  name: Guru-Chandala Yoga
+  category: malefic
+  condition: "conj(jupiter, rahu) or conj(jupiter, ketu)"
+  planets: "[jupiter]"
+  source: "Traditional"
+  effects_key: guru_chandala
+- id: grahan_surya
+  name: Grahan Yoga (Sun with a node)
+  category: malefic
+  condition: "conj(sun, rahu) or conj(sun, ketu)"
+  planets: "[sun]"
+  source: "Traditional"
+  effects_key: grahan
+- id: grahan_chandra
+  name: Grahan Yoga (Moon with a node)
+  category: malefic
+  condition: "conj(moon, rahu) or conj(moon, ketu)"
+  planets: "[moon]"
+  source: "Traditional"
+  effects_key: grahan
+- id: shakata
+  name: Shakata Yoga (Moon 6/8/12 from Jupiter)
+  category: malefic
+  condition: "house_from(moon, jupiter) in [6,8,12]"
+  planets: "[moon, jupiter]"
+  cancellations:
+    - {id: moon_in_kendra_from_lagna, condition: "house(moon) in [1,4,7,10]"}
+  source: "BPHS ch.36 / Phaladeepika"
+  effects_key: shakata
+- id: daridra
+  name: Daridra Yoga (11th lord in dusthana)
+  category: malefic
+  condition: "house(lord(11)) in [6,8,12]"
+  planets: "[lord(11)]"
+  source: "BPHS ch.41"
+  effects_key: daridra

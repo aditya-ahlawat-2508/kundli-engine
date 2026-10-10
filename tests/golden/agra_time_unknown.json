@@ -1,0 +1,136 @@
+{
+ "date": "2004-05-05",
+ "expected": {
+  "lagna": null,
+  "notes": [
+   "Birth time unknown: local noon used; lagna, houses and lagna-dependent outputs omitted. Moon-based results may be off by up to ~6 degrees."
+  ],
+  "planets": {
+   "Jupiter": {
+    "d10": 9,
+    "d9": 4,
+    "deg": 15.0004,
+    "nak": 10,
+    "pada": 1,
+    "retro": false,
+    "sign": 4
+   },
+   "Ketu": {
+    "d10": 11,
+    "d9": 11,
+    "deg": 17.3446,
+    "nak": 14,
+    "pada": 4,
+    "retro": true,
+    "sign": 6
+   },
+   "Mars": {
+    "d10": 3,
+    "d9": 7,
+    "deg": 4.7576,
+    "nak": 4,
+    "pada": 4,
+    "retro": false,
+    "sign": 2
+   },
+   "Mercury": {
+    "d10": 4,
+    "d9": 11,
+    "deg": 28.0865,
+    "nak": 26,
+    "pada": 4,
+    "retro": false,
+    "sign": 11
+   },
+   "Moon": {
+    "d10": 2,
+    "d9": 2,
+    "deg": 26.9579,
+    "nak": 15,
+    "pada": 3,
+    "retro": false,
+    "sign": 6
+   },
+   "Rahu": {
+    "d10": 5,
+    "d9": 5,
+    "deg": 17.3446,
+    "nak": 1,
+    "pada": 2,
+    "retro": true,
+    "sign": 0
+   },
+   "Saturn": {
+    "d10": 7,
+    "d9": 10,
+    "deg": 15.3291,
+    "nak": 5,
+    "pada": 3,
+    "retro": false,
+    "sign": 2
+   },
+   "Sun": {
+    "d10": 7,
+    "d9": 6,
+    "deg": 21.1849,
+    "nak": 1,
+    "pada": 3,
+    "retro": false,
+    "sign": 0
+   },
+   "Venus": {
+    "d10": 6,
+    "d9": 5,
+    "deg": 29.362,
+    "nak": 4,
+    "pada": 2,
+    "retro": false,
+    "sign": 1
+   }
+  },
+  "sav": null,
+  "vimshottari": [
+   [
+    "Jupiter",
+    "1995-12-29T14:47:49+00:00"
+   ],
+   [
+    "Saturn",
+    "2011-12-29T14:47:49+00:00"
+   ],
+   [
+    "Mercury",
+    "2030-12-29T08:47:49+00:00"
+   ],
+   [
+    "Ketu",
+    "2047-12-29T14:47:49+00:00"
+   ],
+   [
+    "Venus",
+    "2054-12-29T08:47:49+00:00"
+   ],
+   [
+    "Sun",
+    "2074-12-29T08:47:49+00:00"
+   ],
+   [
+    "Moon",
+    "2080-12-28T20:47:49+00:00"
+   ],
+   [
+    "Mars",
+    "2090-12-29T08:47:49+00:00"
+   ],
+   [
+    "Rahu",
+    "2097-12-29T02:47:49+00:00"
+   ]
+  ]
+ },
+ "fold": null,
+ "q": "Agra, India",
+ "source": "kundli-engine regression snapshot (NOT JHora)",
+ "time": null,
+ "why": "unknown time"
+}

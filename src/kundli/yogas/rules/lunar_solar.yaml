@@ -1,0 +1,73 @@
+- id: gajakesari
+  name: Gajakesari Yoga
+  category: benefic
+  condition: "house_from(jupiter, moon) in [1,4,7,10]"
+  planets: "[jupiter, moon]"
+  cancellations:
+    - {id: jupiter_debilitated, condition: "dignity(jupiter) == 'debilitated'"}
+    - {id: jupiter_combust, condition: "combust(jupiter)"}
+  source: "BPHS ch.36"
+  effects_key: gajakesari
+- id: budhaditya
+  name: Budhaditya Yoga
+  category: benefic
+  condition: "conj(sun, mercury)"
+  source: "Phaladeepika ch.6"
+  effects_key: budhaditya
+- id: chandra_mangala
+  name: Chandra-Mangala Yoga
+  category: benefic
+  condition: "conj(moon, mars)"
+  source: "Brihat Jataka / Phaladeepika"
+  effects_key: chandra_mangala
+- id: adhi
+  name: Adhi Yoga (benefics in 6/7/8 from Moon)
+  category: benefic
+  condition: "len(benefics_in(moon, [6,7,8])) >= 2"
+  planets: "benefics_in(moon, [6,7,8])"
+  source: "BPHS ch.36 (VERIFY: threshold of two benefics)"
+  effects_key: adhi_yoga
+- id: amala
+  name: Amala Yoga (only benefics in the 10th)
+  category: benefic
+  condition: "pure_benefic_in(lagna, 10) or pure_benefic_in(moon, 10)"
+  source: "Phaladeepika ch.6"
+  effects_key: amala
+- id: sunapha
+  name: Sunapha Yoga
+  category: benefic
+  condition: "len(planets_in_house_from(moon, 2)) > 0"
+  planets: "planets_in_house_from(moon, 2)"
+  source: "BPHS ch.36"
+  effects_key: sunapha
+- id: anapha
+  name: Anapha Yoga
+  category: benefic
+  condition: "len(planets_in_house_from(moon, 12)) > 0"
+  planets: "planets_in_house_from(moon, 12)"
+  source: "BPHS ch.36"
+  effects_key: anapha
+- id: durudhura
+  name: Durudhura Yoga
+  category: benefic
+  condition: "len(planets_in_house_from(moon, 2)) > 0 and len(planets_in_house_from(moon, 12)) > 0"
+  planets: "planets_in_house_from(moon, 2) + planets_in_house_from(moon, 12)"
+  source: "BPHS ch.36"
+  effects_key: durudhura
+- id: kemadruma
+  name: Kemadruma Yoga
+  category: malefic
+  condition: "len(planets_in_house_from(moon, 1)) + len(planets_in_house_from(moon, 2)) + len(planets_in_house_from(moon, 12)) == 0"
+  cancellations:
+    - {id: planet_in_kendra_from_moon, condition: "len(planets_in_kendra_from(moon)) > 0"}
+    - {id: moon_in_kendra, condition: "house(moon) in [1,4,7,10]"}
+  source: "BPHS ch.36"
+  effects_key: kemadruma
+- id: parivartana
+  name: Parivartana Yoga (sign exchange)
+  category: mixed
+  condition: "len(exchange_pairs()) > 0"
+  planets: "flatten(exchange_pairs())"
+  detail: "exchange_pairs()"
+  source: "BPHS ch.36"
+  effects_key: parivartana

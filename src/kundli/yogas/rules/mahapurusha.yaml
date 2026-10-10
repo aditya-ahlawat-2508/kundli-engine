@@ -1,0 +1,30 @@
+- id: ruchaka
+  name: Ruchaka Yoga (Pancha Mahapurusha)
+  category: benefic
+  condition: "house(mars) in [1,4,7,10] and dignity(mars) in ['own','moolatrikona','exalted']"
+  source: "BPHS ch.75 (Pancha Mahapurusha)"
+  effects_key: ruchaka
+- id: bhadra
+  name: Bhadra Yoga (Pancha Mahapurusha)
+  category: benefic
+  condition: "house(mercury) in [1,4,7,10] and dignity(mercury) in ['own','moolatrikona','exalted']"
+  source: "BPHS ch.75"
+  effects_key: bhadra
+- id: hamsa
+  name: Hamsa Yoga (Pancha Mahapurusha)
+  category: benefic
+  condition: "house(jupiter) in [1,4,7,10] and dignity(jupiter) in ['own','moolatrikona','exalted']"
+  source: "BPHS ch.75"
+  effects_key: hamsa
+- id: malavya
+  name: Malavya Yoga (Pancha Mahapurusha)
+  category: benefic
+  condition: "house(venus) in [1,4,7,10] and dignity(venus) in ['own','moolatrikona','exalted']"
+  source: "BPHS ch.75"
+  effects_key: malavya
+- id: sasa
+  name: Sasa Yoga (Pancha Mahapurusha)
+  category: benefic
+  condition: "house(saturn) in [1,4,7,10] and dignity(saturn) in ['own','moolatrikona','exalted']"
+  source: "BPHS ch.75"
+  effects_key: sasa

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kundli Engine</title>
+<style>
+ body{font-family:system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#222}
+ label{display:block;margin:.6rem 0 .2rem;font-weight:600} input,select,button{font:inherit;padding:.4rem;width:100%;box-sizing:border-box}
+ .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem} button{width:auto;cursor:pointer;margin-top:1rem}
+ #cands div{padding:.4rem;border:1px solid #ccc;cursor:pointer} #cands div:hover{background:#eef}
+ pre{background:#f6f6f6;padding:.8rem;overflow:auto} .note{color:#666;font-size:.85rem}
+</style></head><body>
+<h1>Kundli Engine</h1>
+<p class="note">Calculations are deterministic. Readings are traditional interpretation, not prediction. Birth data stays on this machine.</p>
+<label>Name</label><input id="name">
+<div class="row"><div><label>Date of birth</label><input id="date" type="date"></div>
+<div><label>Time of birth (leave empty if unknown)</label><input id="time" type="time"></div></div>
+<label>Place</label><input id="place" placeholder="Type a city, e.g. Agra, India" autocomplete="off">
+<div id="cands"></div><input id="choice" type="hidden">
+<button id="go">Generate</button>
+<div id="out"></div>
+<script>
+let timer;const $=id=>document.getElementById(id);
+$('place').addEventListener('input',()=>{clearTimeout(timer);$('choice').value='';timer=setTimeout(async()=>{
+ const q=$('place').value;if(q.length<2){$('cands').innerHTML='';return}
+ const r=await (await fetch('/places?q='+encodeURIComponent(q))).json();
+ $('cands').innerHTML='';r.forEach(p=>{const d=document.createElement('div');
+  d.textContent=`${p.name}, ${p.admin1} ${p.country} (${p.lat.toFixed(2)}, ${p.lon.toFixed(2)}, ${p.tz})`;
+  d.onclick=()=>{$('place').value=`${p.name}, ${p.admin1||p.country}`;$('choice').value=p.index;$('cands').innerHTML=''};
+  $('cands').appendChild(d)})},250)});
+$('go').onclick=async()=>{
+ const body={name:$('name').value,date:$('date').value,time:$('time').value||null,place:$('place').value,
+   place_choice:$('choice').value===''?null:+$('choice').value};
+ const r=await fetch('/kundli',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+ const j=await r.json();
+ if(r.status===409&&j.candidates){$('out').innerHTML='<p><b>Several places match - pick one above.</b></p>';
+   $('cands').innerHTML='';j.candidates.forEach(p=>{const d=document.createElement('div');d.textContent=`${p.name}, ${p.admin1} ${p.country}`;
+   d.onclick=()=>{$('choice').value=p.index;$('cands').innerHTML='';$('go').click()};$('cands').appendChild(d)});return}
+ if(!r.ok){$('out').textContent=JSON.stringify(j);return}
+ const id=j.id;$('out').innerHTML=`<h2>Charts</h2>`+['D1','Chandra','D9','D10'].map(v=>`<img width="420" src="/kundli/${id}/charts/${v}.svg">`).join('')+
+  `<p><a href="/kundli/${id}/report.pdf">Download PDF report</a> · <a href="/kundli/${id}">JSON</a></p>
+   <h2>Ask</h2><input id="q" placeholder="When is a good time for a job change?"><button id="ask">Ask</button><pre id="ans"></pre>
+   <button id="del">Delete this chart</button>`;
+ $('ask').onclick=async()=>{const d=new Date().toISOString().slice(0,10);
+  const e=new Date(Date.now()+2*365*864e5).toISOString().slice(0,10);
+  const a=await (await fetch(`/kundli/${id}/ask`,{method:'POST',headers:{'content-type':'application/json'},
+   body:JSON.stringify({question:$('q').value,as_of:d,from_:d,to:e})})).json();
+  $('ans').textContent=a.summary+'\n\n'+a.claims.map(c=>'- '+c.text+' ['+c.fact_ids.join(',')+']').join('\n')+'\n\n'+a.disclaimer};
+ $('del').onclick=async()=>{await fetch('/kundli/'+id,{method:'DELETE'});$('out').textContent='Deleted.'}};
+</script></body></html>

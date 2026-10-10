@@ -1,0 +1,150 @@
+{
+ "date": "2000-04-13",
+ "expected": {
+  "lagna": {
+   "deg": 13.0403,
+   "sign": 5
+  },
+  "notes": [],
+  "planets": {
+   "Jupiter": {
+    "d10": 6,
+    "d9": 5,
+    "deg": 18.1846,
+    "nak": 1,
+    "pada": 2,
+    "retro": false,
+    "sign": 0
+   },
+   "Ketu": {
+    "d10": 7,
+    "d9": 10,
+    "deg": 6.0532,
+    "nak": 20,
+    "pada": 3,
+    "retro": true,
+    "sign": 9
+   },
+   "Mars": {
+    "d10": 7,
+    "d9": 6,
+    "deg": 21.7214,
+    "nak": 1,
+    "pada": 3,
+    "retro": false,
+    "sign": 0
+   },
+   "Mercury": {
+    "d10": 9,
+    "d9": 5,
+    "deg": 6.8751,
+    "nak": 25,
+    "pada": 2,
+    "retro": false,
+    "sign": 11
+   },
+   "Moon": {
+    "d10": 7,
+    "d9": 10,
+    "deg": 25.0014,
+    "nak": 8,
+    "pada": 3,
+    "retro": false,
+    "sign": 3
+   },
+   "Rahu": {
+    "d10": 1,
+    "d9": 4,
+    "deg": 6.0532,
+    "nak": 7,
+    "pada": 1,
+    "retro": true,
+    "sign": 3
+   },
+   "Saturn": {
+    "d10": 7,
+    "d9": 6,
+    "deg": 23.1238,
+    "nak": 1,
+    "pada": 3,
+    "retro": false,
+    "sign": 0
+   },
+   "Sun": {
+    "d10": 4,
+    "d9": 11,
+    "deg": 29.9992,
+    "nak": 26,
+    "pada": 4,
+    "retro": false,
+    "sign": 11
+   },
+   "Venus": {
+    "d10": 11,
+    "d9": 7,
+    "deg": 14.4304,
+    "nak": 25,
+    "pada": 4,
+    "retro": false,
+    "sign": 11
+   }
+  },
+  "sav": [
+   21,
+   28,
+   23,
+   31,
+   27,
+   27,
+   24,
+   31,
+   33,
+   38,
+   36,
+   18
+  ],
+  "vimshottari": [
+   [
+    "Mercury",
+    "1989-08-28T01:47:28+00:00"
+   ],
+   [
+    "Ketu",
+    "2006-08-28T07:47:28+00:00"
+   ],
+   [
+    "Venus",
+    "2013-08-28T01:47:28+00:00"
+   ],
+   [
+    "Sun",
+    "2033-08-28T01:47:28+00:00"
+   ],
+   [
+    "Moon",
+    "2039-08-28T13:47:28+00:00"
+   ],
+   [
+    "Mars",
+    "2049-08-28T01:47:28+00:00"
+   ],
+   [
+    "Rahu",
+    "2056-08-27T19:47:28+00:00"
+   ],
+   [
+    "Jupiter",
+    "2074-08-28T07:47:28+00:00"
+   ],
+   [
+    "Saturn",
+    "2090-08-28T07:47:28+00:00"
+   ]
+  ]
+ },
+ "fold": null,
+ "q": "Agra, India",
+ "source": "kundli-engine regression snapshot (NOT JHora)",
+ "time": "17:21:00",
+ "why": "Sun near sidereal Aries ingress"
+}

@@ -1,0 +1,1 @@
+"""Chart and report rendering."""

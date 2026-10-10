@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="428" viewBox="0 0 400 428" font-family="Helvetica, Arial, sans-serif">
+<text x="200" y="16" text-anchor="middle" font-size="14" font-weight="bold">D7 Saptamsa</text>
+<g transform="translate(0,24)">
+<rect x="100" y="0" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="104" y="12" font-size="9" fill="#777">Ari</text>
+<text x="150.0" y="30" text-anchor="middle" font-size="11">Ju 9°V</text>
+<rect x="200" y="0" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="204" y="12" font-size="9" fill="#777">Tau</text>
+<rect x="300" y="0" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="304" y="12" font-size="9" fill="#777">Gem</text>
+<text x="350.0" y="30" text-anchor="middle" font-size="11">Ve 22°</text>
+<rect x="300" y="100" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="304" y="112" font-size="9" fill="#777">Can</text>
+<text x="350.0" y="130" text-anchor="middle" font-size="11">Sa 25°RD</text>
+<rect x="300" y="200" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="304" y="212" font-size="9" fill="#777">Leo</text>
+<rect x="300" y="300" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="304" y="312" font-size="9" fill="#777">Vir</text>
+<text x="350.0" y="330" text-anchor="middle" font-size="11">Ke 10°R</text>
+<rect x="200" y="300" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="204" y="312" font-size="9" fill="#777">Lib</text>
+<rect x="100" y="300" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="104" y="312" font-size="9" fill="#777">Sco</text>
+<rect x="0" y="300" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="4" y="312" font-size="9" fill="#777">Sag</text>
+<line x1="0" y1="300" x2="22" y2="322" stroke="black" stroke-width="2"/>
+<text x="96" y="312" text-anchor="end" font-size="9" font-weight="bold">Asc</text>
+<rect x="0" y="200" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="4" y="212" font-size="9" fill="#777">Cap</text>
+<text x="50.0" y="230" text-anchor="middle" font-size="11">Mo 26°</text>
+<text x="50.0" y="243" text-anchor="middle" font-size="11">Me 23°c</text>
+<rect x="0" y="100" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="4" y="112" font-size="9" fill="#777">Aqu</text>
+<text x="50.0" y="130" text-anchor="middle" font-size="11">Ma 27°</text>
+<rect x="0" y="0" width="100" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="4" y="12" font-size="9" fill="#777">Pis</text>
+<text x="50.0" y="30" text-anchor="middle" font-size="11">Su 23°</text>
+<text x="50.0" y="43" text-anchor="middle" font-size="11">Ra 10°R</text>
+<rect x="100" y="100" width="200" height="200" fill="white" stroke="black" stroke-width="1.5"/>
+<text x="200" y="200" text-anchor="middle" font-size="13" fill="#444">D7 Saptamsa</text>
+</g></svg>
