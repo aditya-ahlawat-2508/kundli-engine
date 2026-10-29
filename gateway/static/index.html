@@ -1086,6 +1086,7 @@ $("kForm").addEventListener("submit",function(ev){
   var btn=$("kForm").querySelector('button[type="submit"]'); if(btn)btn.disabled=true;
   loadSnapshot(function(){
     if(btn)btn.disabled=false;
+    if(S.placeErr){S.placeErr=false;S.snap=null;var fe=$("fErr");fe.textContent=S.lang==="en"?"We could not find this city. Try the nearest big city (e.g. Delhi, Jaipur, Lucknow).":S.lang==="hi"?"यह शहर नहीं मिला। नज़दीकी बड़े शहर का नाम डालिए (जैसे दिल्ली, जयपुर)।":"Yeh shehar nahi mila. Paas ka bada shehar likhiye (jaise Delhi, Jaipur, Lucknow).";fe.hidden=false;return;}
     renderResult();
     $("kForm").hidden=true; $("kResult").hidden=false;
     $("kundli").scrollIntoView({behavior:"smooth",block:"start"});
@@ -1122,7 +1123,7 @@ function liveLines(f){
 }
 function loadSnapshot(cb){
   var s=S.snap; S.live=null;
-  apiJson("/api/snapshot",{name:s.name,date:s.dob,time:s.tob||null,place:s.place}).then(function(d){S.live=d;cb();}).catch(function(){cb();});
+  apiJson("/api/snapshot",{name:s.name,date:s.dob,time:s.tob||null,place:s.place}).then(function(d){S.live=d;cb();}).catch(function(e){S.placeErr=/404/.test(String(e&&e.message));cb();});
 }
 function loadPanchang(){
   api("/api/panchang").then(function(r){return r.json();}).then(function(d){LIVE.panch=d;renderStatic();}).catch(function(){});
@@ -1135,7 +1136,10 @@ function panRows(){
 function openReportPdf(){
   var s=S.snap; if(!s)return;
   var q="date="+encodeURIComponent(s.dob)+"&place="+encodeURIComponent(s.place)+"&name="+encodeURIComponent(s.name||"Guest")+(s.tob?"&time="+encodeURIComponent(s.tob):"");
-  window.open("/api/report.pdf?"+q,"_blank");
+  var w=window.open("","_blank");
+  fetch("/api/report.pdf?"+q).then(function(r){if(!r.ok)throw new Error(r.status);return r.blob();}).then(function(b){
+    var u=URL.createObjectURL(b); if(w)w.location.href=u; else location.href=u;
+  }).catch(function(){if(w)w.close();toast(S.lang==="en"?"Report could not be generated. Check the city name.":"Report nahi ban payi. Shehar ka naam check karein.");});
 }
 
 function firstName(){return S.snap&&S.snap.name?S.snap.name.split(" ")[0]:"";}

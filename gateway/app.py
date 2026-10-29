@@ -36,13 +36,15 @@ app.mount("/engine", engine)  # full engine API stays reachable (docs at /engine
 
 
 def resolve_place(q: str) -> dict:
-    """City text -> lat/lon/tz. Offline GeoNames; India preferred when several match."""
-    c = candidates(q.strip(), online=False)
-    if not c:
-        raise HTTPException(404, "place_not_found")
-    c = sorted(c, key=lambda p: (p.country != "India", -(p.population or 0)))
-    p = c[0]
-    return {"lat": p.lat, "lon": p.lon, "tz": p.tz, "name": p.name}
+    """City text -> lat/lon/tz. Offline GeoNames; India preferred. Tries the full text, each comma part, then each word."""
+    q = q.strip()
+    tries = [q] + [x.strip() for x in q.split(",")] + [w for w in q.replace(",", " ").split() if len(w) >= 3]
+    for t in dict.fromkeys(x for x in tries if len(x) >= 2):
+        c = candidates(t, online=False)
+        if c:
+            p = sorted(c, key=lambda p: (p.country != "India", -(p.population or 0)))[0]
+            return {"lat": p.lat, "lon": p.lon, "tz": p.tz, "name": p.name}
+    raise HTTPException(404, "place_not_found")
 
 
 class Person(BaseModel):
