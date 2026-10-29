@@ -99,6 +99,8 @@ class Person(BaseModel):
 
 
 def build(p: Person):
+    if p.date > dt.date.today().isoformat():
+        raise HTTPException(422, "birth_date_in_future")
     pl = resolve_place(p.place)
     try:
         birth = make_birth(p.name or "Guest", p.date, p.time or "12:00", None, None, None, pl["lat"], pl["lon"], pl["tz"])
@@ -122,17 +124,31 @@ def health() -> dict:
     return {"ok": True, "engine": ops.version_info().get("engine_version")}
 
 
+def _prefix(q: str, n: int = 6) -> list[str]:
+    """Offline prefix matches ('jaip' -> Jaipur), biggest places first, India first."""
+    from kundli.geo import _index, _norm
+    k = _norm(q)
+    best: dict[str, tuple] = {}
+    for key, ps in _index().items():
+        if key.startswith(k):
+            for p in ps:
+                lab = ", ".join(x for x in (p.name, p.admin1, p.country) if x)
+                rank = (p.country != "India", -(p.population or 0))
+                if lab not in best or rank < best[lab]:
+                    best[lab] = rank
+    return [x for x, _ in sorted(best.items(), key=lambda kv: kv[1])[:n]]
+
+
 @app.get("/api/places")
 def places(q: str = Query(min_length=2)) -> list[dict]:
-    """Autocomplete: local cities first, then OpenStreetMap results (e.g. small towns)."""
+    """Autocomplete: local prefix matches first, then OpenStreetMap results (e.g. small towns)."""
     seen, out = set(), []
-    for p in candidates(q, online=False)[:6]:
-        lab = ", ".join(x for x in (p.name, p.admin1, p.country) if x)
-        if lab not in seen:
-            seen.add(lab); out.append({"label": lab})
-    for h in photon(q, 6):
-        if h["label"] not in seen:
-            seen.add(h["label"]); out.append({"label": h["label"]})
+    for lab in _prefix(q):
+        seen.add(lab); out.append({"label": lab})
+    if len(out) < 6:
+        for h in photon(q, 6):
+            if h["label"] not in seen:
+                seen.add(h["label"]); out.append({"label": h["label"]})
     return out[:10]
 
 
@@ -143,6 +159,8 @@ def snapshot(p: Person) -> dict:
     k = to_dict(kd)
     today = dt.date.today().isoformat()
     stack = current_dasha(kd, aware(today), "vimshottari", 2)
+    if not stack:
+        raise HTTPException(422, "no_dasha_for_date")
     maha = stack[0]
     antar = stack[1] if len(stack) > 1 else None
     h10, h7, h2, h11 = (occupants(k, h) for h in (10, 7, 2, 11))
