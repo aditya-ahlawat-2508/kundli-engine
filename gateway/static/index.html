@@ -1615,7 +1615,7 @@ function renderAllPlans(){
   var sh='<img src="'+SHREYA_AV+'" alt="">', jy='<img src="'+JYOTI_AV+'" alt="">', rp='<i aria-hidden="true">'+ZSYM[0]+'\uFE0E</i>';
   var h=PLANS.map(function(p,i){var t=T("plans")[i];return '<div class="ap'+(i===3?" hot":"")+'">'+(i===3?'<span class="rib">'+esc(T("popular"))+'</span>':'')+'<span class="who">'+sh+esc(T("grpChat"))+'</span><b class="name">'+esc(t[0])+'</b><strong>₹'+p[1]+'</strong><span class="per">'+p[0]+' min · '+esc(fill(T("perMin"),{p:(p[1]/p[0]).toFixed(1)}))+'</span><button type="button" class="btn '+(i===3?"btn-primary":"btn-ghost")+'" data-buyplan="'+i+'">'+esc(T("startChatBtn"))+'</button></div>';}).join("");
   h+='<div class="ap"><span class="who">'+jy+esc(T("grpCall"))+'</span><b class="name">'+esc(T("priceCall"))+'</b><strong>₹299</strong><span class="per">15 min · '+esc(fill(T("perMin"),{p:(299/15).toFixed(1)}))+'</span><button type="button" class="btn btn-primary" data-svc="call">'+esc(T("callPlanBtn"))+'</button></div>';
-  h+=REPORTS.map(function(r,i){var t=T("reports")[i];return '<div class="ap'+(i===1?" hot":"")+'">'+(i===1?'<span class="rib">'+esc(t[1])+'</span>':'')+'<span class="who">'+rp+esc(T("grpReport"))+'</span><b class="name">'+esc(t[0])+'</b><strong>₹'+r[0]+'</strong><span class="per">'+esc(t[2][t[2].length-1])+'</span><button type="button" class="btn btn-dark" data-report="'+i+'">'+esc(fill(T("buyReport"),{p:r[0]}))+'</button></div>';}).join("");
+  h+=REPORTS.map(function(r,i){var t=T("reports")[i];return '<div class="ap'+(i===1?" hot":"")+'">'+(i===1?'<span class="rib">'+esc(t[1])+'</span>':'')+'<span class="who">'+rp+esc(T("grpReport"))+'</span><b class="name">'+esc(t[0])+'</b><strong>'+(i<2?'FREE':'₹'+r[0])+'</strong><span class="per">'+esc(t[2][t[2].length-1])+'</span><button type="button" class="btn btn-dark" data-report="'+i+'">'+esc((i<2?fill(T("buyReport"),{p:r[0]}).replace(/₹\s*\d+/,"FREE · testing"):fill(T("buyReport"),{p:r[0]})))+'</button></div>';}).join("");
   tr.innerHTML=h;
 }
 document.addEventListener("click",function(e){var b=e.target.closest("[data-pscroll]");if(!b)return;var tr=$("aPlans");tr.scrollBy({left:Number(b.dataset.pscroll)*(tr.clientWidth*0.8),behavior:"smooth"});});
@@ -1624,13 +1624,15 @@ function renderPlans(){
   renderAllPlans();
   var pc=$("chatPlans"); if(!pc)return;
   pc.innerHTML=PLANS.map(function(p,i){var t=T("plans")[i];var rib=i===3?T("popular"):i===2?T("bestValue"):"";return '<div class="plan'+(i===3?" hot":"")+'">'+(rib?'<span class="ribbon">'+esc(rib)+'</span>':'')+'<span class="mins">'+esc(t[0])+'</span><strong>₹'+p[1]+'</strong><span class="per">'+p[0]+' min · '+esc(fill(T("perMin"),{p:(p[1]/p[0]).toFixed(1)}))+'</span><span class="use">'+esc(t[1])+'</span><button type="button" class="btn '+(i===3?"btn-primary":"btn-ghost")+'" data-buyplan="'+i+'">'+esc(T("startChatBtn"))+'</button></div>';}).join("");
-  $("reportPlans").innerHTML=REPORTS.map(function(r,i){var t=T("reports")[i];return '<div class="report'+(i===1?" hot":"")+'">'+(i===1?'<span class="ribbon">'+esc(t[1])+'</span>':'<span class="kicker">'+esc(t[1])+'</span>')+'<h3>'+esc(t[0])+'</h3><strong>₹'+r[0]+'</strong><ul class="ticks small">'+t[2].map(function(x){return "<li>"+TICK+"<span>"+esc(x)+"</span></li>";}).join("")+'</ul><button type="button" class="btn '+(i===1?"btn-primary":"btn-dark")+'" data-report="'+i+'">'+esc(fill(T("buyReport"),{p:r[0]}))+'</button></div>';}).join("");
+  $("reportPlans").innerHTML=REPORTS.map(function(r,i){var t=T("reports")[i];return '<div class="report'+(i===1?" hot":"")+'">'+(i===1?'<span class="ribbon">'+esc(t[1])+'</span>':'<span class="kicker">'+esc(t[1])+'</span>')+'<h3>'+esc(t[0])+'</h3><strong>'+(i<2?'FREE':'₹'+r[0])+'</strong><ul class="ticks small">'+t[2].map(function(x){return "<li>"+TICK+"<span>"+esc(x)+"</span></li>";}).join("")+'</ul><button type="button" class="btn '+(i===1?"btn-primary":"btn-dark")+'" data-report="'+i+'">'+esc((i<2?fill(T("buyReport"),{p:r[0]}).replace(/₹\s*\d+/,"FREE · testing"):fill(T("buyReport"),{p:r[0]})))+'</button></div>';}).join("");
 }
 function buyReport(i){
   if(!S.snap){toast(T("needDetails"));$("kForm").hidden=false;$("kResult").hidden=true;go("kundli");setTimeout(function(){$("fDob").focus({preventScroll:true});},500);return;}
   var r=REPORTS[i],t=T("reports")[i];
   overlay.onCancel=null;
-  checkout({kind:"report",amount:r[0],label:t[0],onSuccess:function(){openLayer("report",{i:i});openReportPdf();}});
+  var after=function(){openLayer("report",{i:i});openReportPdf();};
+  if(i<2){after();return;}
+  checkout({kind:"report",amount:r[0],label:t[0],onSuccess:after});
 }
 RENDER.report=function(){
   var i=overlay.data.i,r=REPORTS[i],t=T("reports")[i],s=S.snap||{};
