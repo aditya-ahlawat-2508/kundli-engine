@@ -527,6 +527,9 @@ html{-webkit-text-size-adjust:100%}
 .ap .btn{margin-top:auto;min-height:40px;padding:8px 12px;font-size:13.5px;border-radius:999px}
 .ap .rib{position:absolute;top:-10px;right:12px;background:var(--accent);color:var(--on-accent);font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px}
 @media (max-width:700px){.ap{flex-basis:170px}.aplans-head,.aplans-track{padding-inline:16px}}
+
+.wa-btn{background:#25D366;color:#fff;border:0;display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;min-height:44px;padding:10px 18px;border-radius:999px}
+.wa-btn:hover{background:#1ebe5a}
 </style>
 
 <div class="util">
@@ -569,6 +572,7 @@ html{-webkit-text-size-adjust:100%}
             <button type="button" class="btn btn-primary" data-svc="chat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i="aiChat"></span></button>
             <button type="button" class="btn btn-primary" data-svc="call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span data-i="aiCall"></span></button>
             <button type="button" class="btn btn-outline-light" data-svc="kundli" data-i="freeKundli"></button>
+            <a href="https://wa.me/" target="_blank" rel="noopener" class="btn wa-btn" data-wa="hero"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 1.9 17.8L0 24l6.4-1.7A11.8 11.8 0 0 0 12 23.8h0A11.8 11.8 0 0 0 20.5 3.5zM12 21.7a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.4 4.7zm5.4-7.3c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.4 3.4 14.6 14.6 0 0 0 5.6 4.9c2.1.9 2.9 1 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3z"/></svg><span data-i="waBtn"></span></a>
           </div>
           <div class="hb-stats">
             <div><b>[1.5 Lakh+]</b><span data-i="stat1"></span></div>
@@ -1161,7 +1165,7 @@ function renderResult(){
   $("kResult").innerHTML='<div><span class="kicker">'+esc(T("resKicker"))+'</span><h2 style="font-size:22px;font-weight:700">'+esc(name?fill(T("greetName"),{n:name}):T("greet"))+'</h2><p class="muted small">'+esc([s.dob,s.noTime?T("timeUnknown"):s.tob,s.place].filter(Boolean).join(" · "))+'</p></div>'
    +'<div class="modes" role="group">'+["chat","call"].map(function(m){var v=T("modes")[m];return '<button type="button" class="mode" data-mode="'+m+'" aria-pressed="'+(S.mode===m)+'"><b>'+esc(v[0])+'</b><span>'+esc(v[1])+'</span></button>';}).join("")+'</div>'
    +lines+'<div style="border-top:1px dashed var(--line);padding-top:10px"><b class="small">'+esc(T("pending"))+'</b><p class="small">'+esc(q+f[S.topic][1])+'</p></div>'
-   +cta+nudgeBlock()+'<p class="muted small center">'+esc(fill(T("walletHint"),{b:rupee(S.balance)}))+'</p><button type="button" class="btn-link" data-act="editForm">'+esc(T("edit"))+'</button>';
+   +cta+waBlock()+nudgeBlock()+'<p class="muted small center">'+esc(fill(T("walletHint"),{b:rupee(S.balance)}))+'</p><button type="button" class="btn-link" data-act="editForm">'+esc(T("edit"))+'</button>';
 }
 
 /* ---------- rashifal ---------- */
@@ -1720,6 +1724,21 @@ document.addEventListener("click",function(e){
   var c=e.target.closest("[data-svc],[data-buyplan],[data-report],[data-act=buyChat],[data-act=buyCall]"); if(c)track("cta_click");
 },true);
 var __fs=false;document.addEventListener("focusin",function(e){if(!__fs&&e.target.closest&&e.target.closest("#kForm")){__fs=true;track("form_start");}});
+
+/* continue on WhatsApp (click-to-chat, wa.me with the first message pre-filled) */
+Object.assign(I18N.hl,{waBtn:"WhatsApp par continue karein"});Object.assign(I18N.en,{waBtn:"Continue on WhatsApp"});Object.assign(I18N.hi,{waBtn:"WhatsApp पर जारी रखें"});
+var WA_NUMBER="";
+fetch("/api/config").then(function(r){return r.json();}).then(function(c){WA_NUMBER=(c.wa_number||"").replace(/\D/g,"");}).catch(function(){});
+function waText(){
+  var s=S.snap,t=(T("topics")||{})[S.topic]||S.topic;
+  var L={hl:"Namaste Shreya, mujhe "+t+" ke baare mein poochna hai.",en:"Hi Shreya, I want to ask about my "+t+".",hi:"नमस्ते श्रेया, मुझे "+t+" के बारे में पूछना है।"}[S.lang];
+  if(s)L+={hl:" Meri details: ",en:" My details: ",hi:" मेरी जानकारी: "}[S.lang]+[s.name,s.dob,s.noTime?"":s.tob,s.place].filter(Boolean).join(", ");
+  return L;
+}
+function waUrl(){return "https://wa.me/"+WA_NUMBER+"?text="+encodeURIComponent(waText());}
+document.addEventListener("click",function(e){var a=e.target.closest("[data-wa]");if(!a)return;a.href=waUrl();track("wa_click");},true);
+function waBlock(){return '<a href="https://wa.me/" target="_blank" rel="noopener" class="btn wa-btn" data-wa="result" style="justify-content:center">'+WA_ICON_JS+'<span>'+esc(T("waBtn"))+'</span></a>';}
+var WA_ICON_JS='<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 1.9 17.8L0 24l6.4-1.7A11.8 11.8 0 0 0 12 23.8h0A11.8 11.8 0 0 0 20.5 3.5zM12 21.7a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.4 4.7zm5.4-7.3c-.3-.1-1.7-.8-2-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.4 3.4 14.6 14.6 0 0 0 5.6 4.9c2.1.9 2.9 1 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.3z"/></svg>';
 
 /* city autocomplete (datalist) from /api/places */
 (function(){

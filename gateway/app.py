@@ -121,6 +121,13 @@ def occupants(k: dict, h: int) -> list[str]:
             ("Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu")]
 
 
+@app.get("/api/config")
+def config() -> dict:
+    """Public settings. Set WA_NUMBER (digits with country code, e.g. 919876543210) on Render to route to your WhatsApp."""
+    import os
+    return {"wa_number": os.environ.get("WA_NUMBER", "")}
+
+
 @app.get("/api/health")
 def health() -> dict:
     return {"ok": True, "engine": ops.version_info().get("engine_version")}
