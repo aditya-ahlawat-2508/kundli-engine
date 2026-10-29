@@ -1,0 +1,4 @@
+# Classified differences between the provider and the engine (plan: every mismatch is (a) our bug, (b) a convention difference
+# or (c) a provider error). Rows: {endpoint: <fnmatch>, path: <fnmatch on the field path>, class: convention|bug|provider_error, note: <why>}.
+# Empty until oracle/shadow data exists. A row of class `convention` must point at docs/conventions.md in its note.
+[]

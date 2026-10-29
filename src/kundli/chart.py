@@ -8,17 +8,26 @@ import swisseph as swe
 
 from . import __version__
 from .aspects import aspected_signs
+from .avakahada import avakahada
 from .ayanamsa import ayanamsa_ut
 from .config import EngineConfig
 from .core import Core, build_core
-from .dasha import vimshottari, yogini
+from .dasha import chara, vimshottari, yogini
 from .data.tables import NAKSHATRAS, PLANETS, SIGNS
+from .doshas import kaal_sarpa, manglik, sadhesati_events
+from .ephemeris import base_flags
+from .friendship import friendship_tables
+from .functional import functional_nature
 from .houses import sripati_starts
 from .jaimini import jaimini
+from .kp import kp_chart, kp_row
 from .lagnas import gulika_mandi, special_lagnas, sun_upagrahas
 from .models import BirthInput, Kundli, PlanetData
 from .nakshatra import nakshatra_index, nakshatra_lord, pada, sub_lord
-from .panchang import panchang
+from .numerology import numerology
+from .panchang import hindu_month, panchang
+from .panchang.sun_moon_times import rise_args
+from .remedies import gemstone_picks
 from .strength.ashtakavarga import ashtakavarga
 from .strength.bhavabala import bhavabala
 from .strength.shadbala import ishta_kashta, shadbala
@@ -129,6 +138,12 @@ def current_dasha(k: Kundli, as_of: datetime, system: str = "vimshottari", level
         raise ValueError("as_of must be timezone-aware")
     par = k.dashas["params"]
     birth_utc = datetime.fromisoformat(par["birth_utc"])
+    if system == "chara":
+        cp = k.dashas.get("chara", {}).get("params")
+        if cp is None:
+            raise ValueError("Chara dasha needs a known birth time")
+        return chara.stack(cp["lagna_sign"], cp["signs"], cp["degs"], birth_utc, par["year_days"], as_of,
+                           levels or par["levels"], par["tz"])
     mod = {"vimshottari": vimshottari, "yogini": yogini}[system]
     return mod.stack(par["moon_lon"], birth_utc, par["year_days"], as_of, levels or par["levels"], par["tz"])
 
@@ -163,7 +178,7 @@ def generate(birth: BirthInput, cfg: EngineConfig | None = None) -> Kundli:
         notes=notes,
     )
     sun, moon = core.lon["Sun"], core.lon["Moon"]
-    k.panchang = panchang(m.jd_ut, sun, moon, birth.place.lat, birth.place.lon, birth.place.tz)
+    k.panchang = panchang(m.jd_ut, sun, moon, birth.place.lat, birth.place.lon, birth.place.tz, **rise_args(cfg))
     k.upagrahas = {"sun_based": sun_upagrahas(sun)}
     if hs is not None:
         k.bhava_chalit = _bhava_chalit(core)
@@ -186,10 +201,31 @@ def generate(birth: BirthInput, cfg: EngineConfig | None = None) -> Kundli:
     else:
         k.yogas = [y for y in evaluate_yogas(core, None)]
     k.vimshopaka = vimshopaka(core)
+    _report_sections(k, core)
     k.notes = notes
     if cfg.include_outer_planets:
         k.outer_planets = [p.model_dump() for p in _outer(core)]
     return k
+
+
+def _report_sections(k: Kundli, core: Core) -> None:
+    """Sections added for the full report: friendship, avakahada, KP, functional nature, gemstones, numerology,
+    Chara dasha, Hindu month and the dosha analyses."""
+    m, cfg = core.moment, core.cfg
+    k.friendship = friendship_tables({p: core.sign[p] for p in PLANETS})
+    k.avakahada = avakahada(core.lon["Moon"], core.rashi_house["Moon"])
+    k.numerology = numerology(core.birth.name, core.birth.date, cfg.numerology_system)
+    if k.panchang is not None:
+        k.panchang["hindu_month"] = hindu_month(m.jd_ut, cfg.ayanamsa, base_flags(cfg))
+    k.kp = {"planets": {p: kp_row(core.lon[p]) for p in PLANETS}}
+    if core.lagna_sign is not None:
+        k.kp = kp_chart(k)
+        k.functional_nature = functional_nature(core.lagna_sign)
+        k.gemstones = gemstone_picks(core.lagna_sign)
+        k.dashas["chara"] = {"params": {"lagna_sign": core.lagna_sign, "signs": dict(core.sign), "degs": dict(core.deg)},
+                             "mahadashas": chara.tree(core.lagna_sign, core.sign, core.deg, m.utc, cfg.dasha_year_days,
+                                                      core.birth.place.tz)}
+    k.doshas = {"kaal_sarpa": kaal_sarpa(k), "manglik": manglik(k), "sadhesati_events": sadhesati_events(k)}
 
 
 def _outer(core: Core):

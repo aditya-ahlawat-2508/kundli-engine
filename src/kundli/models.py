@@ -107,4 +107,11 @@ class Kundli(BaseModel):
     yogas: list[dict[str, Any]] = []
     jaimini: dict[str, Any] | None = None
     outer_planets: list[dict[str, Any]] = []
+    friendship: dict[str, Any] | None = None
+    avakahada: dict[str, Any] | None = None
+    kp: dict[str, Any] | None = None
+    functional_nature: dict[str, str] | None = None
+    gemstones: list[dict[str, Any]] | None = None
+    numerology: dict[str, Any] | None = None
+    doshas: dict[str, Any] | None = None
     notes: list[str] = []

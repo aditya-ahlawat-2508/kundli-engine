@@ -1,6 +1,15 @@
 """Ashtakavarga: Bhinnashtakavarga (BAV), Sarvashtakavarga (SAV), prastara, shodhana, shodhya pinda."""
 from ..core import Core
-from ..data.tables import BAV_CONTRIB, EKADHIPATYA, GRAHA_GUNAKARA, RASI_GUNAKARA, SAV_TOTAL, SEVEN
+from ..data.tables import (
+    BAV_CONTRIB,
+    EKADHIPATYA,
+    GRAHA_GUNAKARA,
+    LAGNA_BAV_CONTRIB,
+    LAGNA_BAV_TOTAL,
+    RASI_GUNAKARA,
+    SAV_TOTAL,
+    SEVEN,
+)
 
 REFS = [*SEVEN, "Lagna"]
 
@@ -16,6 +25,20 @@ def prastara(core: Core, target: str) -> dict[str, list[int]]:
             row[(csign + h - 1) % 12] = 1
         rows[c] = row
     return rows
+
+
+def lagna_bav(core: Core) -> dict:
+    """Bhinnashtakavarga of the Lagna as target: 8 contributor rows x 12 signs, column sums, grand total (49)."""
+    assert core.lagna_sign is not None
+    rows: dict[str, list[int]] = {}
+    for c in REFS:
+        csign = core.lagna_sign if c == "Lagna" else core.sign[c]
+        row = [0] * 12
+        for h in LAGNA_BAV_CONTRIB[c]:
+            row[(csign + h - 1) % 12] = 1
+        rows[c] = row
+    bindus = [sum(rows[c][s] for c in REFS) for s in range(12)]
+    return {"prastara": rows, "bav": bindus, "total": sum(bindus), "expected_total": LAGNA_BAV_TOTAL}
 
 
 def bav(core: Core, target: str) -> list[int]:
@@ -87,4 +110,5 @@ def ashtakavarga(core: Core) -> dict:
         "shodhana": reductions,
         "shodhya_pinda": pinda,
         "expected_sav_total": SAV_TOTAL,
+        "lagna_bav": lagna_bav(core),
     }

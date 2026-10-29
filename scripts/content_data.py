@@ -1,0 +1,376 @@
+"""Source vocabulary for the drafted content library (English + Hindi). scripts/draft_content.py composes the YAML
+units from these parts. All text is original and written to the tone rules in docs/content_rules.md: tendencies, not
+certainties; no medical, legal or financial claims; no fear language. Everything starts as status: draft."""
+
+PLANETS = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
+SIGNS = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn",
+         "Aquarius", "Pisces"]
+ELEMENTS = ["fire", "earth", "air", "water"]            # sign % 4
+MODALITIES = ["movable", "fixed", "dual"]               # sign % 3
+
+NAMES = {
+    "en": {
+        "planets": {p: p for p in PLANETS},
+        "signs": {i: s for i, s in enumerate(SIGNS)},
+        "elements": {"fire": "fire", "earth": "earth", "air": "air", "water": "water"},
+        "modalities": {"movable": "movable", "fixed": "fixed", "dual": "dual"},
+        "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    },
+    "hi": {
+        "planets": {"Sun": "सूर्य", "Moon": "चंद्र", "Mars": "मंगल", "Mercury": "बुध", "Jupiter": "गुरु",
+                    "Venus": "शुक्र", "Saturn": "शनि", "Rahu": "राहु", "Ketu": "केतु"},
+        "signs": {i: s for i, s in enumerate(["मेष", "वृषभ", "मिथुन", "कर्क", "सिंह", "कन्या", "तुला", "वृश्चिक",
+                                              "धनु", "मकर", "कुंभ", "मीन"])},
+        "elements": {"fire": "अग्नि", "earth": "पृथ्वी", "air": "वायु", "water": "जल"},
+        "modalities": {"movable": "चर", "fixed": "स्थिर", "dual": "द्विस्वभाव"},
+        "weekdays": ["रविवार", "सोमवार", "मंगलवार", "बुधवार", "गुरुवार", "शुक्रवार", "शनिवार"],
+    },
+}
+NAKSHATRA_HI = ["अश्विनी", "भरणी", "कृत्तिका", "रोहिणी", "मृगशिरा", "आर्द्रा", "पुनर्वसु", "पुष्य", "आश्लेषा", "मघा",
+                "पूर्वाफाल्गुनी", "उत्तराफाल्गुनी", "हस्त", "चित्रा", "स्वाति", "विशाखा", "अनुराधा", "ज्येष्ठा", "मूल",
+                "पूर्वाषाढ़ा", "उत्तराषाढ़ा", "श्रवण", "धनिष्ठा", "शतभिषा", "पूर्वभाद्रपद", "उत्तरभाद्रपद", "रेवती"]
+TITHI_HI = ["प्रतिपदा", "द्वितीया", "तृतीया", "चतुर्थी", "पंचमी", "षष्ठी", "सप्तमी", "अष्टमी", "नवमी", "दशमी", "एकादशी",
+            "द्वादशी", "त्रयोदशी", "चतुर्दशी", "पूर्णिमा", "अमावस्या"]
+
+THEMES = {
+    "en": {
+        "Sun": "the soul, vitality, authority, father figures, confidence and leadership",
+        "Moon": "the mind, emotions, mother, nurturing, memory and the public mood",
+        "Mars": "energy, courage, drive, competition, siblings and physical effort",
+        "Mercury": "intellect, speech, learning, trade, analysis and adaptability",
+        "Jupiter": "wisdom, growth, teachers, fortune, ethics, children and generosity",
+        "Venus": "love, harmony, beauty, comfort, the arts, partnership and pleasure",
+        "Saturn": "discipline, duty, time, perseverance, structure and long-term results",
+        "Rahu": "ambition, innovation, foreign influences, unconventional paths and worldly desire",
+        "Ketu": "detachment, intuition, spirituality, past-life themes and letting go",
+    },
+    "hi": {
+        "Sun": "आत्मा, जीवन-शक्ति, अधिकार, पिता, आत्मविश्वास और नेतृत्व",
+        "Moon": "मन, भावनाएँ, माता, पोषण, स्मृति और जनमानस",
+        "Mars": "ऊर्जा, साहस, पराक्रम, प्रतिस्पर्धा, भाई-बहन और परिश्रम",
+        "Mercury": "बुद्धि, वाणी, शिक्षा, व्यापार, विश्लेषण और अनुकूलन",
+        "Jupiter": "ज्ञान, वृद्धि, गुरु, भाग्य, नैतिकता, संतान और उदारता",
+        "Venus": "प्रेम, सामंजस्य, सौंदर्य, सुख-सुविधा, कला और साझेदारी",
+        "Saturn": "अनुशासन, कर्तव्य, समय, धैर्य, संरचना और दीर्घकालिक फल",
+        "Rahu": "महत्वाकांक्षा, नवीनता, विदेशी प्रभाव, अपरंपरागत मार्ग और सांसारिक इच्छा",
+        "Ketu": "वैराग्य, अंतर्ज्ञान, अध्यात्म, पूर्वजन्म के विषय और त्याग",
+    },
+}
+PLANET_NOTE = {
+    "en": {
+        "Sun": "A well-placed Sun supports self-belief and a clear sense of purpose; a weaker Sun asks you to build confidence through service and steady effort.",
+        "Moon": "A well-placed Moon supports emotional steadiness and adaptability; a weaker Moon asks for regular routines and restful habits.",
+        "Mars": "A well-placed Mars supports courage and initiative; a weaker Mars asks you to channel energy patiently and avoid haste.",
+        "Mercury": "A well-placed Mercury supports clear thinking and communication; a weaker Mercury asks for focus and careful checking of details.",
+        "Jupiter": "A well-placed Jupiter supports wisdom, guidance and good fortune; a weaker Jupiter asks you to stay open to learning and counsel.",
+        "Venus": "A well-placed Venus supports harmony in relationships and enjoyment of life; a weaker Venus asks for balance between comfort and commitment.",
+        "Saturn": "A well-placed Saturn supports discipline and lasting achievement; a weaker Saturn asks for patience, since results tend to arrive late but stay.",
+        "Rahu": "Rahu amplifies whatever it touches and tends to bring sudden changes of direction; grounding and ethics keep its ambition constructive.",
+        "Ketu": "Ketu points to areas where you feel naturally detached; mindful engagement keeps its insight from turning into withdrawal.",
+    },
+    "hi": {
+        "Sun": "सुस्थित सूर्य आत्मविश्वास और स्पष्ट उद्देश्य को बल देता है; कमज़ोर सूर्य सेवा और निरंतर प्रयास से आत्मविश्वास बनाने को कहता है।",
+        "Moon": "सुस्थित चंद्र भावनात्मक स्थिरता और अनुकूलन को बल देता है; कमज़ोर चंद्र नियमित दिनचर्या और विश्राम की आदतें चाहता है।",
+        "Mars": "सुस्थित मंगल साहस और पहल को बल देता है; कमज़ोर मंगल ऊर्जा को धैर्य से लगाने और जल्दबाज़ी से बचने को कहता है।",
+        "Mercury": "सुस्थित बुध स्पष्ट सोच और संवाद को बल देता है; कमज़ोर बुध एकाग्रता और विवरणों की सावधानी से जाँच चाहता है।",
+        "Jupiter": "सुस्थित गुरु ज्ञान, मार्गदर्शन और सौभाग्य को बल देता है; कमज़ोर गुरु सीखने और परामर्श के प्रति खुले रहने को कहता है।",
+        "Venus": "सुस्थित शुक्र संबंधों में सामंजस्य और जीवन के आनंद को बल देता है; कमज़ोर शुक्र सुख-सुविधा और प्रतिबद्धता में संतुलन चाहता है।",
+        "Saturn": "सुस्थित शनि अनुशासन और स्थायी उपलब्धि को बल देता है; कमज़ोर शनि धैर्य चाहता है, क्योंकि फल देर से आते हैं पर टिकते हैं।",
+        "Rahu": "राहु जिसे छूता है उसे बढ़ा देता है और अचानक दिशा-परिवर्तन ला सकता है; संयम और नैतिकता उसकी महत्वाकांक्षा को रचनात्मक रखते हैं।",
+        "Ketu": "केतु उन क्षेत्रों को दर्शाता है जहाँ स्वाभाविक वैराग्य रहता है; सजग जुड़ाव उसकी अंतर्दृष्टि को अलगाव बनने से रोकता है।",
+    },
+}
+
+# planet x element: how the planet's themes express themselves in a sign of that element
+EXPRESSION = {
+    "en": {
+        "Sun": {"fire": "confidence is open and bold, with a natural urge to lead and be seen",
+                "earth": "confidence is steady and practical, built through reliable effort and visible results",
+                "air": "confidence works through ideas, communication and the company of others",
+                "water": "confidence is quiet and feeling-led, drawing strength from intuition and loyalty"},
+        "Moon": {"fire": "emotions are quick and warm, reacting with enthusiasm and a need for action",
+                 "earth": "emotions are steady and grounded, seeking security, routine and tangible comfort",
+                 "air": "emotions are processed through thought and conversation, with a curious, restless mind",
+                 "water": "emotions run deep and receptive, with strong empathy, memory and sensitivity to atmosphere"},
+        "Mars": {"fire": "energy is direct and competitive, quick to start things and to defend its position",
+                 "earth": "energy is patient and sustained, best used on concrete projects that need stamina",
+                 "air": "energy goes into talk, planning and mental contests, sharp but sometimes scattered",
+                 "water": "energy is emotional and protective, strong when motivated by feeling and prone to moods"},
+        "Mercury": {"fire": "thinking is fast, decisive and persuasive, sometimes impatient with detail",
+                    "earth": "thinking is methodical and practical, strong in analysis, accounts and craft",
+                    "air": "thinking is versatile and social, quick to learn, connect and exchange ideas",
+                    "water": "thinking is intuitive and imaginative, absorbing impressions more than arguments"},
+        "Jupiter": {"fire": "wisdom is inspired and optimistic, favouring vision, faith and bold growth",
+                    "earth": "wisdom is practical and prudent, growing through steady, ethical building",
+                    "air": "wisdom is intellectual and sociable, expanding through learning, teaching and networks",
+                    "water": "wisdom is compassionate and devotional, expanding through care, faith and imagination"},
+        "Venus": {"fire": "affection is passionate and expressive, drawn to excitement and admiration",
+                  "earth": "affection is loyal and sensual, valuing comfort, stability and beautiful things",
+                  "air": "affection is friendly and refined, enjoying conversation, art and social grace",
+                  "water": "affection is tender and devoted, emotionally deep and romantic"},
+        "Saturn": {"fire": "discipline is tested by impatience and learns to channel drive into long-term goals",
+                   "earth": "discipline is natural and enduring, giving patience, thrift and capacity for hard work",
+                   "air": "discipline works through systems, rules and ideas, with serious, detached reasoning",
+                   "water": "discipline meets emotion, with caution in feelings and a need to build trust slowly"},
+        "Rahu": {"fire": "ambition is bold and attention-seeking, drawn to leadership and risk",
+                 "earth": "ambition focuses on money, status and tangible achievement, often by unconventional means",
+                 "air": "ambition is drawn to technology, media, networks and new ideas",
+                 "water": "ambition mixes with emotion and imagination, drawn to the hidden, the foreign or the mystical"},
+        "Ketu": {"fire": "detachment shows as restless independence and a wish to act without applause",
+                 "earth": "detachment shows as simplicity and indifference to material display",
+                 "air": "detachment shows as a questioning, abstract mind that steps back from social noise",
+                 "water": "detachment shows as deep intuition and a pull toward inner, spiritual experience"},
+    },
+    "hi": {
+        "Sun": {"fire": "आत्मविश्वास खुला और साहसी रहता है, नेतृत्व की स्वाभाविक इच्छा के साथ",
+                "earth": "आत्मविश्वास स्थिर और व्यावहारिक रहता है, जो भरोसेमंद परिश्रम और ठोस परिणामों से बनता है",
+                "air": "आत्मविश्वास विचारों, संवाद और लोगों के साथ से काम करता है",
+                "water": "आत्मविश्वास शांत और भावना-प्रधान रहता है, अंतर्ज्ञान और निष्ठा से बल पाता है"},
+        "Moon": {"fire": "भावनाएँ तीव्र और उत्साही होती हैं, कर्म की ओर प्रेरित करती हैं",
+                 "earth": "भावनाएँ स्थिर और जमीनी होती हैं, सुरक्षा, दिनचर्या और ठोस सुख चाहती हैं",
+                 "air": "भावनाएँ विचार और बातचीत से संसाधित होती हैं, मन जिज्ञासु और चंचल रहता है",
+                 "water": "भावनाएँ गहरी और ग्रहणशील होती हैं, सहानुभूति और संवेदनशीलता प्रबल रहती है"},
+        "Mars": {"fire": "ऊर्जा सीधी और प्रतिस्पर्धी होती है, काम शुरू करने और अपना पक्ष रखने में तेज",
+                 "earth": "ऊर्जा धैर्यवान और टिकाऊ होती है, ठोस कार्यों में सबसे अच्छी लगती है",
+                 "air": "ऊर्जा बातचीत, योजना और बौद्धिक प्रतिस्पर्धा में लगती है, तेज पर कभी-कभी बिखरी हुई",
+                 "water": "ऊर्जा भावनात्मक और रक्षात्मक होती है, प्रेरणा मिलने पर प्रबल पर मनोदशा से प्रभावित"},
+        "Mercury": {"fire": "सोच तेज, निर्णायक और प्रभावशाली होती है, कभी विवरण के प्रति अधीर",
+                    "earth": "सोच व्यवस्थित और व्यावहारिक होती है, विश्लेषण, हिसाब और शिल्प में सशक्त",
+                    "air": "सोच बहुमुखी और सामाजिक होती है, सीखने और विचार-विनिमय में तेज",
+                    "water": "सोच अंतर्ज्ञानी और कल्पनाशील होती है, तर्क से अधिक अनुभूतियाँ ग्रहण करती है"},
+        "Jupiter": {"fire": "ज्ञान प्रेरित और आशावादी होता है, दृष्टि, आस्था और साहसिक विकास को बल देता है",
+                    "earth": "ज्ञान व्यावहारिक और विवेकपूर्ण होता है, धीरे-धीरे नैतिक निर्माण से बढ़ता है",
+                    "air": "ज्ञान बौद्धिक और मिलनसार होता है, अध्ययन, शिक्षण और संपर्कों से बढ़ता है",
+                    "water": "ज्ञान करुणामय और भक्तिपूर्ण होता है, सेवा, आस्था और कल्पना से बढ़ता है"},
+        "Venus": {"fire": "स्नेह उत्साही और अभिव्यक्तिपूर्ण होता है, रोमांच और प्रशंसा की ओर आकर्षित",
+                  "earth": "स्नेह निष्ठावान और इंद्रिय-सुखप्रिय होता है, सुविधा, स्थिरता और सुंदर वस्तुओं को महत्व देता है",
+                  "air": "स्नेह मित्रवत और परिष्कृत होता है, बातचीत, कला और सामाजिक शिष्टता का आनंद लेता है",
+                  "water": "स्नेह कोमल और समर्पित होता है, भावनात्मक रूप से गहरा और रोमानी"},
+        "Saturn": {"fire": "अनुशासन की परीक्षा अधीरता से होती है, और ऊर्जा को दीर्घकालिक लक्ष्यों में लगाना सीखा जाता है",
+                   "earth": "अनुशासन स्वाभाविक और टिकाऊ होता है, धैर्य, मितव्ययिता और परिश्रम की क्षमता देता है",
+                   "air": "अनुशासन प्रणालियों, नियमों और विचारों से काम करता है, गंभीर और निरपेक्ष तर्क के साथ",
+                   "water": "अनुशासन भावनाओं से मिलता है, भावनाओं में सावधानी और विश्वास धीरे-धीरे बनाने की आवश्यकता के साथ"},
+        "Rahu": {"fire": "महत्वाकांक्षा साहसी और ध्यान आकर्षित करने वाली होती है, नेतृत्व और जोखिम की ओर खिंचती है",
+                 "earth": "महत्वाकांक्षा धन, पद और ठोस उपलब्धि पर केंद्रित रहती है, अक्सर अपरंपरागत तरीकों से",
+                 "air": "महत्वाकांक्षा तकनीक, मीडिया, संपर्क-जाल और नए विचारों की ओर खिंचती है",
+                 "water": "महत्वाकांक्षा भावना और कल्पना से मिलती है, छिपे, विदेशी या रहस्यमय की ओर खिंचती है"},
+        "Ketu": {"fire": "वैराग्य बेचैन स्वतंत्रता और बिना प्रशंसा के कर्म करने की इच्छा के रूप में दिखता है",
+                 "earth": "वैराग्य सादगी और भौतिक दिखावे के प्रति उदासीनता के रूप में दिखता है",
+                 "air": "वैराग्य प्रश्न करने वाले, अमूर्त मन के रूप में दिखता है जो सामाजिक शोर से दूर रहता है",
+                 "water": "वैराग्य गहरे अंतर्ज्ञान और आंतरिक, आध्यात्मिक अनुभव की ओर खिंचाव के रूप में दिखता है"},
+    },
+}
+SIGN_TRAIT = {
+    "en": ["initiative, courage and a pioneering spirit", "patience, persistence and a love of stability and comfort",
+           "curiosity, versatility and quick communication", "nurturing, protectiveness and emotional memory",
+           "dignity, generosity and a need for recognition", "precision, service and practical improvement",
+           "balance, diplomacy and a sense of fairness and beauty", "intensity, depth and determination to transform",
+           "optimism, philosophy and a love of freedom and exploration", "ambition, structure and responsibility",
+           "independence, originality and concern for the wider group", "compassion, imagination and spiritual sensitivity"],
+    "hi": ["पहल, साहस और अग्रणी भावना", "धैर्य, दृढ़ता और स्थिरता व सुख-सुविधा का प्रेम",
+           "जिज्ञासा, बहुमुखी प्रतिभा और तेज संवाद", "पोषण, संरक्षण और भावनात्मक स्मृति",
+           "गरिमा, उदारता और सम्मान की आवश्यकता", "सूक्ष्मता, सेवा और व्यावहारिक सुधार",
+           "संतुलन, कूटनीति और न्याय व सौंदर्य की समझ", "तीव्रता, गहराई और परिवर्तन का संकल्प",
+           "आशावाद, दर्शन और स्वतंत्रता व अन्वेषण का प्रेम", "महत्वाकांक्षा, संरचना और उत्तरदायित्व",
+           "स्वतंत्रता, मौलिकता और व्यापक समूह की चिंता", "करुणा, कल्पना और आध्यात्मिक संवेदनशीलता"],
+}
+DIGNITY_TEXT = {
+    "en": {"exalted": "{P} is exalted here, so these qualities are traditionally considered strongly supported.",
+           "debilitated": "{P} is debilitated here, so these qualities may need conscious effort and tend to mature with experience.",
+           "own": "{P} is in its own sign here, a comfortable and self-supported placement.",
+           "friend": "The sign lord {L} is friendly to {P}, so the placement is generally supportive.",
+           "neutral": "The sign lord {L} is neutral to {P}, giving moderate and mixed support.",
+           "enemy": "The sign lord {L} is not friendly to {P}, so results may come with some effort.",
+           "node": "For the nodes this report follows the convention stated in its appendix."},
+    "hi": {"exalted": "{P} यहाँ उच्च का है, इसलिए ये गुण परंपरा से अत्यंत सहयोगी माने जाते हैं।",
+           "debilitated": "{P} यहाँ नीच का है, इसलिए इन गुणों के लिए सचेत प्रयास की आवश्यकता हो सकती है और ये अनुभव के साथ परिपक्व होते हैं।",
+           "own": "{P} यहाँ अपनी राशि में है, जो सहज और आत्म-समर्थित स्थिति है।",
+           "friend": "राशि स्वामी {L} {P} का मित्र है, इसलिए स्थिति सामान्यतः सहायक है।",
+           "neutral": "राशि स्वामी {L} {P} के प्रति सम है, इसलिए सहयोग मध्यम और मिश्रित रहता है।",
+           "enemy": "राशि स्वामी {L} {P} का मित्र नहीं है, इसलिए फल कुछ प्रयास के साथ आ सकते हैं।",
+           "node": "राहु-केतु के लिए यह रिपोर्ट परिशिष्ट में बताई गई परिपाटी का पालन करती है।"},
+}
+PIS_TEMPLATE = {
+    "en": "{P} signifies {themes}. In {S}, a {mod} {el} sign ruled by {L} and marked by {trait}, {phrase}. {dignity}",
+    "hi": "{P} {themes} का कारक है। {S} राशि ({mod} {el} तत्व, स्वामी {L}, पहचान: {trait}) में {phrase}। {dignity}",
+}
+
+LAGNA = {
+    "en": [
+        ("Ram", "Direct, energetic and quick to act. You tend to lead from the front, value independence and learn best by doing. The watch-point is impatience; steady follow-through turns your initiative into lasting results."),
+        ("Bull", "Calm, dependable and grounded. You value comfort, loyalty and tangible progress, and you persist where others give up. The watch-point is resistance to change; flexibility keeps stability from becoming rigidity."),
+        ("Twins", "Curious, communicative and adaptable. You pick things up quickly, enjoy variety and connect easily with people. The watch-point is scattered focus; choosing a few priorities turns versatility into mastery."),
+        ("Crab", "Sensitive, caring and protective. You read moods well, value home and family, and remember what matters to you. The watch-point is taking things personally; healthy boundaries let empathy be a strength."),
+        ("Lion", "Warm, confident and generous. You carry natural presence, like to lead and want your work to be recognised. The watch-point is pride; listening as well as leading keeps your warmth inspiring."),
+        ("Maiden", "Analytical, modest and service-minded. You notice detail, like order and improve whatever you touch. The watch-point is over-criticism, of yourself most of all; allowing 'good enough' keeps precision productive."),
+        ("Scales", "Gracious, fair-minded and sociable. You seek harmony, have an eye for beauty and work well in partnership. The watch-point is indecision; clarity about your own preferences keeps diplomacy from becoming avoidance."),
+        ("Scorpion", "Intense, private and determined. You look beneath the surface, hold deep loyalties and recover strongly from setbacks. The watch-point is guardedness; trusting selectively lets your depth connect rather than isolate."),
+        ("Archer", "Optimistic, honest and freedom-loving. You are drawn to learning, travel and big-picture thinking. The watch-point is restlessness and bluntness; patience with detail makes your vision practical."),
+        ("Goat", "Disciplined, practical and ambitious. You build step by step, take responsibility seriously and often mature early. The watch-point is excess reserve and self-pressure; making room for rest and warmth keeps ambition sustainable."),
+        ("Water-bearer", "Independent, original and humane. You think in terms of ideas and groups, value freedom and often see ahead of your time. The watch-point is detachment; staying emotionally present keeps your vision connected to people."),
+        ("Fish", "Compassionate, imaginative and adaptable. You absorb the feelings around you and are drawn to art, service and spiritual life. The watch-point is vagueness and over-giving; grounding routines let your sensitivity serve you."),
+    ],
+    "hi": [
+        ("मेढ़ा", "सीधे, ऊर्जावान और तुरंत कदम उठाने वाले। आप आगे बढ़कर नेतृत्व करते हैं, स्वतंत्रता को महत्व देते हैं और करके सीखते हैं। ध्यान रखने योग्य बात अधीरता है; निरंतरता आपकी पहल को स्थायी परिणाम में बदलती है।"),
+        ("वृषभ (बैल)", "शांत, भरोसेमंद और जमीन से जुड़े। आप सुख-सुविधा, निष्ठा और ठोस प्रगति को महत्व देते हैं और जहाँ दूसरे छोड़ देते हैं वहाँ टिके रहते हैं। ध्यान रखने योग्य बात बदलाव का विरोध है; लचीलापन स्थिरता को जड़ता बनने से रोकता है।"),
+        ("युगल", "जिज्ञासु, संवादप्रिय और अनुकूलनशील। आप जल्दी सीखते हैं, विविधता पसंद करते हैं और लोगों से सहज जुड़ते हैं। ध्यान रखने योग्य बात बिखरा ध्यान है; कुछ प्राथमिकताएँ चुनने से बहुमुखी प्रतिभा निपुणता बनती है।"),
+        ("केकड़ा", "संवेदनशील, देखभाल करने वाले और रक्षक। आप मनोदशाएँ पढ़ लेते हैं, घर-परिवार को महत्व देते हैं और अपने लिए जो मायने रखता है उसे याद रखते हैं। ध्यान रखने योग्य बात बातों को व्यक्तिगत लेना है; स्वस्थ सीमाएँ सहानुभूति को शक्ति बनाती हैं।"),
+        ("सिंह", "गर्मजोशी भरे, आत्मविश्वासी और उदार। आपमें स्वाभाविक प्रभाव है, आप नेतृत्व पसंद करते हैं और चाहते हैं कि आपके काम को पहचान मिले। ध्यान रखने योग्य बात अभिमान है; नेतृत्व के साथ सुनना आपकी गर्मजोशी को प्रेरक रखता है।"),
+        ("कन्या", "विश्लेषणात्मक, विनम्र और सेवाभावी। आप विवरण देखते हैं, व्यवस्था पसंद करते हैं और जिस चीज़ को छूते हैं उसे बेहतर बनाते हैं। ध्यान रखने योग्य बात अति-आलोचना है, विशेषकर अपने प्रति; 'पर्याप्त अच्छा' को स्वीकारना सूक्ष्मता को उत्पादक रखता है।"),
+        ("तराजू", "शालीन, निष्पक्ष और मिलनसार। आप सामंजस्य चाहते हैं, सौंदर्य की समझ रखते हैं और साझेदारी में अच्छा काम करते हैं। ध्यान रखने योग्य बात अनिर्णय है; अपनी पसंद की स्पष्टता कूटनीति को टालमटोल बनने से रोकती है।"),
+        ("बिच्छू", "तीव्र, निजी और संकल्पवान। आप सतह के नीचे देखते हैं, गहरी निष्ठा रखते हैं और असफलताओं से मज़बूती से उबरते हैं। ध्यान रखने योग्य बात सतर्कता की दीवार है; चुनकर भरोसा करना आपकी गहराई को जोड़ने वाला बनाता है।"),
+        ("धनुर्धर", "आशावादी, ईमानदार और स्वतंत्रता-प्रेमी। आप अध्ययन, यात्रा और बड़ी तस्वीर की सोच की ओर खिंचते हैं। ध्यान रखने योग्य बात बेचैनी और स्पष्टवादिता की तीक्ष्णता है; विवरण के प्रति धैर्य आपकी दृष्टि को व्यावहारिक बनाता है।"),
+        ("मकर (बकरा)", "अनुशासित, व्यावहारिक और महत्वाकांक्षी। आप कदम-दर-कदम निर्माण करते हैं, उत्तरदायित्व को गंभीरता से लेते हैं और अक्सर जल्दी परिपक्व होते हैं। ध्यान रखने योग्य बात अत्यधिक संकोच और स्वयं पर दबाव है; विश्राम और आत्मीयता के लिए जगह महत्वाकांक्षा को टिकाऊ रखती है।"),
+        ("कुंभधारी", "स्वतंत्र, मौलिक और मानवीय। आप विचारों और समूहों के रूप में सोचते हैं, स्वतंत्रता को महत्व देते हैं और अक्सर अपने समय से आगे देखते हैं। ध्यान रखने योग्य बात निर्लिप्तता है; भावनात्मक रूप से उपस्थित रहना आपकी दृष्टि को लोगों से जोड़े रखता है।"),
+        ("मछली", "करुणामय, कल्पनाशील और अनुकूलनशील। आप आसपास की भावनाओं को सोख लेते हैं और कला, सेवा व आध्यात्मिक जीवन की ओर खिंचते हैं। ध्यान रखने योग्य बात अस्पष्टता और अति-देना है; जमीनी दिनचर्या आपकी संवेदनशीलता को आपके काम आने देती है।"),
+    ],
+}
+LAGNA_QUALITY = {"movable": "Movable", "fixed": "Fixed", "dual": "Dual"}
+
+HOUSE_THEME = {
+    "en": ["self and personality", "wealth, speech and family", "effort, courage and siblings",
+           "home, mother and inner peace", "intellect, creativity and children", "daily work, service and obstacles",
+           "marriage and partnerships", "transformation and sudden change", "fortune, dharma and higher learning",
+           "career and public life", "gains and networks", "expenses, foreign lands and solitude"],
+    "hi": ["स्वयं और व्यक्तित्व", "धन, वाणी और परिवार", "पराक्रम, साहस और भाई-बहन", "घर, माता और आंतरिक शांति",
+           "बुद्धि, सृजन और संतान", "दैनिक कार्य, सेवा और बाधाएँ", "विवाह और साझेदारी", "परिवर्तन और अचानक बदलाव",
+           "भाग्य, धर्म और उच्च शिक्षा", "करियर और सार्वजनिक जीवन", "लाभ और संपर्क", "खर्च, विदेश और एकांत"],
+}
+
+KAAL_SARPA = {
+    "en": {
+        "intro": "Kaal Sarp Yoga is said to form when the seven planets lie on one side of the Rahu-Ketu axis. Traditionally it is read as a theme of karmic intensity: results may arrive in bursts or after delay, and attention gathers on the houses of the nodal axis. It is one indicator among many, and many charts with this pattern show strong achievement.",
+        "absent": "The seven planets are not all on one side of the Rahu-Ketu axis, so Kaal Sarp Yoga is not formed in this chart.",
+        "partial": "Six of the seven planets lie on one side of the Rahu-Ketu axis, a partial Kaal Sarp pattern. Traditionally its effect is considered milder than a full formation.",
+        "type": "The yoga is of the {type} type, named for Rahu standing in the {n} house. The nodal axis runs across houses {n} and {m}, linking {a} with {b}.",
+        "direction": {"ascending": "The planets lie on the arc from Ketu to Rahu (ascending direction). Traditional texts treat this as the more active direction.",
+                      "descending": "The planets lie on the arc from Rahu to Ketu (descending direction). Traditional texts treat this as the more subtle direction."},
+        "remedies": "Traditional devotional practices include reciting the Rahu and Ketu mantras, charity on Saturdays and visiting a Shiva temple. They are cultural and personal practices; no outcome is guaranteed.",
+    },
+    "hi": {
+        "intro": "कालसर्प योग तब बनता बताया जाता है जब सातों ग्रह राहु-केतु अक्ष के एक ओर हों। परंपरा में इसे कर्मिक तीव्रता का विषय माना जाता है: फल एक साथ या देर से आ सकते हैं और ध्यान राहु-केतु अक्ष के भावों पर केंद्रित रहता है। यह अनेक संकेतों में से एक है, और इस स्थिति वाली कई कुंडलियों में उल्लेखनीय उपलब्धियाँ दिखती हैं।",
+        "absent": "सातों ग्रह राहु-केतु अक्ष के एक ओर नहीं हैं, इसलिए इस कुंडली में कालसर्प योग नहीं बनता।",
+        "partial": "सात में से छह ग्रह राहु-केतु अक्ष के एक ओर हैं, यह आंशिक कालसर्प स्थिति है। परंपरा में इसका प्रभाव पूर्ण योग से मृदु माना जाता है।",
+        "type": "यह योग {type} प्रकार का है, जिसका नाम राहु के {n} भाव में होने से पड़ता है। राहु-केतु अक्ष भाव {n} और {m} के आर-पार है, जो {a} को {b} से जोड़ता है।",
+        "direction": {"ascending": "ग्रह केतु से राहु की ओर के चाप में हैं (आरोही दिशा)। परंपरागत ग्रंथ इसे अधिक सक्रिय दिशा मानते हैं।",
+                      "descending": "ग्रह राहु से केतु की ओर के चाप में हैं (अवरोही दिशा)। परंपरागत ग्रंथ इसे अधिक सूक्ष्म दिशा मानते हैं।"},
+        "remedies": "परंपरागत भक्ति-अभ्यासों में राहु-केतु मंत्र पाठ, शनिवार को दान और शिव मंदिर दर्शन शामिल हैं। ये सांस्कृतिक और व्यक्तिगत अभ्यास हैं; किसी परिणाम की गारंटी नहीं है।",
+    },
+}
+ORD_EN = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th"]
+
+MANGLIK = {
+    "en": {
+        "intro": "In Manglik analysis, Mars is checked in the 1st, 2nd, 4th, 7th, 8th and 12th houses from the Lagna, the Moon and Venus. Traditionally this placement indicates strong energy and a need for patience and understanding in partnership. It is weighed together with cancellation factors and the partner's chart.",
+        "none": "Mars does not occupy a Manglik house from the Lagna, Moon or Venus in this chart, so no Manglik placement is found.",
+        "effective": "A Manglik placement is found from: {refs}. No cancellation factor applies, so the traditional view treats it as active. Matching with the partner's chart is customary, and mutual placements are considered to balance each other.",
+        "cancelled": "A Manglik placement is found from {refs}, but traditional cancellation factors apply (for example Mars in its own sign or exalted, or Jupiter's association or aspect), which reduce its weight.",
+        "others": "Other planets traditionally counted in this analysis (Sun, Saturn, Rahu, Ketu) stand in Manglik houses from the Lagna: {others}.",
+        "intensity": "Indicative weight in this report: {pct}% (a transparent heuristic of this engine, not a classical figure).",
+        "remedies": "Traditional practices include worshipping Hanuman on Tuesdays and reciting the Mangal mantra. They are devotional and cultural; they do not decide the quality of a relationship.",
+        "refs": {"lagna": "the Lagna", "moon": "the Moon", "venus": "Venus"},
+    },
+    "hi": {
+        "intro": "मांगलिक विश्लेषण में लग्न, चंद्र और शुक्र से मंगल को 1, 2, 4, 7, 8 और 12वें भाव में देखा जाता है। परंपरा में यह स्थिति तीव्र ऊर्जा और साझेदारी में धैर्य व समझ की आवश्यकता दर्शाती है। इसे परिहार कारकों और साथी की कुंडली के साथ तौला जाता है।",
+        "none": "इस कुंडली में लग्न, चंद्र या शुक्र से मंगल मांगलिक भाव में नहीं है, इसलिए मांगलिक स्थिति नहीं मिलती।",
+        "effective": "मांगलिक स्थिति इनसे मिलती है: {refs}। कोई परिहार लागू नहीं है, इसलिए परंपरागत दृष्टि से यह सक्रिय है। साथी की कुंडली से मिलान प्रचलित है, और परस्पर स्थितियाँ एक-दूसरे को संतुलित मानी जाती हैं।",
+        "cancelled": "{refs} से मांगलिक स्थिति मिलती है, पर परंपरागत परिहार लागू होते हैं (जैसे मंगल का स्वराशि या उच्च में होना, या गुरु की युति/दृष्टि), जो इसके भार को घटाते हैं।",
+        "others": "इस विश्लेषण में परंपरा से गिने जाने वाले अन्य ग्रह (सूर्य, शनि, राहु, केतु) लग्न से मांगलिक भावों में हैं: {others}।",
+        "intensity": "इस रिपोर्ट में सूचक भार: {pct}% (इस इंजन की पारदर्शी अनुमान-विधि, शास्त्रीय आँकड़ा नहीं)।",
+        "remedies": "परंपरागत अभ्यासों में मंगलवार को हनुमान पूजा और मंगल मंत्र पाठ शामिल हैं। ये भक्ति और संस्कृति से जुड़े हैं; ये संबंध की गुणवत्ता तय नहीं करते।",
+        "refs": {"lagna": "लग्न", "moon": "चंद्र", "venus": "शुक्र"},
+    },
+}
+
+SADHESATI = {
+    "en": {
+        "intro": "Sade Sati is the roughly seven-and-a-half-year period when Saturn transits the 12th, 1st and 2nd signs from the natal Moon. Traditionally it is a period of testing, responsibility and restructuring, and many people describe it as a time of maturity. Because Saturn can move back and forth across a sign boundary, the table below lists every entry and exit.",
+        "active": "At the reference date of this report Sade Sati is active ({phase}).",
+        "inactive": "At the reference date of this report Sade Sati is not active.",
+        "phases": {"RISING_START": "Rising phase begins (Saturn enters the 12th from the Moon).",
+                   "RISING_END": "Rising phase ends; Saturn returns to the 11th.",
+                   "PEAK_START": "Peak phase begins (Saturn is over the Moon sign).",
+                   "SETTING_START": "Setting phase begins (Saturn enters the 2nd from the Moon).",
+                   "SETTING_END": "Setting phase ends; Sade Sati is over for now."},
+        "phase_names": {"sade_sati_rising": "rising phase", "sade_sati_peak": "peak phase",
+                        "sade_sati_setting": "setting phase", "dhaiya_kantaka": "Dhaiya (Saturn 4th from the Moon)",
+                        "dhaiya_ashtama": "Dhaiya (Saturn 8th from the Moon)"},
+        "guidance": "Traditionally advised: steady routines, honesty, patience and respect for elders and colleagues.",
+        "remedies": "Traditional practices include reciting the Hanuman Chalisa, serving elders and the needy, and charity on Saturdays. They are devotional and cultural; no outcome is guaranteed.",
+    },
+    "hi": {
+        "intro": "साढ़ेसाती लगभग साढ़े सात वर्ष की वह अवधि है जब शनि जन्म चंद्र राशि से 12वीं, 1ली और 2री राशि में गोचर करता है। परंपरा में यह परीक्षा, उत्तरदायित्व और पुनर्गठन का समय माना जाता है, और कई लोग इसे परिपक्वता का समय बताते हैं। शनि राशि-सीमा पर आगे-पीछे हो सकता है, इसलिए नीचे की तालिका में हर प्रवेश और निकास दिया गया है।",
+        "active": "इस रिपोर्ट की संदर्भ तिथि पर साढ़ेसाती सक्रिय है ({phase})।",
+        "inactive": "इस रिपोर्ट की संदर्भ तिथि पर साढ़ेसाती सक्रिय नहीं है।",
+        "phases": {"RISING_START": "प्रथम चरण (उदय) आरंभ: शनि चंद्र से 12वें में प्रवेश करता है।",
+                   "RISING_END": "प्रथम चरण समाप्त; शनि 11वें में लौटता है।",
+                   "PEAK_START": "मध्य चरण (शिखर) आरंभ: शनि चंद्र राशि पर है।",
+                   "SETTING_START": "अंतिम चरण (अस्त) आरंभ: शनि चंद्र से 2रे में प्रवेश करता है।",
+                   "SETTING_END": "अंतिम चरण समाप्त; फ़िलहाल साढ़ेसाती समाप्त है।"},
+        "phase_names": {"sade_sati_rising": "प्रथम चरण", "sade_sati_peak": "मध्य चरण", "sade_sati_setting": "अंतिम चरण",
+                        "dhaiya_kantaka": "ढैया (शनि चंद्र से चौथे)", "dhaiya_ashtama": "ढैया (शनि चंद्र से आठवें)"},
+        "guidance": "परंपरा में सुझाव: नियमित दिनचर्या, ईमानदारी, धैर्य और बड़ों व सहकर्मियों का सम्मान।",
+        "remedies": "परंपरागत अभ्यासों में हनुमान चालीसा पाठ, बड़ों और ज़रूरतमंदों की सेवा और शनिवार को दान शामिल हैं। ये भक्ति और संस्कृति से जुड़े हैं; किसी परिणाम की गारंटी नहीं है।",
+    },
+}
+
+GEM_TEXT = {
+    "en": {
+        "Sun": "Ruby is the traditional gem of the Sun, associated with confidence, authority and clarity of purpose.",
+        "Moon": "Pearl is the traditional gem of the Moon, associated with calm, emotional balance and receptivity.",
+        "Mars": "Red Coral is the traditional gem of Mars, associated with courage, drive and protective energy.",
+        "Mercury": "Emerald is the traditional gem of Mercury, associated with clear thinking, communication and skill in trade.",
+        "Jupiter": "Yellow Sapphire is the traditional gem of Jupiter, associated with wisdom, optimism and good counsel.",
+        "Venus": "Diamond is the traditional gem of Venus, associated with harmony, refinement and the pleasures of relationships and the arts.",
+        "Saturn": "Blue Sapphire is the traditional gem of Saturn, associated with discipline, focus and steady long-term effort.",
+        "Rahu": "Hessonite (Gomed) is the traditional gem of Rahu, associated with ambition and clarity amid confusion.",
+        "Ketu": "Cat's Eye is the traditional gem of Ketu, associated with intuition, detachment and spiritual focus.",
+    },
+    "hi": {
+        "Sun": "माणिक्य सूर्य का परंपरागत रत्न है, जो आत्मविश्वास, अधिकार और उद्देश्य की स्पष्टता से जुड़ा है।",
+        "Moon": "मोती चंद्र का परंपरागत रत्न है, जो शांति, भावनात्मक संतुलन और ग्रहणशीलता से जुड़ा है।",
+        "Mars": "मूंगा मंगल का परंपरागत रत्न है, जो साहस, ऊर्जा और रक्षात्मक शक्ति से जुड़ा है।",
+        "Mercury": "पन्ना बुध का परंपरागत रत्न है, जो स्पष्ट सोच, संवाद और व्यापार-कौशल से जुड़ा है।",
+        "Jupiter": "पुखराज गुरु का परंपरागत रत्न है, जो ज्ञान, आशावाद और सुमार्गदर्शन से जुड़ा है।",
+        "Venus": "हीरा शुक्र का परंपरागत रत्न है, जो सामंजस्य, परिष्कार और संबंधों व कलाओं के आनंद से जुड़ा है।",
+        "Saturn": "नीलम शनि का परंपरागत रत्न है, जो अनुशासन, एकाग्रता और निरंतर दीर्घकालिक प्रयास से जुड़ा है।",
+        "Rahu": "गोमेद राहु का परंपरागत रत्न है, जो महत्वाकांक्षा और भ्रम में स्पष्टता से जुड़ा है।",
+        "Ketu": "लहसुनिया केतु का परंपरागत रत्न है, जो अंतर्ज्ञान, वैराग्य और आध्यात्मिक एकाग्रता से जुड़ा है।",
+    },
+}
+GEM_CAUTION = {
+    "en": "In Jyotish a gemstone is a symbolic support, not a medical, legal or financial remedy, and results are not guaranteed. Strong stones (Blue Sapphire, Hessonite, Cat's Eye) are traditionally tried for a short period before regular wear. Consult a qualified astrologer and buy only from a certified gemologist.",
+    "hi": "ज्योतिष में रत्न एक प्रतीकात्मक सहारा है, चिकित्सा, कानूनी या वित्तीय उपाय नहीं, और परिणामों की गारंटी नहीं है। प्रबल रत्न (नीलम, गोमेद, लहसुनिया) परंपरा से नियमित धारण से पहले कुछ समय के लिए परखे जाते हैं। योग्य ज्योतिषी से परामर्श लें और केवल प्रमाणित रत्न-विशेषज्ञ से खरीदें।",
+}
+GEM_ROLE = {
+    "en": {"life_stone": ("Life Stone", "The Lagna lord's gem. The Lagna represents the self, so this stone is traditionally worn as a lifelong support."),
+           "benefic_stone": ("Benefic Stone", "The gem of the 5th lord. The 5th house relates to intellect, creativity, children and past good deeds."),
+           "lucky_stone": ("Lucky Stone", "The gem of the 9th lord. The 9th house is the house of fortune, dharma and higher learning.")},
+    "hi": {"life_stone": ("जीवन रत्न", "लग्नेश का रत्न। लग्न स्वयं का प्रतीक है, इसलिए यह रत्न परंपरा से आजीवन सहारे के रूप में पहना जाता है।"),
+           "benefic_stone": ("शुभ रत्न", "पंचमेश का रत्न। पंचम भाव बुद्धि, सृजन, संतान और पूर्व पुण्य से जुड़ा है।"),
+           "lucky_stone": ("भाग्य रत्न", "नवमेश का रत्न। नवम भाव भाग्य, धर्म और उच्च शिक्षा का भाव है।")},
+}
+NUMEROLOGY = {
+    "en": {
+        1: "Number 1 is ruled by the Sun: leadership, originality and self-reliance. You prefer to initiate rather than follow. The watch-point is ego and stubbornness.",
+        2: "Number 2 is ruled by the Moon: sensitivity, cooperation and imagination. You are tactful and intuitive, and good at partnership. The watch-point is moodiness and indecision.",
+        3: "Number 3 is ruled by Jupiter: optimism, expression and a love of learning. You are sociable and creative, and often teach or advise. The watch-point is over-extending and scattered effort.",
+        4: "Number 4 is ruled by Rahu: unconventional thinking, hard work and a practical bent for systems. You often take a different route from others. The watch-point is restlessness and sudden changes of course.",
+        5: "Number 5 is ruled by Mercury: quick intelligence, communication and a flair for trade. You adapt fast and like variety. The watch-point is hurry and nervous energy.",
+        6: "Number 6 is ruled by Venus: charm, love of beauty and a caring, family-oriented nature. You value harmony and comfort. The watch-point is indulgence and avoiding conflict.",
+        7: "Number 7 is ruled by Ketu: introspection, research and a spiritual bent. You prefer depth to crowds. The watch-point is aloofness and over-analysis.",
+        8: "Number 8 is ruled by Saturn: discipline, endurance and a sense of responsibility. Results come through sustained effort over time. The watch-point is heaviness, delay and being too hard on yourself.",
+        9: "Number 9 is ruled by Mars: courage, energy and a humanitarian drive. You defend what you believe in. The watch-point is temper and impulsiveness.",
+    },
+    "hi": {
+        1: "अंक 1 का स्वामी सूर्य है: नेतृत्व, मौलिकता और आत्मनिर्भरता। आप अनुसरण से अधिक पहल करना पसंद करते हैं। ध्यान रखने योग्य बात अहंकार और हठ है।",
+        2: "अंक 2 का स्वामी चंद्र है: संवेदनशीलता, सहयोग और कल्पना। आप व्यवहारकुशल और अंतर्ज्ञानी हैं, साझेदारी में अच्छे हैं। ध्यान रखने योग्य बात मनोदशा का उतार-चढ़ाव और अनिर्णय है।",
+        3: "अंक 3 का स्वामी गुरु है: आशावाद, अभिव्यक्ति और सीखने का प्रेम। आप मिलनसार और रचनात्मक हैं, अक्सर सिखाते या सलाह देते हैं। ध्यान रखने योग्य बात बहुत फैल जाना और बिखरा प्रयास है।",
+        4: "अंक 4 का स्वामी राहु है: अपरंपरागत सोच, कठोर परिश्रम और प्रणालियों के प्रति व्यावहारिक झुकाव। आप अक्सर दूसरों से अलग राह चुनते हैं। ध्यान रखने योग्य बात बेचैनी और अचानक दिशा बदलना है।",
+        5: "अंक 5 का स्वामी बुध है: तेज बुद्धि, संवाद और व्यापार की समझ। आप जल्दी ढल जाते हैं और विविधता पसंद करते हैं। ध्यान रखने योग्य बात जल्दबाज़ी और घबराहट भरी ऊर्जा है।",
+        6: "अंक 6 का स्वामी शुक्र है: आकर्षण, सौंदर्य-प्रेम और देखभाल करने वाला, परिवार-प्रधान स्वभाव। आप सामंजस्य और सुख-सुविधा को महत्व देते हैं। ध्यान रखने योग्य बात अतिभोग और टकराव से बचना है।",
+        7: "अंक 7 का स्वामी केतु है: आत्मचिंतन, शोध और आध्यात्मिक झुकाव। आप भीड़ से अधिक गहराई पसंद करते हैं। ध्यान रखने योग्य बात अलगाव और अति-विश्लेषण है।",
+        8: "अंक 8 का स्वामी शनि है: अनुशासन, सहनशक्ति और उत्तरदायित्व की भावना। फल समय के साथ निरंतर प्रयास से आते हैं। ध्यान रखने योग्य बात बोझिलता, देरी और स्वयं के प्रति अधिक कठोरता है।",
+        9: "अंक 9 का स्वामी मंगल है: साहस, ऊर्जा और मानवीय प्रेरणा। आप जिसमें विश्वास करते हैं उसकी रक्षा करते हैं। ध्यान रखने योग्य बात क्रोध और आवेग है।",
+    },
+}

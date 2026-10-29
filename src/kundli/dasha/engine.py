@@ -89,3 +89,20 @@ def stack_at(sys: System, periods: list[tuple[int, datetime, float]], as_of: dat
                       "end_utc": _fmt(end, z)[0], "start_local": _fmt(start, z)[1], "end_local": _fmt(end, z)[1]})
         cur = list(_children(sys, i, start, days))
     return stack
+
+
+def descend(sys: System, periods: list[tuple[int, datetime, float]], path: list[str], tz: str, depth: int = 1) -> dict:
+    """Sub-periods of the period reached by following `path` (lord names: maha, then antar, then pratyantar...).
+    Each lord occurs once per level inside its parent, so a path identifies one period."""
+    cur = periods
+    hit = None
+    for lvl, name in enumerate(path):
+        key = name.strip().lower()
+        hit = next((p for p in cur if sys.seq[p[0]][0].lower() == key), None)
+        if hit is None:
+            raise ValueError(f"no {LEVEL_NAMES[lvl]} period for lord {name!r} here; "
+                             f"available: {[sys.seq[p[0]][0] for p in cur]}")
+        cur = list(_children(sys, *hit))
+    assert hit is not None
+    parent = build_tree(sys, [hit], 1, tz, len(path) - 1)[0]
+    return {"parent": parent, "children": build_tree(sys, cur, depth, tz, len(path))}

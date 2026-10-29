@@ -1,0 +1,1050 @@
+# Endpoint registry (V2 Phase 11). status: missing|partial|exists|done. oracle: none|reference|shadow.
+# Names come from the provider endpoint list supplied by the user; replace with real schemas after docs arrive.
+- name: birth_details
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: exists
+  oracle: none
+  note: chart.generate header/birth
+- name: astro_details
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: partial
+  oracle: none
+  note: 'lookups.astro_details; ghat_chakra and yunja missing (no verified table)'
+- name: planets
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: exists
+  oracle: none
+  note: Kundli.planets
+- name: planets/extended
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: partial
+  oracle: none
+  note: outer planets via include_outer_planets only
+- name: bhav_madhya
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: exists
+  oracle: none
+  note: houses.madhyas/starts
+- name: ghat_chakra
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: missing
+  oracle: none
+  note: 'blocked: no authoritative table'
+- name: ayanamsha
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: exists
+  oracle: none
+  note: header.ayanamsa_degrees
+- name: planet_nature
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: exists
+  oracle: none
+  note: friendship + functional
+- name: bhavabala
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: partial
+  oracle: none
+  note: simplified (no dig/occupant terms)
+- name: shadbala
+  group: Basic Astro Details
+  tier: T1/T2
+  module: chart.generate, avakahada, friendship, functional, strength/
+  phase: V1+13
+  status: partial
+  oracle: none
+  note: simplified; unverified vs reference
+- name: general_house_report/:planet_name
+  group: Life Reports
+  tier: T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'planet''s whole-sign house -> content key house_report.<planet>.<house>; blocks are unreviewed drafts, so content_missing until reviewed + frozen'
+- name: general_rashi_report/:planet_name
+  group: Life Reports
+  tier: T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'planet''s sign -> content key rashi_report.<planet>.<sign>; text pending review'
+- name: general_ascendant_report
+  group: Life Reports
+  tier: T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'lagna sign -> content key ascendant_report.<sign>; text pending review'
+- name: general_nakshatra_report
+  group: Life Reports
+  tier: T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'Moon nakshatra -> content key nakshatra_report.<nakshatra>; no vocabulary drafted yet'
+- name: simple_manglik
+  group: Horoscope Dosha
+  tier: T2
+  module: doshas, yogas/rules/doshas.yaml, transits
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'Mars in 1/2/4/7/8/12 from lagna only'
+- name: manglik
+  group: Horoscope Dosha
+  tier: T2
+  module: doshas, yogas/rules/doshas.yaml, transits
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'references per config manglik_rules; cancellations standard_v1; intensity is our heuristic'
+- name: kalsarpa_details
+  group: Horoscope Dosha
+  tier: T2
+  module: doshas, yogas/rules/doshas.yaml, transits
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'full vs partial per config kalsarpa_variant; 12 type names # VERIFY'
+- name: sadhesati_current_status
+  group: Horoscope Dosha
+  tier: T2
+  module: doshas, yogas/rules/doshas.yaml, transits
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'phase at explicit as_of + containing period'
+- name: sadhesati_life_details
+  group: Horoscope Dosha
+  tier: T2
+  module: doshas, yogas/rules/doshas.yaml, transits
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'all Sade Sati/Dhaiya periods and phase-changing ingresses, second-level dates'
+- name: pitra_dosha_report
+  group: Horoscope Dosha
+  tier: T2
+  module: doshas, yogas/rules/doshas.yaml, transits
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'indicator rules only; school-dependent; text arrives with content store'
+- name: griha_pravesh
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/griha_pravesh.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: bhumi_pujan
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/bhumi_pujan.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: property_purchase
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/property_purchase.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: vehicle_purchase
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/vehicle_purchase.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: gold_purchase
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/gold_purchase.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: loan_take
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/loan_take.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: loan_give
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/loan_give.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: account_opening
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/account_opening.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: business_start
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/business_start.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: job_joining
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/job_joining.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: agreement_signing
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/agreement_signing.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: travel
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/travel.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: mundan
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/mundan.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: namkaran
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/namkaran.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: annaprashan
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/annaprashan.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: vidyarambh
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/vidyarambh.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: upanayana
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/upanayana.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: marriage
+  group: Monthly Muhurta
+  tier: T2
+  module: muhurta/
+  phase: '18'
+  status: partial
+  oracle: none
+  note: 'muhurta.scan with muhurta/rulesets/marriage.yaml (v1, generic principles from memory, # VERIFY); explainable windows'
+- name: lalkitab_horoscope
+  group: Lalkitab
+  tier: T2
+  module: lalkitab/
+  phase: '20'
+  status: partial
+  oracle: none
+  note: 'chart layout per config lalkitab_edition (lagna_houses | fixed_aries); edition choice # VERIFY'
+- name: lalkitab_debts
+  group: Lalkitab
+  tier: T2
+  module: lalkitab/
+  phase: '20'
+  status: partial
+  oracle: none
+  note: '3 debt rules encoded (pitri, matri, stri); other classical debts not implemented'
+- name: lalkitab_remedies/:planet_name
+  group: Lalkitab
+  tier: T2
+  module: lalkitab/
+  phase: '20'
+  status: partial
+  oracle: none
+  note: 'selection facts + content-store key only; remedy text arrives in phase 21'
+- name: lalkitab_houses
+  group: Lalkitab
+  tier: T2
+  module: lalkitab/
+  phase: '20'
+  status: partial
+  oracle: none
+  note: 'occupants, karakas from the pakka ghar table (# VERIFY)'
+- name: lalkitab_planets
+  group: Lalkitab
+  tier: T2
+  module: lalkitab/
+  phase: '20'
+  status: partial
+  oracle: none
+  note: 'house, pakka ghar (# VERIFY, low confidence), exaltation/debilitation houses (derived)'
+- name: puja_suggestion
+  group: Suggestions and Remedies
+  tier: T2
+  module: remedies/, content/
+  phase: '22'
+  status: partial
+  oracle: none
+  note: 'rules in remedies/rules.yaml (weak benefic, afflicted malefic, dusthana lord weak, dosha pujas, Sade Sati when as_of given; # VERIFY); text via content keys remedy.puja.*'
+- name: basic_gem_suggestion
+  group: Suggestions and Remedies
+  tier: T2
+  module: remedies/, content/
+  phase: '22'
+  status: partial
+  oracle: none
+  note: 'gems of the 1st/5th/9th lords + care flags (functional malefic, debilitated, combust, 6/8/12 lord); text via remedy.gem.*'
+- name: rudraksha_suggestion
+  group: Suggestions and Remedies
+  tier: T2
+  module: remedies/, content/
+  phase: '22'
+  status: partial
+  oracle: none
+  note: 'mukhi linked to the gem-candidate grahas; the plan''s blocked rule is unconfirmed (# VERIFY)'
+- name: sadhesati_remedies
+  group: Suggestions and Remedies
+  tier: T2
+  module: remedies/, content/
+  phase: '22'
+  status: partial
+  oracle: none
+  note: 'phase at as_of + Saturn facts; text via remedy.sadhesati.<phase>'
+- name: daily_nakshatra_prediction
+  group: Daily Nakshatra Predictions
+  tier: T1/T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'Tarabala (nine taras from the birth nakshatra) + Chandrabala at sunrise; key daily.tara.<tara>.nakshatra.<nak>; no daily text drafted yet'
+- name: daily_nakshatra_prediction/next
+  group: Daily Nakshatra Predictions
+  tier: T1/T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'same, date + 1'
+- name: daily_nakshatra_prediction/previous
+  group: Daily Nakshatra Predictions
+  tier: T1/T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'same, date - 1'
+- name: daily_nakshatra_consolidated
+  group: Daily Nakshatra Predictions
+  tier: T1/T3
+  module: content/, panchang/tarabala
+  phase: '21'
+  status: partial
+  oracle: none
+  note: 'every nakshatra segment of the Vedic day with its tara and content block'
+- name: varshaphal_year_chart
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: exists
+  oracle: none
+  note: 'chart at the solar return (config solar_return_zodiac), configured sidereal zodiac'
+- name: varshaphal_month_chart
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: exists
+  oracle: none
+  note: 'month n = Sun advanced (n-1)*30 deg from natal; needs year+month'
+- name: varshaphal_details
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: exists
+  oracle: none
+  note: 'return moment, lagna, muntha'
+- name: varshaphal_planets
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: exists
+  oracle: none
+  note: 'planets of the year chart'
+- name: varshaphal_muntha
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: exists
+  oracle: none
+  note: 'natal lagna + age; lord and house in the annual chart'
+- name: varshaphal_mudda_dasha
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: partial
+  oracle: none
+  note: '1 dasha year = 3 days; basis per config mudda_dasha_basis (# VERIFY)'
+- name: varshaphal_panchavargeeya_bala
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: partial
+  oracle: none
+  note: 'five divisions; hadda table sums verified, fractions from memory (# VERIFY)'
+- name: varshaphal_harsha_bala
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: partial
+  oracle: none
+  note: 'four components; low confidence (# VERIFY)'
+- name: varshaphal_saham_points
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: partial
+  oracle: none
+  note: '10 sahams from planets+lagna only; formulas from memory (# VERIFY)'
+- name: varshaphal_yoga
+  group: Varshaphal
+  tier: T1/T2
+  module: varshaphal/
+  phase: '17'
+  status: partial
+  oracle: none
+  note: 'Ithasala and Ishrafa only; Nakta/Yamaya/Kambool etc. not implemented'
+- name: geo_details
+  group: Geo Details
+  tier: Data
+  module: geo.py, timeutil.py, tzinfo_lookup.py
+  phase: '23'
+  status: exists
+  oracle: none
+  note: 'offline GeoNames candidates (no third-party call); own request model {place, limit}'
+- name: timezone_with_dst
+  group: Geo Details
+  tier: Data
+  module: geo.py, timeutil.py, tzinfo_lookup.py
+  phase: '23'
+  status: exists
+  oracle: none
+  note: 'IANA zone for lat/lon or place + offset, DST, abbreviation, nonexistent/ambiguous times and the year''s transitions; historical rules'
+- name: sarvartha_siddhi
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: amrit_siddhi
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: ravi_yoga
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: ravi_pushya
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: guru_pushya
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: dwipushkar
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: tripushkar
+  group: Monthly Panchang Yoga
+  tier: T2
+  module: panchang/yogas_monthly
+  phase: '13'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/rules/monthly_yogas.yaml (# VERIFY); windows from exact nakshatra/tithi boundaries'
+- name: kp_planets
+  group: Krishnamurti Paddhati
+  tier: T1/T2
+  module: kp
+  phase: '15'
+  status: exists
+  oracle: none
+  note: 'per planet: sign/star/sub/sub-sub lords + KP house (Placidus)'
+- name: kp_house_cusps
+  group: Krishnamurti Paddhati
+  tier: T1/T2
+  module: kp
+  phase: '15'
+  status: exists
+  oracle: none
+  note: 'Placidus cusps with lord chains'
+- name: kp_birth_chart
+  group: Krishnamurti Paddhati
+  tier: T1/T2
+  module: kp
+  phase: '15'
+  status: exists
+  oracle: none
+  note: 'planets + cusps + significators (kp.kp_chart)'
+- name: kp_house_significator
+  group: Krishnamurti Paddhati
+  tier: T1/T2
+  module: kp
+  phase: '15'
+  status: exists
+  oracle: none
+  note: 'A-D ordering (kp/significators.py); Rahu/Ketu own no house # VERIFY'
+- name: kp_planet_significator
+  group: Krishnamurti Paddhati
+  tier: T1/T2
+  module: kp
+  phase: '15'
+  status: exists
+  oracle: none
+  note: 'levels 1-4 ordering; Rahu/Ketu own no house # VERIFY'
+- name: biorhythm
+  group: Biorhythm
+  tier: T1
+  module: biorhythm
+  phase: '19'
+  status: exists
+  oracle: none
+  note: '23/28/33-day sine cycles from days since birth; labelled entertainment'
+- name: moon_biorhythm
+  group: Biorhythm
+  tier: T1
+  module: biorhythm
+  phase: '19'
+  status: missing
+  oracle: none
+  note: 'definition not confirmed; deliberately not implemented (plan: do not guess)'
+- name: horo_chart/:chart_id
+  group: Horoscope Charts
+  tier: T1
+  module: render, vargas
+  phase: V1+11
+  status: exists
+  oracle: none
+  note: Kundli.vargas / chandra / surya
+- name: horo_chart_image/:chartId
+  group: Horoscope Charts
+  tier: T1
+  module: render, vargas
+  phase: V1+11
+  status: exists
+  oracle: none
+  note: render.north_indian/south_indian SVG
+- name: planet_ashtak/:planet_name
+  group: Ashtakvarga
+  tier: T2
+  module: strength/ashtakavarga
+  phase: V1
+  status: exists
+  oracle: none
+  note: ashtakavarga.bav/prastara
+- name: sarvashtak
+  group: Ashtakvarga
+  tier: T2
+  module: strength/ashtakavarga
+  phase: V1
+  status: exists
+  oracle: none
+  note: ashtakavarga.sav
+- name: numero_table
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: exists
+  oracle: none
+  note: 'radical/destiny/name numbers; letter table per config numerology_system'
+- name: numero_report
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: partial
+  oracle: none
+  note: 'facts computed; report text arrives in phase 21'
+- name: numero_fav_time
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: exists
+  oracle: none
+  note: 'weekday of the lord of the number (none for Rahu/Ketu numbers); radical and destiny'
+- name: numero_place_vastu
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: partial
+  oracle: none
+  note: 'direction lordship of the ruling graha (# VERIFY, from memory)'
+- name: numero_fasts_report
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: partial
+  oracle: none
+  note: 'weekday computed; text in phase 21'
+- name: numero_fav_lord
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: exists
+  oracle: none
+  note: 'friendly/neutral/inimical numbers from natural friendship; Rahu/Ketu not defined'
+- name: numero_fav_mantra
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: partial
+  oracle: none
+  note: 'navagraha beeja mantras (# VERIFY, from memory); disclaimer in response'
+- name: numero_prediction/daily
+  group: Numerology
+  tier: T2
+  module: numerology
+  phase: '19'
+  status: partial
+  oracle: none
+  note: 'daily number convention reduce(radical + date digits); text in phase 21'
+- name: basic_panchang
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'engine-neutral; exact element spans (panchang/spans.py)'
+- name: basic_panchang/sunrise
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'engine-neutral; exact element spans (panchang/spans.py)'
+- name: advanced_panchang
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'engine-neutral; spans, hora, choghadiya, inauspicious, tamil, festivals'
+- name: advanced_panchang/sunrise
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'engine-neutral; spans, hora, choghadiya, inauspicious, tamil, festivals'
+- name: planet_panchang
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'basic panchang plus natal planets at the moment (not transits)'
+- name: planet_panchang/sunrise
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'basic panchang plus natal planets at the moment (not transits)'
+- name: chaughadiya_muhurta
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'day and night; night table is # VERIFY'
+- name: hora_muhurta
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'current hora of the moment'
+- name: hora_muhurta_dinman
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: '24 horas of the Vedic day'
+- name: panchang_chart
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'D1 chart + lagna at the moment'
+- name: panchang_chart/sunrise
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'D1 chart + lagna at the moment'
+- name: tamil_month_panchang
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'every civil day of the Tamil month; sunset rule is # VERIFY'
+- name: tamil_panchang
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'Tamil month and day; year name not implemented'
+- name: panchang_festival
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'rules in panchang/festivals/rules (single-anchor, # VERIFY)'
+- name: festival-by-date
+  group: Panchang
+  tier: T1
+  module: panchang/ (core, spans, sun_moon_times, hora, choghadiya, inauspicious, tamil, festivals)
+  phase: '12'
+  status: exists
+  oracle: none
+  note: 'festivals of the calendar month containing the date (semantics to confirm from provider docs)'
+- name: match_birth_details
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'birth details of both partners'
+- name: match_ashtakoot_points
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: '8 kootas; tables from memory (# VERIFY, match/tables.yaml)'
+- name: match_ashtakoot_report
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'points + verdict; report text arrives in phase 21'
+- name: match_obstructions
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'manglik match, nadi and bhakoot dosha with cancellations (# VERIFY)'
+- name: match_astro_details
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'avakahada of both'
+- name: match_planet_details
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: exists
+  oracle: none
+  note: 'planets of both'
+- name: match_manglik_report
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'manglik match computed; text in phase 21'
+- name: match_making_report
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'computed result; text in phase 21'
+- name: match_making_detailed_report
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'computed result + astro details; text in phase 21'
+- name: match_dashakoot_points
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: '9 of 10 poruthams; Rasi not implemented'
+- name: match_percentage
+  group: Match Making
+  tier: T2
+  module: match/
+  phase: '16'
+  status: partial
+  oracle: none
+  note: 'total/36*100 convention; provider formula to be discovered with the oracle'
+- name: current_vdasha_all
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: chart.current_dasha levels=5
+- name: major_vdasha
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: ''
+- name: current_vdasha
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: ''
+- name: current_vdasha_date
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: as_of explicit
+- name: sub_vdasha/:md
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'antardashas of an MD (dasha.engine.descend)'
+- name: sub_sub_vdasha/:md/:ad
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'pratyantar list'
+- name: sub_sub_sub_vdasha/:md/:ad/:pd
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'sookshma list'
+- name: sub_sub_sub_sub_vdasha/:md/:ad/:pd/:sd
+  group: Vimshottari Dasha
+  tier: T1
+  module: dasha/vimshottari
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'prana list'
+- name: major_chardasha
+  group: Char Dasha
+  tier: T2
+  module: dasha/chara
+  phase: '14'
+  status: partial
+  oracle: none
+  note: 'maha dates verified against one reference; co-lord rule # VERIFY'
+- name: current_chardasha
+  group: Char Dasha
+  tier: T2
+  module: dasha/chara
+  phase: '14'
+  status: partial
+  oracle: none
+  note: 'as_of stack; sub-levels below maha # VERIFY'
+- name: sub_chardasha/:md
+  group: Char Dasha
+  tier: T2
+  module: dasha/chara
+  phase: '14'
+  status: partial
+  oracle: none
+  note: 'antars: one rule for all schools (# VERIFY)'
+- name: sub_sub_chardasha
+  group: Char Dasha
+  tier: T2
+  module: dasha/chara
+  phase: '14'
+  status: partial
+  oracle: none
+  note: 'pratyantars of the antar running at as_of; same # VERIFY rule'
+- name: major_yogini_dasha
+  group: Yogini Dasha
+  tier: T1
+  module: dasha/yogini
+  phase: '14'
+  status: exists
+  oracle: none
+  note: ''
+- name: sub_yogini_dasha/:dashaCycle/:dashaName
+  group: Yogini Dasha
+  tier: T1
+  module: dasha/yogini
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'cycle = n-th 36-year cycle; route semantics to confirm from provider docs'
+- name: sub_yogini_dasha
+  group: Yogini Dasha
+  tier: T1
+  module: dasha/yogini
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'antars of the yogini MD running at as_of (cycle-aware)'
+- name: current_yogini_dasha
+  group: Yogini Dasha
+  tier: T1
+  module: dasha/yogini
+  phase: '14'
+  status: exists
+  oracle: none
+  note: 'cycle-aware: repeats beyond the first 36 years'

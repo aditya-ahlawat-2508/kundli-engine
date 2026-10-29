@@ -1,0 +1,11 @@
+---
+hash: null
+key: remedy.gem.jupiter
+lang: en
+reviewer: null
+sources:
+- template:scripts/content_data.py (original vocabulary, unreviewed draft)
+status: draft
+version: 1
+---
+Yellow Sapphire is the traditional gem of Jupiter, associated with wisdom, optimism and good counsel. In Jyotish a gemstone is a symbolic support, not a medical, legal or financial remedy, and results are not guaranteed. Strong stones (Blue Sapphire, Hessonite, Cat's Eye) are traditionally tried for a short period before regular wear. Consult a qualified astrologer and buy only from a certified gemologist.

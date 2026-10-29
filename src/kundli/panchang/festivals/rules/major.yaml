@@ -1,0 +1,33 @@
+# Festival rules. Months are AMANTA names (as returned by panchang.hindu_month); tithi is 1..30 (16..30 = krishna
+# paksha, 30 = amavasya). anchor = the moment of the civil day at which the tithi must be running:
+#   sunrise | madhyahna (midday) | aparahna (0.7 of the day) | pradosha (sunset + 2 ghati) | nishita (midnight of the
+#   night after the day) | moonrise
+# kind: lunar (month + tithi), tithi (every month), sankranti (solar ingress), after (the civil day after another rule).
+# All rules are simplified single-anchor rules: when a tithi touches two civil days at the anchor, or neither, the
+# classical tie-breaks are NOT applied (docs/open_questions.md). verify=true until checked against Drik Panchang.
+- {id: maha_shivaratri, name: Maha Shivaratri, kind: lunar, month: Magha, tithi: 29, anchor: nishita}
+- {id: holika_dahan, name: Holika Dahan, kind: lunar, month: Phalguna, tithi: 15, anchor: pradosha}
+- {id: holi, name: Holi, kind: after, after: holika_dahan}
+- {id: ugadi, name: Ugadi / Gudi Padwa, kind: lunar, month: Chaitra, tithi: 1, anchor: sunrise}
+- {id: rama_navami, name: Rama Navami, kind: lunar, month: Chaitra, tithi: 9, anchor: madhyahna}
+- {id: hanuman_jayanti, name: Hanuman Jayanti, kind: lunar, month: Chaitra, tithi: 15, anchor: sunrise}
+- {id: akshaya_tritiya, name: Akshaya Tritiya, kind: lunar, month: Vaishakha, tithi: 3, anchor: sunrise}
+- {id: buddha_purnima, name: Buddha Purnima, kind: lunar, month: Vaishakha, tithi: 15, anchor: sunrise}
+- {id: guru_purnima, name: Guru Purnima, kind: lunar, month: Ashadha, tithi: 15, anchor: sunrise}
+- {id: raksha_bandhan, name: Raksha Bandhan, kind: lunar, month: Shravana, tithi: 15, anchor: sunrise}
+- {id: janmashtami, name: Krishna Janmashtami, kind: lunar, month: Shravana, tithi: 23, anchor: nishita}
+- {id: ganesh_chaturthi, name: Ganesh Chaturthi, kind: lunar, month: Bhadrapada, tithi: 4, anchor: madhyahna}
+- {id: sharad_navratri_start, name: Sharad Navratri begins, kind: lunar, month: Ashwin, tithi: 1, anchor: sunrise}
+- {id: vijayadashami, name: Vijayadashami (Dussehra), kind: lunar, month: Ashwin, tithi: 10, anchor: aparahna}
+- {id: karwa_chauth, name: Karwa Chauth, kind: lunar, month: Ashwin, tithi: 19, anchor: moonrise}
+- {id: dhanteras, name: Dhanteras, kind: lunar, month: Ashwin, tithi: 28, anchor: pradosha}
+- {id: diwali, name: Diwali (Lakshmi Puja), kind: lunar, month: Ashwin, tithi: 30, anchor: pradosha}
+- {id: dev_deepawali, name: Dev Deepawali, kind: lunar, month: Kartik, tithi: 15, anchor: pradosha}
+- {id: ekadashi_shukla, name: Shukla Ekadashi, kind: tithi, tithi: 11, anchor: sunrise}
+- {id: ekadashi_krishna, name: Krishna Ekadashi, kind: tithi, tithi: 26, anchor: sunrise}
+- {id: purnima, name: Purnima, kind: tithi, tithi: 15, anchor: sunrise}
+- {id: amavasya, name: Amavasya, kind: tithi, tithi: 30, anchor: sunrise}
+- {id: pradosh_shukla, name: Pradosh Vrat (shukla), kind: tithi, tithi: 13, anchor: pradosha}
+- {id: pradosh_krishna, name: Pradosh Vrat (krishna), kind: tithi, tithi: 28, anchor: pradosha}
+- {id: sankashti_chaturthi, name: Sankashti Chaturthi, kind: tithi, tithi: 19, anchor: moonrise}
+- {id: sankranti, name: Sankranti, kind: sankranti}

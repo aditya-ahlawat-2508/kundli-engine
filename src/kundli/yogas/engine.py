@@ -2,8 +2,10 @@
 no eval/exec, no attribute access, no imports. Only calls to the functions registered in `chart_functions`.
 """
 import ast
+import copy
 import operator
 from collections.abc import Callable
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -183,11 +185,17 @@ def evaluate(expr: str, fns: dict[str, Callable[..., Any]]) -> Any:
 
 
 # ---- rules ------------------------------------------------------------------------------------------
-def load_rules(directory: Path = RULES_DIR) -> list[dict]:
+@lru_cache(maxsize=8)
+def _load(directory: Path) -> tuple[dict, ...]:
     rules: list[dict] = []
     for f in sorted(directory.glob("*.yaml")):
         rules.extend(yaml.safe_load(f.read_text(encoding="utf-8")) or [])
-    return rules
+    return tuple(rules)
+
+
+def load_rules(directory: Path = RULES_DIR) -> list[dict]:
+    """The rule dicts of every YAML file in `directory`. Parsed once per process; callers get their own deep copy."""
+    return copy.deepcopy(list(_load(directory)))
 
 
 def _expand(rule: dict) -> list[dict]:

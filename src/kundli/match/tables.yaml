@@ -1,0 +1,73 @@
+# Match-making tables (V2 phase 16). Every table is entered from the standard Ashtakoota / Dashakoota schemes from
+# memory and is `verify: true` until checked against a cited source and a second reviewer (docs/open_questions.md).
+# Orientation of the 2-D matrices: row = boy (groom), column = girl (bride).
+source: standard Ashtakoota/Dashakoota schemes (from memory); NOT yet checked against a primary source
+verify: true
+
+# Varna rank by name (higher = senior). Score 1 if boy's rank >= girl's.
+varna_rank: {Vipra: 4, Kshatriya: 3, Vaishya: 2, Shudra: 1}
+
+vashya_matrix:
+  order: [Chatushpad, Manav, Jalchar, Vanchar, Keet]
+  rows:
+    Chatushpad: [2, 1, 1, 0.5, 1]
+    Manav:      [1, 2, 0.5, 0, 1]
+    Jalchar:    [1, 0.5, 2, 1, 1]
+    Vanchar:    [0, 0, 1, 2, 0]
+    Keet:       [1, 1, 1, 0, 2]
+
+yoni_matrix:
+  order: [Ashwa, Gaja, Mesha, Sarpa, Shwan, Marjar, Mushak, Gau, Mahisha, Vyaghra, Mriga, Vanar, Nakul, Simha]
+  rows:
+    Ashwa:   [4, 2, 2, 3, 2, 2, 2, 1, 0, 1, 3, 3, 2, 1]
+    Gaja:    [2, 4, 3, 3, 2, 2, 2, 2, 3, 1, 2, 3, 2, 0]
+    Mesha:   [2, 3, 4, 2, 1, 2, 1, 3, 3, 1, 2, 0, 3, 1]
+    Sarpa:   [3, 3, 2, 4, 2, 1, 1, 1, 1, 2, 2, 2, 0, 2]
+    Shwan:   [2, 2, 1, 2, 4, 2, 1, 2, 2, 1, 0, 2, 1, 1]
+    Marjar:  [2, 2, 2, 1, 2, 4, 0, 2, 2, 1, 3, 3, 2, 1]
+    Mushak:  [2, 2, 1, 1, 1, 0, 4, 2, 2, 2, 2, 2, 1, 2]
+    Gau:     [1, 2, 3, 1, 2, 2, 2, 4, 3, 0, 3, 2, 2, 1]
+    Mahisha: [0, 3, 3, 1, 2, 2, 2, 3, 4, 1, 2, 2, 2, 1]
+    Vyaghra: [1, 1, 1, 2, 1, 1, 2, 0, 1, 4, 1, 1, 2, 1]
+    Mriga:   [3, 2, 2, 2, 0, 3, 2, 3, 2, 1, 4, 2, 2, 2]
+    Vanar:   [3, 3, 0, 2, 2, 3, 2, 2, 2, 1, 2, 4, 3, 2]
+    Nakul:   [2, 2, 3, 0, 1, 2, 1, 2, 2, 2, 2, 3, 4, 2]
+    Simha:   [1, 0, 1, 2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 4]
+
+gana_matrix:
+  order: [Deva, Manushya, Rakshasa]
+  rows:
+    Deva:     [6, 6, 1]
+    Manushya: [5, 6, 0]
+    Rakshasa: [1, 0, 6]
+
+# Rajju (Dashakoota): nakshatra groups by body part. Same rajju = incompatible.
+rajju:
+  Pada:   [Ashwini, Ashlesha, Magha, Jyeshtha, Mula, Revati]
+  Kati:   [Bharani, Pushya, Purva Phalguni, Anuradha, Purva Ashadha, Uttara Bhadrapada]
+  Nabhi:  [Krittika, Punarvasu, Uttara Phalguni, Vishakha, Uttara Ashadha, Purva Bhadrapada]
+  Kantha: [Rohini, Ardra, Hasta, Swati, Shravana, Shatabhisha]
+  Siras:  [Mrigashira, Chitra, Dhanishta]
+
+# Vedha (Dashakoota): mutually obstructing nakshatras. A triple means every pair obstructs.
+vedha:
+  - [Ashwini, Jyeshtha]
+  - [Bharani, Anuradha]
+  - [Krittika, Vishakha]
+  - [Rohini, Swati]
+  - [Ardra, Shravana]
+  - [Punarvasu, Uttara Ashadha]
+  - [Pushya, Purva Ashadha]
+  - [Ashlesha, Mula]
+  - [Magha, Revati]
+  - [Purva Phalguni, Uttara Bhadrapada]
+  - [Uttara Phalguni, Purva Bhadrapada]
+  - [Hasta, Shatabhisha]
+  - [Mrigashira, Chitra, Dhanishta]
+
+# Verdict bands on the 36-point Ashtakoota total (convention; providers differ).
+verdict_bands:
+  - {min: 33, label: excellent}
+  - {min: 25, label: good}
+  - {min: 18, label: average}
+  - {min: 0, label: not_recommended}

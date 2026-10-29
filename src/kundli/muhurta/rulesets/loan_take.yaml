@@ -1,0 +1,9 @@
+activity: loan_take
+version: v1
+verify: true
+sources:
+  - activity rules summarised from standard muhurta practice (from memory); not yet checked against a primary source
+rules:
+  - {id: weekday, kind: weekday_in, values: [Sunday, Monday, Wednesday, Thursday, Friday], weight: 3}
+  - {id: nakshatra_class, kind: nakshatra_class_in, classes: [kshipra, mridu, chara], weight: 4}
+  - {id: avoid_tuesday, kind: weekday_not_in, values: [Tuesday], veto: true}

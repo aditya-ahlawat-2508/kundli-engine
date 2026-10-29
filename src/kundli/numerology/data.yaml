@@ -1,0 +1,24 @@
+# Numerology lookups per number (1-9). Entered from standard Hindu numerology practice from memory (`verify: true`):
+# number -> ruling graha (RULERS), planet direction lordship (Vastu), traditional beeja mantra. Mantras are liturgical text,
+# not provider prose. Rahu (4) and Ketu (7) have no weekday of their own, and Ketu has no accepted direction.
+verify: true
+source: standard Hindu numerology / Vastu graha-direction practice and navagraha beeja mantras (from memory); not yet checked against a primary source
+direction:   # lordship of the eight directions
+  Sun: East
+  Venus: South-East
+  Mars: South
+  Rahu: South-West
+  Saturn: West
+  Moon: North-West
+  Mercury: North
+  Jupiter: North-East
+mantra:
+  Sun: Om Hraam Hreem Hraum Sah Suryaya Namah
+  Moon: Om Shraam Shreem Shraum Sah Chandraya Namah
+  Mars: Om Kraam Kreem Kraum Sah Bhaumaya Namah
+  Mercury: Om Braam Breem Braum Sah Budhaya Namah
+  Jupiter: Om Graam Greem Graum Sah Gurave Namah
+  Venus: Om Draam Dreem Draum Sah Shukraya Namah
+  Saturn: Om Praam Preem Praum Sah Shanaye Namah
+  Rahu: Om Bhraam Bhreem Bhraum Sah Rahave Namah
+  Ketu: Om Sraam Sreem Sraum Sah Ketave Namah

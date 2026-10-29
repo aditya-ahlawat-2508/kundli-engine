@@ -1,0 +1,46 @@
+{
+ "description": "Numeric facts read from an external sample horoscope report (Lahiri, mean node). No vendor text.",
+ "birth": {
+  "place": "Malkapur",
+  "date": "1985-02-23",
+  "time": "05:45",
+  "lat": 20.883333333333333,
+  "lon": 76.2,
+  "tz": "Asia/Kolkata"
+ },
+ "expected": {
+  "sidereal_longitudes": {
+   "Sun": 310.684722,
+   "Moon": 346.563889,
+   "Mars": 351.519444,
+   "Mercury": 313.789444,
+   "Jupiter": 280.0225,
+   "Venus": 352.488056,
+   "Saturn": 214.346111,
+   "Rahu": 28.695,
+   "Ketu": 208.695
+  },
+  "vimshottari_maha_starts": [
+   [
+    "Saturn",
+    "1966-04-17"
+   ],
+   [
+    "Mercury",
+    "1985-04-17"
+   ],
+   [
+    "Ketu",
+    "2002-04-17"
+   ],
+   [
+    "Venus",
+    "2009-04-17"
+   ],
+   [
+    "Sun",
+    "2029-04-17"
+   ]
+  ]
+ }
+}

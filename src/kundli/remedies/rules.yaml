@@ -1,0 +1,42 @@
+# Remedy SELECTION rules (V2 phase 22). Data only: they decide which remedies are traditionally associated with a chart; no
+# wording lives here (text = content store, keys `remedy.*`). Every rule is `verify: true`: standard practice from memory,
+# not yet checked against a cited source (docs/open_questions.md). Schools differ a lot; the plan treats the oracle as a loose
+# reference only. Predicates (all must hold): functional (list), dignity (list), combust (bool), retrograde (bool),
+# shadbala_ratio_below (number), house (list, whole-sign from the lagna), lord_of_any (list of houses).
+graha_shanti:
+  - id: weak_benefic
+    description: a functional benefic or yogakaraka that is weak (below its Shadbala minimum, debilitated or combust)
+    planets: [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn]
+    when:
+      functional: [benefic, yogakaraka]
+      any_of:
+        - {shadbala_ratio_below: 1.0}
+        - {dignity: [debilitated]}
+        - {combust: true}
+    source: standard graha-shanti practice (from memory); not yet checked against a primary source
+    verify: true
+  - id: afflicted_malefic
+    description: a functional malefic standing in a kendra or in the 8th or 12th house
+    planets: [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn]
+    when:
+      functional: [malefic]
+      house: [1, 4, 7, 8, 10, 12]
+    source: standard graha-shanti practice (from memory); not yet checked against a primary source
+    verify: true
+  - id: dusthana_lord_weak
+    description: a lord of the 6th, 8th or 12th house that is also weak
+    planets: [Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn]
+    when:
+      lord_of_any: [6, 8, 12]
+      any_of:
+        - {shadbala_ratio_below: 1.0}
+        - {dignity: [debilitated]}
+    source: standard graha-shanti practice (from memory); not yet checked against a primary source
+    verify: true
+dosha_pujas:
+  - {id: kaalsarpa_shanti, dosha: kaal_sarpa, source: standard practice (from memory), verify: true}
+  - {id: manglik_shanti, dosha: manglik, source: standard practice (from memory), verify: true}
+  - {id: pitra_shanti, dosha: pitra, source: standard practice (from memory), verify: true}
+# Rudraksha mukhi traditionally linked to each graha (from memory). The plan lists the rule for CHOOSING a rudraksha as blocked
+# on an authoritative source: here the grahas are the gem candidates (lords of the 1st, 5th, 9th), which is itself unconfirmed.
+rudraksha_mukhi: {Sun: 1, Moon: 2, Mars: 3, Mercury: 4, Jupiter: 5, Venus: 6, Saturn: 7, Rahu: 8, Ketu: 9}

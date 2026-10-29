@@ -4,6 +4,7 @@ from datetime import datetime
 from ..data.tables import VIM_ORDER, VIM_YEARS
 from ..nakshatra import fraction_elapsed, nakshatra_index, nakshatra_lord
 from .engine import System, build_tree, maha_periods, stack_at
+from .engine import descend as descend_periods
 
 VIMSHOTTARI = System("vimshottari", tuple((p, float(VIM_YEARS[p])) for p in VIM_ORDER))
 
@@ -26,3 +27,7 @@ def tree(moon_lon: float, birth_utc: datetime, year_days: float, depth: int, tz:
 
 def stack(moon_lon: float, birth_utc: datetime, year_days: float, as_of: datetime, levels: int, tz: str):
     return stack_at(VIMSHOTTARI, periods(moon_lon, birth_utc, year_days), as_of, levels, tz)
+
+
+def descend(moon_lon: float, birth_utc: datetime, year_days: float, path: list[str], tz: str, depth: int = 1) -> dict:
+    return descend_periods(VIMSHOTTARI, periods(moon_lon, birth_utc, year_days), path, tz, depth)

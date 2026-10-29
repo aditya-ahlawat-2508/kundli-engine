@@ -1,0 +1,1807 @@
+[
+ {
+  "id": "special-midnight",
+  "name": "special-midnight",
+  "date": "1990-03-15",
+  "time": "00:00",
+  "place": "Kolkata",
+  "lat": 22.5726,
+  "lon": 88.3639,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "midnight"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-late-evening",
+  "name": "special-late-evening",
+  "date": "2003-04-01",
+  "time": "23:45",
+  "place": "Pune",
+  "lat": 18.5196,
+  "lon": 73.8554,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "near-midnight"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-sign-boundary",
+  "name": "special-sign-boundary",
+  "date": "2000-04-13",
+  "time": "17:21",
+  "place": "Agra",
+  "lat": 27.1767,
+  "lon": 78.0081,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "sign-boundary",
+   "sun-ingress"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-pre1950-india",
+  "name": "special-pre1950-india",
+  "date": "1943-03-03",
+  "time": "08:15",
+  "place": "Delhi",
+  "lat": 28.6139,
+  "lon": 77.209,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "pre-1950",
+   "war-time"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-pre1906-lmt",
+  "name": "special-pre1906-lmt",
+  "date": "1900-06-01",
+  "time": "10:00",
+  "place": "Kolkata",
+  "lat": 22.5726,
+  "lon": 88.3639,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "historical-tz"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-dst-overlap",
+  "name": "special-dst-overlap",
+  "date": "2023-11-05",
+  "time": "01:30",
+  "place": "New York",
+  "lat": 40.7128,
+  "lon": -74.006,
+  "tz": "America/New_York",
+  "fold": 0,
+  "tags": [
+   "dst-overlap"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-dst-gap",
+  "name": "special-dst-gap",
+  "date": "2023-03-12",
+  "time": "02:30",
+  "place": "New York",
+  "lat": 40.7128,
+  "lon": -74.006,
+  "tz": "America/New_York",
+  "fold": null,
+  "tags": [
+   "dst-gap"
+  ],
+  "expect_error": "NonexistentLocalTime"
+ },
+ {
+  "id": "special-polar-day",
+  "name": "special-polar-day",
+  "date": "1995-06-21",
+  "time": "14:00",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": null,
+  "tags": [
+   "polar",
+   "no-sunset"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-polar-night",
+  "name": "special-polar-night",
+  "date": "1995-12-21",
+  "time": "12:00",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": null,
+  "tags": [
+   "polar",
+   "no-sunrise"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-southern",
+  "name": "special-southern",
+  "date": "1990-12-25",
+  "time": "23:10",
+  "place": "Sydney",
+  "lat": -33.8688,
+  "lon": 151.2093,
+  "tz": "Australia/Sydney",
+  "fold": null,
+  "tags": [
+   "southern-hemisphere"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-time-unknown",
+  "name": "special-time-unknown",
+  "date": "2004-05-05",
+  "time": null,
+  "place": "Agra",
+  "lat": 27.1767,
+  "lon": 78.0081,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "time-unknown"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-equator",
+  "name": "special-equator",
+  "date": "1988-08-08",
+  "time": "08:08",
+  "place": "Nairobi",
+  "lat": -1.2921,
+  "lon": 36.8219,
+  "tz": "Africa/Nairobi",
+  "fold": null,
+  "tags": [
+   "equator"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-dateline",
+  "name": "special-dateline",
+  "date": "1975-01-01",
+  "time": "00:30",
+  "place": "Auckland",
+  "lat": -36.8485,
+  "lon": 174.7633,
+  "tz": "Pacific/Auckland",
+  "fold": null,
+  "tags": [
+   "dateline",
+   "year-boundary"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "special-leap-day",
+  "name": "special-leap-day",
+  "date": "2000-02-29",
+  "time": "12:00",
+  "place": "Mumbai",
+  "lat": 19.076,
+  "lon": 72.8777,
+  "tz": "Asia/Kolkata",
+  "fold": null,
+  "tags": [
+   "leap-day"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-001",
+  "name": "rand-001",
+  "date": "1941-01-01",
+  "time": "00:06",
+  "place": "Mumbai",
+  "lat": 19.076,
+  "lon": 72.8777,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-002",
+  "name": "rand-002",
+  "date": "2024-07-13",
+  "time": "22:57",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-003",
+  "name": "rand-003",
+  "date": "1955-12-06",
+  "time": "03:02",
+  "place": "Delhi",
+  "lat": 28.6139,
+  "lon": 77.209,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-004",
+  "name": "rand-004",
+  "date": "1964-12-22",
+  "time": "08:23",
+  "place": "Bengaluru",
+  "lat": 12.9716,
+  "lon": 77.5946,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-005",
+  "name": "rand-005",
+  "date": "2015-12-06",
+  "time": "07:17",
+  "place": "Moscow",
+  "lat": 55.7558,
+  "lon": 37.6173,
+  "tz": "Europe/Moscow",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-006",
+  "name": "rand-006",
+  "date": "1995-12-03",
+  "time": "23:00",
+  "place": "Dhaka",
+  "lat": 23.8103,
+  "lon": 90.4125,
+  "tz": "Asia/Dhaka",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-007",
+  "name": "rand-007",
+  "date": "2017-08-10",
+  "time": "01:12",
+  "place": "Sao Paulo",
+  "lat": -23.5505,
+  "lon": -46.6333,
+  "tz": "America/Sao_Paulo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-008",
+  "name": "rand-008",
+  "date": "1956-08-14",
+  "time": "11:50",
+  "place": "Nairobi",
+  "lat": -1.2921,
+  "lon": 36.8219,
+  "tz": "Africa/Nairobi",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-009",
+  "name": "rand-009",
+  "date": "2017-02-09",
+  "time": "21:21",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-010",
+  "name": "rand-010",
+  "date": "2023-09-25",
+  "time": "01:29",
+  "place": "London",
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "tz": "Europe/London",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-011",
+  "name": "rand-011",
+  "date": "1944-12-09",
+  "time": "22:47",
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-012",
+  "name": "rand-012",
+  "date": "1975-07-25",
+  "time": "13:01",
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-013",
+  "name": "rand-013",
+  "date": "2007-09-02",
+  "time": "13:46",
+  "place": "Moscow",
+  "lat": 55.7558,
+  "lon": 37.6173,
+  "tz": "Europe/Moscow",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-014",
+  "name": "rand-014",
+  "date": "1984-04-27",
+  "time": "05:02",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-015",
+  "name": "rand-015",
+  "date": "1970-08-02",
+  "time": "06:42",
+  "place": "Johannesburg",
+  "lat": -26.2041,
+  "lon": 28.0473,
+  "tz": "Africa/Johannesburg",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-016",
+  "name": "rand-016",
+  "date": "1969-10-06",
+  "time": "22:16",
+  "place": "Agra",
+  "lat": 27.1767,
+  "lon": 78.0081,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-017",
+  "name": "rand-017",
+  "date": "2017-06-14",
+  "time": "20:32",
+  "place": "Karachi",
+  "lat": 24.8607,
+  "lon": 67.0011,
+  "tz": "Asia/Karachi",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-018",
+  "name": "rand-018",
+  "date": "1947-05-26",
+  "time": "17:04",
+  "place": "Moscow",
+  "lat": 55.7558,
+  "lon": 37.6173,
+  "tz": "Europe/Moscow",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-019",
+  "name": "rand-019",
+  "date": "2021-09-30",
+  "time": "10:18",
+  "place": "Reykjavik",
+  "lat": 64.1466,
+  "lon": -21.9426,
+  "tz": "Atlantic/Reykjavik",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-020",
+  "name": "rand-020",
+  "date": "1949-09-27",
+  "time": "01:10",
+  "place": "Toronto",
+  "lat": 43.6532,
+  "lon": -79.3832,
+  "tz": "America/Toronto",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-021",
+  "name": "rand-021",
+  "date": "1985-07-05",
+  "time": "23:27",
+  "place": "Johannesburg",
+  "lat": -26.2041,
+  "lon": 28.0473,
+  "tz": "Africa/Johannesburg",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-022",
+  "name": "rand-022",
+  "date": "1981-12-06",
+  "time": "06:30",
+  "place": "Los Angeles",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "tz": "America/Los_Angeles",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-023",
+  "name": "rand-023",
+  "date": "1990-12-09",
+  "time": "09:58",
+  "place": "Chennai",
+  "lat": 13.0827,
+  "lon": 80.2707,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-024",
+  "name": "rand-024",
+  "date": "2019-04-30",
+  "time": "01:12",
+  "place": "Chennai",
+  "lat": 13.0827,
+  "lon": 80.2707,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-025",
+  "name": "rand-025",
+  "date": "1970-11-04",
+  "time": "10:54",
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-026",
+  "name": "rand-026",
+  "date": "2002-06-19",
+  "time": "06:41",
+  "place": "London",
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "tz": "Europe/London",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-027",
+  "name": "rand-027",
+  "date": "1973-11-27",
+  "time": "18:20",
+  "place": "Tokyo",
+  "lat": 35.6762,
+  "lon": 139.6503,
+  "tz": "Asia/Tokyo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-028",
+  "name": "rand-028",
+  "date": "1946-08-30",
+  "time": "07:19",
+  "place": "Nairobi",
+  "lat": -1.2921,
+  "lon": 36.8219,
+  "tz": "Africa/Nairobi",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-029",
+  "name": "rand-029",
+  "date": "1986-02-24",
+  "time": "07:47",
+  "place": "Meerut",
+  "lat": 28.98,
+  "lon": 77.7064,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-030",
+  "name": "rand-030",
+  "date": "1942-01-11",
+  "time": "10:26",
+  "place": "Kathmandu",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "tz": "Asia/Kathmandu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-031",
+  "name": "rand-031",
+  "date": "2008-07-12",
+  "time": "08:48",
+  "place": "London",
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "tz": "Europe/London",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-032",
+  "name": "rand-032",
+  "date": "1942-12-31",
+  "time": "12:45",
+  "place": "London",
+  "lat": 51.5074,
+  "lon": -0.1278,
+  "tz": "Europe/London",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-033",
+  "name": "rand-033",
+  "date": "1991-05-21",
+  "time": "00:18",
+  "place": "Moscow",
+  "lat": 55.7558,
+  "lon": 37.6173,
+  "tz": "Europe/Moscow",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-034",
+  "name": "rand-034",
+  "date": "1943-11-05",
+  "time": "00:38",
+  "place": "Johannesburg",
+  "lat": -26.2041,
+  "lon": 28.0473,
+  "tz": "Africa/Johannesburg",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-035",
+  "name": "rand-035",
+  "date": "1971-08-31",
+  "time": "12:29",
+  "place": "Kathmandu",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "tz": "Asia/Kathmandu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-036",
+  "name": "rand-036",
+  "date": "1991-08-30",
+  "time": "01:16",
+  "place": "Dubai",
+  "lat": 25.2048,
+  "lon": 55.2708,
+  "tz": "Asia/Dubai",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-037",
+  "name": "rand-037",
+  "date": "1959-10-26",
+  "time": "00:27",
+  "place": "Bengaluru",
+  "lat": 12.9716,
+  "lon": 77.5946,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-038",
+  "name": "rand-038",
+  "date": "1961-11-23",
+  "time": "11:52",
+  "place": "Kolkata",
+  "lat": 22.5726,
+  "lon": 88.3639,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-039",
+  "name": "rand-039",
+  "date": "2004-07-15",
+  "time": "00:53",
+  "place": "Kathmandu",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "tz": "Asia/Kathmandu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-040",
+  "name": "rand-040",
+  "date": "1957-11-06",
+  "time": "06:46",
+  "place": "Auckland",
+  "lat": -36.8485,
+  "lon": 174.7633,
+  "tz": "Pacific/Auckland",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-041",
+  "name": "rand-041",
+  "date": "2000-03-27",
+  "time": "01:02",
+  "place": "Kolkata",
+  "lat": 22.5726,
+  "lon": 88.3639,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-042",
+  "name": "rand-042",
+  "date": "1987-09-15",
+  "time": "05:33",
+  "place": "Sao Paulo",
+  "lat": -23.5505,
+  "lon": -46.6333,
+  "tz": "America/Sao_Paulo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-043",
+  "name": "rand-043",
+  "date": "1970-04-27",
+  "time": "18:52",
+  "place": "Lucknow",
+  "lat": 26.8467,
+  "lon": 80.9462,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-044",
+  "name": "rand-044",
+  "date": "2016-07-09",
+  "time": "13:19",
+  "place": "Meerut",
+  "lat": 28.98,
+  "lon": 77.7064,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-045",
+  "name": "rand-045",
+  "date": "1989-11-28",
+  "time": "00:07",
+  "place": "Meerut",
+  "lat": 28.98,
+  "lon": 77.7064,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-046",
+  "name": "rand-046",
+  "date": "2001-01-01",
+  "time": "15:34",
+  "place": "Nairobi",
+  "lat": -1.2921,
+  "lon": 36.8219,
+  "tz": "Africa/Nairobi",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-047",
+  "name": "rand-047",
+  "date": "1970-11-30",
+  "time": "19:59",
+  "place": "Nairobi",
+  "lat": -1.2921,
+  "lon": 36.8219,
+  "tz": "Africa/Nairobi",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-048",
+  "name": "rand-048",
+  "date": "2015-10-07",
+  "time": "18:16",
+  "place": "Meerut",
+  "lat": 28.98,
+  "lon": 77.7064,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-049",
+  "name": "rand-049",
+  "date": "1973-11-04",
+  "time": "21:14",
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-050",
+  "name": "rand-050",
+  "date": "1997-01-17",
+  "time": "10:00",
+  "place": "New York",
+  "lat": 40.7128,
+  "lon": -74.006,
+  "tz": "America/New_York",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-051",
+  "name": "rand-051",
+  "date": "2014-07-06",
+  "time": "06:55",
+  "place": "Tokyo",
+  "lat": 35.6762,
+  "lon": 139.6503,
+  "tz": "Asia/Tokyo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-052",
+  "name": "rand-052",
+  "date": "2013-05-20",
+  "time": "10:05",
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-053",
+  "name": "rand-053",
+  "date": "2018-02-25",
+  "time": "00:30",
+  "place": "Dhaka",
+  "lat": 23.8103,
+  "lon": 90.4125,
+  "tz": "Asia/Dhaka",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-054",
+  "name": "rand-054",
+  "date": "1952-05-30",
+  "time": "20:51",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-055",
+  "name": "rand-055",
+  "date": "1995-07-19",
+  "time": "03:38",
+  "place": "Honolulu",
+  "lat": 21.3069,
+  "lon": -157.8583,
+  "tz": "Pacific/Honolulu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-056",
+  "name": "rand-056",
+  "date": "1966-03-07",
+  "time": "06:07",
+  "place": "Dubai",
+  "lat": 25.2048,
+  "lon": 55.2708,
+  "tz": "Asia/Dubai",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-057",
+  "name": "rand-057",
+  "date": "1980-05-12",
+  "time": "19:01",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-058",
+  "name": "rand-058",
+  "date": "2022-02-20",
+  "time": "20:38",
+  "place": "Honolulu",
+  "lat": 21.3069,
+  "lon": -157.8583,
+  "tz": "Pacific/Honolulu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-059",
+  "name": "rand-059",
+  "date": "1962-09-15",
+  "time": "18:51",
+  "place": "Mumbai",
+  "lat": 19.076,
+  "lon": 72.8777,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-060",
+  "name": "rand-060",
+  "date": "1963-08-26",
+  "time": "14:01",
+  "place": "Delhi",
+  "lat": 28.6139,
+  "lon": 77.209,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-061",
+  "name": "rand-061",
+  "date": "1975-01-11",
+  "time": "13:13",
+  "place": "Los Angeles",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "tz": "America/Los_Angeles",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-062",
+  "name": "rand-062",
+  "date": "2022-04-22",
+  "time": "11:03",
+  "place": "Auckland",
+  "lat": -36.8485,
+  "lon": 174.7633,
+  "tz": "Pacific/Auckland",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-063",
+  "name": "rand-063",
+  "date": "1995-03-14",
+  "time": "12:37",
+  "place": "Los Angeles",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "tz": "America/Los_Angeles",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-064",
+  "name": "rand-064",
+  "date": "1991-04-06",
+  "time": "16:15",
+  "place": "Buenos Aires",
+  "lat": -34.6037,
+  "lon": -58.3816,
+  "tz": "America/Argentina/Buenos_Aires",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-065",
+  "name": "rand-065",
+  "date": "1942-12-25",
+  "time": null,
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-066",
+  "name": "rand-066",
+  "date": "1973-01-28",
+  "time": "06:19",
+  "place": "Chennai",
+  "lat": 13.0827,
+  "lon": 80.2707,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-067",
+  "name": "rand-067",
+  "date": "1973-09-22",
+  "time": "22:25",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-068",
+  "name": "rand-068",
+  "date": "1989-09-29",
+  "time": "03:52",
+  "place": "Mumbai",
+  "lat": 19.076,
+  "lon": 72.8777,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-069",
+  "name": "rand-069",
+  "date": "2009-08-26",
+  "time": "03:16",
+  "place": "Los Angeles",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "tz": "America/Los_Angeles",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-070",
+  "name": "rand-070",
+  "date": "1958-11-18",
+  "time": "12:03",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-071",
+  "name": "rand-071",
+  "date": "2021-04-13",
+  "time": "02:05",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-072",
+  "name": "rand-072",
+  "date": "1976-11-19",
+  "time": "19:34",
+  "place": "Johannesburg",
+  "lat": -26.2041,
+  "lon": 28.0473,
+  "tz": "Africa/Johannesburg",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-073",
+  "name": "rand-073",
+  "date": "2023-01-15",
+  "time": "03:49",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-074",
+  "name": "rand-074",
+  "date": "2003-05-11",
+  "time": "12:46",
+  "place": "Kathmandu",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "tz": "Asia/Kathmandu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-075",
+  "name": "rand-075",
+  "date": "1979-12-28",
+  "time": null,
+  "place": "Los Angeles",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "tz": "America/Los_Angeles",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-076",
+  "name": "rand-076",
+  "date": "1995-08-18",
+  "time": "05:10",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-077",
+  "name": "rand-077",
+  "date": "1995-10-07",
+  "time": "21:33",
+  "place": "Nairobi",
+  "lat": -1.2921,
+  "lon": 36.8219,
+  "tz": "Africa/Nairobi",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-078",
+  "name": "rand-078",
+  "date": "1943-01-27",
+  "time": "11:20",
+  "place": "New York",
+  "lat": 40.7128,
+  "lon": -74.006,
+  "tz": "America/New_York",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-079",
+  "name": "rand-079",
+  "date": "1988-04-25",
+  "time": "15:15",
+  "place": "Tromso",
+  "lat": 69.6492,
+  "lon": 18.9553,
+  "tz": "Europe/Oslo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-080",
+  "name": "rand-080",
+  "date": "1989-10-06",
+  "time": "17:11",
+  "place": "Delhi",
+  "lat": 28.6139,
+  "lon": 77.209,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-081",
+  "name": "rand-081",
+  "date": "1950-05-07",
+  "time": "22:58",
+  "place": "Pune",
+  "lat": 18.5196,
+  "lon": 73.8554,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-082",
+  "name": "rand-082",
+  "date": "2020-06-25",
+  "time": "10:55",
+  "place": "Kathmandu",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "tz": "Asia/Kathmandu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-083",
+  "name": "rand-083",
+  "date": "1948-10-31",
+  "time": "22:28",
+  "place": "Sydney",
+  "lat": -33.8688,
+  "lon": 151.2093,
+  "tz": "Australia/Sydney",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-084",
+  "name": "rand-084",
+  "date": "1951-05-22",
+  "time": "13:04",
+  "place": "New York",
+  "lat": 40.7128,
+  "lon": -74.006,
+  "tz": "America/New_York",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-085",
+  "name": "rand-085",
+  "date": "1950-07-11",
+  "time": "16:20",
+  "place": "Agra",
+  "lat": 27.1767,
+  "lon": 78.0081,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-086",
+  "name": "rand-086",
+  "date": "1975-10-16",
+  "time": "20:47",
+  "place": "Sydney",
+  "lat": -33.8688,
+  "lon": 151.2093,
+  "tz": "Australia/Sydney",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-087",
+  "name": "rand-087",
+  "date": "1952-01-31",
+  "time": "04:54",
+  "place": "Delhi",
+  "lat": 28.6139,
+  "lon": 77.209,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-088",
+  "name": "rand-088",
+  "date": "2010-06-07",
+  "time": "23:04",
+  "place": "Agra",
+  "lat": 27.1767,
+  "lon": 78.0081,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-089",
+  "name": "rand-089",
+  "date": "2014-11-03",
+  "time": "12:43",
+  "place": "Los Angeles",
+  "lat": 34.0522,
+  "lon": -118.2437,
+  "tz": "America/Los_Angeles",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-090",
+  "name": "rand-090",
+  "date": "2003-01-03",
+  "time": "04:39",
+  "place": "Chennai",
+  "lat": 13.0827,
+  "lon": 80.2707,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-091",
+  "name": "rand-091",
+  "date": "1950-01-16",
+  "time": "22:46",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-092",
+  "name": "rand-092",
+  "date": "1976-09-23",
+  "time": "18:38",
+  "place": "Pune",
+  "lat": 18.5196,
+  "lon": 73.8554,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-093",
+  "name": "rand-093",
+  "date": "2004-06-08",
+  "time": "00:41",
+  "place": "Johannesburg",
+  "lat": -26.2041,
+  "lon": 28.0473,
+  "tz": "Africa/Johannesburg",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-094",
+  "name": "rand-094",
+  "date": "1958-03-22",
+  "time": "00:36",
+  "place": "Tokyo",
+  "lat": 35.6762,
+  "lon": 139.6503,
+  "tz": "Asia/Tokyo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-095",
+  "name": "rand-095",
+  "date": "1949-12-03",
+  "time": "13:26",
+  "place": "Buenos Aires",
+  "lat": -34.6037,
+  "lon": -58.3816,
+  "tz": "America/Argentina/Buenos_Aires",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-096",
+  "name": "rand-096",
+  "date": "2013-06-21",
+  "time": "05:38",
+  "place": "Singapore",
+  "lat": 1.3521,
+  "lon": 103.8198,
+  "tz": "Asia/Singapore",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-097",
+  "name": "rand-097",
+  "date": "2017-11-28",
+  "time": "20:33",
+  "place": "Dubai",
+  "lat": 25.2048,
+  "lon": 55.2708,
+  "tz": "Asia/Dubai",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-098",
+  "name": "rand-098",
+  "date": "1979-03-10",
+  "time": "09:30",
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-099",
+  "name": "rand-099",
+  "date": "2002-01-12",
+  "time": "19:26",
+  "place": "Sydney",
+  "lat": -33.8688,
+  "lon": 151.2093,
+  "tz": "Australia/Sydney",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-100",
+  "name": "rand-100",
+  "date": "1946-09-13",
+  "time": "06:53",
+  "place": "Kolkata",
+  "lat": 22.5726,
+  "lon": 88.3639,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-101",
+  "name": "rand-101",
+  "date": "1997-10-01",
+  "time": "07:26",
+  "place": "Moscow",
+  "lat": 55.7558,
+  "lon": 37.6173,
+  "tz": "Europe/Moscow",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-102",
+  "name": "rand-102",
+  "date": "2009-01-13",
+  "time": "22:46",
+  "place": "Meerut",
+  "lat": 28.98,
+  "lon": 77.7064,
+  "tz": "Asia/Kolkata",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-103",
+  "name": "rand-103",
+  "date": "1955-03-30",
+  "time": "08:51",
+  "place": "Tokyo",
+  "lat": 35.6762,
+  "lon": 139.6503,
+  "tz": "Asia/Tokyo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-104",
+  "name": "rand-104",
+  "date": "2018-01-08",
+  "time": null,
+  "place": "Colombo",
+  "lat": 6.9271,
+  "lon": 79.8612,
+  "tz": "Asia/Colombo",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-105",
+  "name": "rand-105",
+  "date": "1950-06-03",
+  "time": "13:39",
+  "place": "Dubai",
+  "lat": 25.2048,
+  "lon": 55.2708,
+  "tz": "Asia/Dubai",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ },
+ {
+  "id": "rand-106",
+  "name": "rand-106",
+  "date": "2024-05-17",
+  "time": "18:16",
+  "place": "Kathmandu",
+  "lat": 27.7172,
+  "lon": 85.324,
+  "tz": "Asia/Kathmandu",
+  "fold": 0,
+  "tags": [
+   "random"
+  ],
+  "expect_error": null
+ }
+]

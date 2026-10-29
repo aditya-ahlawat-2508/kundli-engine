@@ -1,0 +1,10 @@
+activity: travel
+version: v1
+verify: true
+sources:
+  - activity rules summarised from standard muhurta practice (from memory); not yet checked against a primary source
+rules:
+  - {id: weekday, kind: weekday_in, values: [Monday, Wednesday, Thursday, Friday], weight: 3}
+  - {id: nakshatra_class, kind: nakshatra_class_in, classes: [chara, kshipra, mridu], weight: 4}
+  - {id: dishashoola, kind: dishashoola_ok, veto: true}
+  - {id: avoid_ugra_tikshna, kind: nakshatra_class_not_in, classes: [ugra, tikshna], veto: true}

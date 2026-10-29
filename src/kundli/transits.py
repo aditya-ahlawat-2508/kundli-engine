@@ -3,6 +3,7 @@
 All functions take explicit datetimes; nothing reads the clock.
 """
 from datetime import UTC, datetime, timedelta
+from functools import lru_cache
 from typing import Any
 
 import swisseph as swe
@@ -82,9 +83,30 @@ def snapshot(k: Kundli, as_of: datetime) -> dict[str, Any]:
 
 
 # ---- ingress dates ----------------------------------------------------------------------------------
+TABLE_START, TABLE_END = datetime(1900, 1, 1, tzinfo=UTC), datetime(2200, 12, 31, tzinfo=UTC)
+
+
+@lru_cache(maxsize=8)
+def _saturn_table(ayanamsa: str, ephemeris: str, ephemeris_path: str | None) -> tuple[dict[str, Any], ...]:
+    """Every Saturn sign change 1900-2200 for one ephemeris setup, computed once per process (~1.1 s) and sliced per request:
+    Sade Sati needs a 90-year window per chart, and stepping Saturn day by day for each chart dominated the cost of
+    `generate`. Events are identical to the per-chart computation (tested): a sign crossing is a property of Saturn's
+    motion, not of where the scan starts."""
+    cfg = EngineConfig(ayanamsa=ayanamsa, ephemeris=ephemeris, ephemeris_path=ephemeris_path)  # type: ignore[arg-type]
+    return tuple(_scan_ingresses("Saturn", TABLE_START, TABLE_END, cfg))
+
+
 def ingresses(planet: str, start: datetime, end: datetime, cfg: EngineConfig) -> list[dict[str, Any]]:
     """All sign changes of `planet` in [start, end], found by stepping and bisecting to ~1 second.
-    Retrograde re-entries are reported as separate events (`retrograde` flag)."""
+    Retrograde re-entries are reported as separate events (`retrograde` flag). Saturn windows inside 1900-2200 come from a
+    process-wide table (see `_saturn_table`)."""
+    if planet == "Saturn" and TABLE_START <= start and end <= TABLE_END:
+        j0, j1 = jd_of(start), jd_of(end)
+        return [dict(e) for e in _saturn_table(cfg.ayanamsa, cfg.ephemeris, cfg.ephemeris_path) if j0 < e["jd_ut"] <= j1]
+    return _scan_ingresses(planet, start, end, cfg)
+
+
+def _scan_ingresses(planet: str, start: datetime, end: datetime, cfg: EngineConfig) -> list[dict[str, Any]]:
     j0, j1 = jd_of(start), jd_of(end)
     step = 0.25 if planet == "Moon" else 1.0
     out: list[dict[str, Any]] = []

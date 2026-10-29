@@ -1,0 +1,57 @@
+# Monthly panchang yogas (V2 phase 13). Weekday = Vedic weekday (sunrise to next sunrise). Nakshatra names follow
+# data/tables.py NAKSHATRAS. All tables are entered from standard almanac practice and are `verify: true` until
+# compared with a published almanac (docs/open_questions.md). Pushkar nakshatra sets are additionally derived from
+# geometry in tests: Tripushkar = nakshatras whose four padas split 3/1 over two signs, Dwipushkar = split 2/2.
+sarvartha_siddhi:
+  name: Sarvartha Siddhi Yoga
+  kind: weekday_nakshatra
+  table:
+    Sunday: [Ashwini, Pushya, Hasta, Uttara Phalguni, Mula, Uttara Ashadha, Uttara Bhadrapada]
+    Monday: [Rohini, Mrigashira, Pushya, Anuradha, Shravana]
+    Tuesday: [Ashwini, Krittika, Ashlesha, Uttara Bhadrapada]
+    Wednesday: [Krittika, Rohini, Mrigashira, Hasta, Anuradha]
+    Thursday: [Ashwini, Punarvasu, Pushya, Anuradha, Revati]
+    Friday: [Ashwini, Punarvasu, Anuradha, Shravana, Revati]
+    Saturday: [Rohini, Swati, Shravana]
+  source: standard almanac practice (from memory); not yet checked against a published almanac
+  verify: true
+amrit_siddhi:
+  name: Amrit Siddhi Yoga
+  kind: weekday_nakshatra
+  table: {Sunday: [Hasta], Monday: [Mrigashira], Tuesday: [Ashwini], Wednesday: [Anuradha], Thursday: [Pushya], Friday: [Revati], Saturday: [Rohini]}
+  source: standard almanac practice (from memory); tithi-based cancellations are not applied
+  verify: true
+ravi_yoga:
+  name: Ravi Yoga
+  kind: moon_from_sun
+  offsets: [4, 6, 9, 10, 13, 20]
+  source: Moon in the 4th/6th/9th/10th/13th/20th nakshatra counted inclusively from the Sun's nakshatra (from memory)
+  verify: true
+ravi_pushya:
+  name: Ravi Pushya Yoga
+  kind: weekday_nakshatra
+  table: {Sunday: [Pushya]}
+  source: Sunday + Pushya
+  verify: false
+guru_pushya:
+  name: Guru Pushya Yoga
+  kind: weekday_nakshatra
+  table: {Thursday: [Pushya]}
+  source: Thursday + Pushya
+  verify: false
+dwipushkar:
+  name: Dwipushkar Yoga
+  kind: weekday_tithi_nakshatra
+  weekdays: [Sunday, Tuesday, Saturday]
+  tithis: [2, 7, 12, 17, 22, 27]
+  nakshatras: [Mrigashira, Chitra, Dhanishta]
+  source: Bhadra tithis on Sun/Tue/Sat with the nakshatras that split 2/2 over two signs (from memory)
+  verify: true
+tripushkar:
+  name: Tripushkar Yoga
+  kind: weekday_tithi_nakshatra
+  weekdays: [Sunday, Tuesday, Saturday]
+  tithis: [2, 7, 12, 17, 22, 27]
+  nakshatras: [Krittika, Punarvasu, Uttara Phalguni, Vishakha, Uttara Ashadha, Purva Bhadrapada]
+  source: Bhadra tithis on Sun/Tue/Sat with the nakshatras that split 3/1 over two signs (from memory)
+  verify: true

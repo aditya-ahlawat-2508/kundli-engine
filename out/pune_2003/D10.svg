@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="428" viewBox="0 0 400 428" font-family="Helvetica, Arial, sans-serif">
+<text x="200" y="16" text-anchor="middle" font-size="14" font-weight="bold">D10 Dashamsa</text>
+<g transform="translate(0,24)">
+<rect x="0" y="0" width="400" height="400" fill="white" stroke="black" stroke-width="2"/>
+<line x1="0.00" y1="0.00" x2="400.00" y2="400.00" stroke="black" stroke-width="1.5"/>
+<line x1="400.00" y1="0.00" x2="0.00" y2="400.00" stroke="black" stroke-width="1.5"/>
+<line x1="200.00" y1="0.00" x2="400.00" y2="200.00" stroke="black" stroke-width="1.5"/>
+<line x1="400.00" y1="200.00" x2="200.00" y2="400.00" stroke="black" stroke-width="1.5"/>
+<line x1="200.00" y1="400.00" x2="0.00" y2="200.00" stroke="black" stroke-width="1.5"/>
+<line x1="0.00" y1="200.00" x2="200.00" y2="0.00" stroke="black" stroke-width="1.5"/>
+<text x="200.00" y="66.00" text-anchor="middle" font-size="11" fill="#555">12</text>
+<text x="200.00" y="96.00" text-anchor="middle" font-size="11">Asc</text>
+<text x="200.00" y="109.00" text-anchor="middle" font-size="11">Ra 5°RE</text>
+<text x="100.00" y="13.33" text-anchor="middle" font-size="11" fill="#555">1</text>
+<text x="100.00" y="29.33" text-anchor="middle" font-size="11">Su 27°</text>
+<text x="100.00" y="42.33" text-anchor="middle" font-size="11">Mo 22°c</text>
+<text x="33.33" y="80.00" text-anchor="middle" font-size="11" fill="#555">2</text>
+<text x="100.00" y="166.00" text-anchor="middle" font-size="11" fill="#555">3</text>
+<text x="100.00" y="196.00" text-anchor="middle" font-size="11">Ve 1°</text>
+<text x="33.33" y="280.00" text-anchor="middle" font-size="11" fill="#555">4</text>
+<text x="33.33" y="296.00" text-anchor="middle" font-size="11">Ma 26°</text>
+<text x="33.33" y="309.00" text-anchor="middle" font-size="11">Ju 21°RE</text>
+<text x="100.00" y="346.67" text-anchor="middle" font-size="11" fill="#555">5</text>
+<text x="100.00" y="362.67" text-anchor="middle" font-size="11">Me 17°cDV</text>
+<text x="200.00" y="266.00" text-anchor="middle" font-size="11" fill="#555">6</text>
+<text x="200.00" y="296.00" text-anchor="middle" font-size="11">Ke 5°RE</text>
+<text x="300.00" y="346.67" text-anchor="middle" font-size="11" fill="#555">7</text>
+<text x="300.00" y="362.67" text-anchor="middle" font-size="11">Sa 25°</text>
+<text x="366.67" y="280.00" text-anchor="middle" font-size="11" fill="#555">8</text>
+<text x="300.00" y="166.00" text-anchor="middle" font-size="11" fill="#555">9</text>
+<text x="366.67" y="80.00" text-anchor="middle" font-size="11" fill="#555">10</text>
+<text x="300.00" y="13.33" text-anchor="middle" font-size="11" fill="#555">11</text>
+</g></svg>

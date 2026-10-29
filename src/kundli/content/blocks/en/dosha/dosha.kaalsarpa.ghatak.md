@@ -1,0 +1,11 @@
+---
+hash: null
+key: dosha.kaalsarpa.ghatak
+lang: en
+reviewer: null
+sources:
+- template:scripts/content_data.py (original vocabulary, unreviewed draft)
+status: draft
+version: 1
+---
+Kaal Sarp Yoga is said to form when the seven planets lie on one side of the Rahu-Ketu axis. Traditionally it is read as a theme of karmic intensity: results may arrive in bursts or after delay, and attention gathers on the houses of the nodal axis. It is one indicator among many, and many charts with this pattern show strong achievement. The yoga is of the Ghatak type, named for Rahu standing in the 10 house. The nodal axis runs across houses 10 and 4, linking career and public life with home, mother and inner peace. Traditional devotional practices include reciting the Rahu and Ketu mantras, charity on Saturdays and visiting a Shiva temple. They are cultural and personal practices; no outcome is guaranteed.

@@ -1,0 +1,9 @@
+activity: annaprashan
+version: v1
+verify: true
+sources:
+  - activity rules summarised from standard muhurta practice (from memory); not yet checked against a primary source
+rules:
+  - {id: weekday, kind: weekday_in, values: [Monday, Wednesday, Thursday, Friday], weight: 3}
+  - {id: nakshatra_class, kind: nakshatra_class_in, classes: [kshipra, mridu, chara, dhruva], weight: 4}
+  - {id: avoid_kharmas, kind: sun_sign_not_in, values: [Sagittarius, Pisces], veto: true}

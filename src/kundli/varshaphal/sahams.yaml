@@ -1,0 +1,14 @@
+# Saham (Arabic part) formulas for the annual chart: day = Asc + plus - minus; night = Asc + minus - plus.
+# Day chart = Sun above the horizon (houses 7-12). Symbols: planets by name. Entered from the standard Tajika list
+# from memory (`verify: true`); no classical adjustment rule (adding 30 degrees when the part falls outside a
+# prescribed arc) is applied. Only formulas that need nothing but the planets and the lagna are included.
+- {id: punya, name: Punya (merit), plus: Moon, minus: Sun, verify: true}
+- {id: vidya, name: Vidya (learning), plus: Sun, minus: Moon, verify: true}
+- {id: putra, name: Putra (children), plus: Jupiter, minus: Moon, verify: true}
+- {id: vivaha, name: Vivaha (marriage), plus: Venus, minus: Saturn, verify: true}
+- {id: karma, name: Karma (profession), plus: Mars, minus: Mercury, verify: true}
+- {id: bhratri, name: Bhratri (siblings), plus: Jupiter, minus: Saturn, verify: true}
+- {id: mata, name: Mata (mother), plus: Moon, minus: Venus, verify: true}
+- {id: pitri, name: Pitri (father), plus: Saturn, minus: Sun, verify: true}
+- {id: gaurava, name: Gaurava (honour), plus: Jupiter, minus: Moon, base: Sun, verify: true}
+- {id: yasha, name: Yasha (fame), plus: Jupiter, minus: punya, verify: true}

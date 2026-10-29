@@ -9,6 +9,7 @@ from .houses import HouseSet, compute_houses, house_of, sripati_starts, whole_si
 from .models import BirthInput, BirthMoment, PlanetPosition
 from .nakshatra import nakshatra_index, nakshatra_lord, pada, sub_lord
 from .panchang import sun_events, vara_index
+from .panchang.sun_moon_times import rise_args
 from .timeutil import resolve_birth
 from .vargas import VARGAS, is_vargottama
 
@@ -117,7 +118,7 @@ def build_core(birth: BirthInput, cfg: EngineConfig) -> Core:
         for h in range(1, 13):
             lords_of[SIGN_LORDS[(lagna_sign + h - 1) % 12]].append(h)
 
-    ev = sun_events(m.jd_ut, birth.place.lat, birth.place.lon)
+    ev = sun_events(m.jd_ut, birth.place.lat, birth.place.lon, **rise_args(cfg))
     day_idx = vara_index(ev["sunrise"], birth.place.tz) if ev else None
     return Core(cfg, birth, m, pos, hs, lon, sign, deg, lagna_sign, rashi_house, house, chalit, dig, combust,
                 war, varga, lords_of, ev, day_idx, notes)

@@ -1,0 +1,21 @@
+# Lal Kitab debts (rin): a debt is indicated when a listed graha stands in a listed house. Only the three rules whose
+# wording is most widely repeated are encoded; the other classical debts (brother, sister, son, guru, etc.) are NOT
+# implemented because their conditions differ between editions (docs/open_questions.md). `verify: true` for all.
+- id: pitri_rin
+  name: Pitri Rin (ancestral debt)
+  planets: [Venus, Mercury, Rahu]
+  houses: [2, 5, 9, 12]
+  source: widely repeated Lal Kitab rule (from memory); not yet checked against a cited edition
+  verify: true
+- id: matri_rin
+  name: Matri Rin (maternal debt)
+  planets: [Ketu]
+  houses: [4]
+  source: widely repeated Lal Kitab rule (from memory); not yet checked against a cited edition
+  verify: true
+- id: stri_rin
+  name: Stri Rin (debt to the wife / women)
+  planets: [Sun, Moon, Rahu]
+  houses: [2, 7]
+  source: widely repeated Lal Kitab rule (from memory); not yet checked against a cited edition
+  verify: true

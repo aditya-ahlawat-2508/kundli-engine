@@ -1,0 +1,13 @@
+activity: marriage
+version: v1
+verify: true
+sources:
+  - activity rules summarised from standard muhurta practice (from memory); not yet checked against a primary source
+rules:
+  - {id: weekday, kind: weekday_in, values: [Monday, Wednesday, Thursday, Friday], weight: 3}
+  - {id: marriage_nakshatra, kind: nakshatra_in, values: [Mrigashira, Magha, Rohini, Uttara Phalguni, Hasta, Swati, Anuradha, Mula, Uttara Ashadha, Uttara Bhadrapada, Revati], weight: 5}
+  - {id: avoid_kharmas, kind: sun_sign_not_in, values: [Sagittarius, Pisces], veto: true}
+  - {id: venus_jupiter_not_combust, kind: not_combust, planets: [Venus, Jupiter], veto: true}
+  - {id: avoid_ashtami, kind: tithi_not_in, values: [8, 23], weight: 1}
+  - {id: outside_chaturmas_months, kind: month_not_in, values: [Shravana, Bhadrapada, Ashwin], weight: 2}
+  - {id: shukla_paksha, kind: paksha_in, values: [shukla], weight: 1}

@@ -1,0 +1,16 @@
+# Rules applied to every activity (merged before the activity's own rules; an activity may list `skip_common: [ids]`).
+version: v1
+sources:
+  - general muhurta principles as summarised in standard almanacs (from memory); not yet checked against a primary source
+verify: true
+rules:
+  - {id: avoid_rahu_kaal, kind: not_in_window, windows: [rahu_kaal], veto: true}
+  - {id: avoid_yamaganda, kind: not_in_window, windows: [yamaganda], veto: true}
+  - {id: avoid_gulika, kind: not_in_window, windows: [gulika_kaal], veto: true}
+  - {id: avoid_riktha_tithi, kind: tithi_not_in, values: [4, 9, 14, 19, 24, 29, 30], veto: true}
+  - {id: avoid_inauspicious_yoga, kind: yoga_not_in, values: [Vishkambha, Atiganda, Shula, Ganda, Vyaghata, Vajra, Vyatipata, Parigha, Vaidhriti], veto: true}
+  - {id: avoid_vishti_karana, kind: karana_not_in, values: [Vishti], veto: true}
+  - {id: avoid_adhika_month, kind: adhika_not, veto: true}
+  - {id: abhijit_bonus, kind: in_window, windows: [abhijit_muhurta], weight: 1}
+  - {id: tarabala, kind: tarabala_ok, weight: 2}
+  - {id: chandrabala, kind: chandrabala_ok, weight: 2}

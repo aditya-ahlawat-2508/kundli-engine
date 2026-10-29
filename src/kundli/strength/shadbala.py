@@ -23,6 +23,7 @@ from ..data.tables import (
 )
 from ..ephemeris import PLANET_IDS, base_flags
 from ..panchang import hora_lord, sun_events, vara_index
+from ..panchang.sun_moon_times import rise_args
 
 NATURAL_BENEFIC = {"Jupiter", "Venus", "Mercury"}  # Moon: benefic when waxing (decided per chart)
 
@@ -161,7 +162,7 @@ def varsha_masa_vara_lords(core: Core) -> dict[str, str]:
     out = {}
     for key, tgt, back in (("abda", 0.0, 367.0), ("masa", month_start, 32.0)):
         j = _sun_crossing(core, tgt, jd, back)
-        ev = sun_events(j, lat, lon)
+        ev = sun_events(j, lat, lon, **rise_args(core.cfg))
         out[key] = WEEKDAY_LORDS[vara_index(ev["sunrise"], tz)] if ev else "Sun"
     assert core.day_idx is not None
     out["vara"] = WEEKDAY_LORDS[core.day_idx]

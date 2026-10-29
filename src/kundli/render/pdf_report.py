@@ -1,6 +1,7 @@
 """PDF report (reportlab). Deterministic: invariant mode, no timestamps."""
 import io
 from typing import Any
+from xml.sax.saxutils import escape
 
 from reportlab.graphics import renderPDF
 from reportlab.lib import colors
@@ -77,9 +78,9 @@ def build_pdf(k: Kundli, charts: list[str] | None = None, style: str = "north") 
     h1, h2, body = STY["Title"], STY["Heading2"], STY["BodyText"]
     b, cfg = k.birth, k.header["config"]
     f: list = [Spacer(1, 40 * mm), Paragraph("Kundli (Janma Patrika)", h1), Spacer(1, 8 * mm),
-               Paragraph(f"<b>{b['name']}</b>", STY["Heading1"]),
+               Paragraph(f"<b>{escape(b['name'])}</b>", STY["Heading1"]),
                Paragraph(f"Born {b['local']} (UTC offset {b['utc_offset_seconds'] / 3600:+.2f} h)", body),
-               Paragraph(f"{b['place']['name']}, {b['place']['admin1']} {b['place']['country']} &nbsp; "
+               Paragraph(f"{escape(b['place']['name'])}, {escape(b['place']['admin1'])} {escape(b['place']['country'])} &nbsp; "
                          f"lat {b['place']['lat']:.4f}, lon {b['place']['lon']:.4f}, tz {b['place']['tz']}", body)]
     if b["time_unknown"]:
         f.append(Paragraph("<b>Birth time unknown - lagna-dependent sections omitted.</b>", body))

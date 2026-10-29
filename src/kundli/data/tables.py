@@ -127,3 +127,60 @@ MALEFICS = ["Sun", "Mars", "Saturn", "Rahu", "Ketu"]
 # Graha drishti: aspected houses counted from the planet (BPHS ch.26) ; nodes 5/7/9 VERIFY
 ASPECT_HOUSES = {"Sun": [7], "Moon": [7], "Mercury": [7], "Venus": [7], "Mars": [4, 7, 8],
                  "Jupiter": [5, 7, 9], "Saturn": [3, 7, 10], "Rahu": [5, 7, 9], "Ketu": [5, 7, 9]}
+
+# Ashtakavarga of the Lagna itself (Lagna as the target). Houses counted from each contributor; total 49.
+# Derived from, and checked against, an external reference report (tests/reference).
+LAGNA_BAV_CONTRIB = {
+    "Sun": [3, 4, 6, 10, 11, 12], "Moon": [3, 6, 10, 11, 12], "Mars": [1, 3, 6, 10, 11],
+    "Mercury": [1, 2, 4, 6, 8, 10, 11], "Jupiter": [1, 2, 4, 5, 6, 7, 9, 10, 11],
+    "Venus": [1, 2, 3, 4, 5, 8, 9], "Saturn": [1, 3, 4, 6, 10, 11], "Lagna": [3, 6, 10, 11],
+}
+LAGNA_BAV_TOTAL = 49
+
+# Avakahada (nakshatra / rashi lookups). Indices: nakshatra 0..26, sign 0..11.
+# VERIFY: entered from the standard avakahada scheme from memory; cross-checked on ONE chart only (Pisces / Uttara
+# Bhadrapada Moon). Needs a source line and a second-person review of all 27 / 12 entries (docs/open_questions.md).
+VARNA_BY_SIGN = ["Kshatriya", "Vaishya", "Shudra", "Vipra", "Kshatriya", "Vaishya", "Shudra", "Vipra",
+                 "Kshatriya", "Vaishya", "Shudra", "Vipra"]  # Vipra = Brahmin
+YONI_BY_NAK = ["Ashwa", "Gaja", "Mesha", "Sarpa", "Sarpa", "Shwan", "Marjar", "Mesha", "Marjar", "Mushak",
+               "Mushak", "Gau", "Mahisha", "Vyaghra", "Mahisha", "Vyaghra", "Mriga", "Mriga", "Shwan", "Vanar",
+               "Nakul", "Vanar", "Simha", "Ashwa", "Simha", "Gau", "Gaja"]
+GANA_BY_NAK = ["Deva", "Manushya", "Rakshasa", "Manushya", "Deva", "Manushya", "Deva", "Deva", "Rakshasa",
+               "Rakshasa", "Manushya", "Manushya", "Deva", "Rakshasa", "Deva", "Rakshasa", "Deva", "Rakshasa",
+               "Rakshasa", "Manushya", "Manushya", "Deva", "Rakshasa", "Rakshasa", "Manushya", "Manushya", "Deva"]
+NADI_CYCLE = ["Adi", "Madhya", "Antya", "Antya", "Madhya", "Adi"]  # repeats 0..5 over the 27 nakshatras
+TATVA_BY_SIGN = ["Fire", "Earth", "Air", "Water"]  # sign % 4
+# Name syllables (avakahada akshara): 4 padas per nakshatra. VERIFY: Shravana and a few others vary by school.
+NAME_SYLLABLES = [
+    "Chu Che Cho La", "Li Lu Le Lo", "A I U E", "O Va Vi Vu", "Ve Vo Ka Ki", "Ku Gha Ng Chha", "Ke Ko Ha Hi",
+    "Hu He Ho Da", "Di Du De Do", "Ma Mi Mu Me", "Mo Ta Ti Tu", "Te To Pa Pi", "Pu Sha Na Tha", "Pe Po Ra Ri",
+    "Ru Re Ro Ta", "Ti Tu Te To", "Na Ni Nu Ne", "No Ya Yi Yu", "Ye Yo Bha Bhi", "Bhu Dha Pha Dha",
+    "Bhe Bho Ja Ji", "Ju Je Jo Gha", "Ga Gi Gu Ge", "Go Sa Si Su", "Se So Da Di", "Du Tha Jha Na",
+    "De Do Cha Chi",
+]
+# Paya (by Moon's house from Lagna) and Kaal Sarpa types (by Rahu's house from Lagna). VERIFY (one chart checked).
+PAYA_BY_HOUSE = {1: "Gold", 6: "Gold", 11: "Gold", 2: "Silver", 5: "Silver", 9: "Silver",
+                 3: "Copper", 7: "Copper", 10: "Copper", 4: "Iron", 8: "Iron", 12: "Iron"}
+KAAL_SARPA_TYPES = ["Anant", "Kulik", "Vasuki", "Shankhpal", "Padma", "Mahapadma", "Takshak", "Karkotak",
+                    "Shankhchoor", "Ghatak", "Vishdhar", "Sheshnaag"]
+
+# VERIFY: gem, finger, metal and substitutes differ by tradition; checked only for Saturn/Venus/Mercury.
+# Navagraha gemstones (traditional): gem, substitutes, weekday, finger of the right hand, metal, deity, beeja mantra.
+GEMS = {
+    "Sun": ("Ruby", ["Garnet", "Red Spinel"], "Sunday", "Ring", "Gold", "Surya", "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः"),
+    "Moon": ("Pearl", ["Moonstone"], "Monday", "Little", "Silver", "Chandra", "ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः"),
+    "Mars": ("Red Coral", ["Carnelian"], "Tuesday", "Ring", "Gold or copper", "Mangal",
+             "ॐ क्रां क्रीं क्रौं सः भौमाय नमः"),
+    "Mercury": ("Emerald", ["Peridot", "Green Onyx"], "Wednesday", "Little", "Gold", "Budha",
+                "ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः"),
+    "Jupiter": ("Yellow Sapphire", ["Yellow Topaz", "Citrine"], "Thursday", "Index", "Gold", "Guru",
+                "ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः"),
+    "Venus": ("Diamond", ["White Sapphire", "White Zircon"], "Friday", "Little", "Silver or platinum", "Shukra",
+              "ॐ द्रां द्रीं द्रौं सः शुक्राय नमः"),
+    "Saturn": ("Blue Sapphire", ["Amethyst", "Lapis Lazuli"], "Saturday", "Middle", "Silver or iron (ashtadhatu)",
+               "Shani", "ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः"),
+    "Rahu": ("Hessonite (Gomed)", ["Orange Zircon"], "Saturday", "Middle", "Silver or ashtadhatu", "Rahu",
+             "ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः"),
+    "Ketu": ("Cat's Eye", ["Tiger's Eye"], "Tuesday", "Little", "Silver or ashtadhatu", "Ketu",
+             "ॐ स्रां स्रीं स्रौं सः केतवे नमः"),
+}

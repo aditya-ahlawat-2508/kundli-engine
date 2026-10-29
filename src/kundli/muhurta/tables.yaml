@@ -1,0 +1,17 @@
+# Muhurta tables (V2 phase 18). From the standard nakshatra-class scheme and the commonly listed inauspicious
+# yogas, from memory: `verify: true` until checked against a cited source and a second reviewer.
+verify: true
+source: standard muhurta nakshatra classes and almanac inauspicious yogas (from memory); not yet checked against a primary source
+nakshatra_class:
+  dhruva: [Rohini, Uttara Phalguni, Uttara Ashadha, Uttara Bhadrapada]      # fixed: lasting works
+  chara: [Swati, Punarvasu, Shravana, Dhanishta, Shatabhisha]               # movable: travel, vehicles
+  kshipra: [Ashwini, Pushya, Hasta]                                         # swift: starting, trade, learning
+  mridu: [Mrigashira, Chitra, Anuradha, Revati]                             # soft: ceremonies, arts, friendship
+  ugra: [Bharani, Magha, Purva Phalguni, Purva Ashadha, Purva Bhadrapada]   # fierce
+  tikshna: [Ardra, Ashlesha, Jyeshtha, Mula]                                # sharp
+  misra: [Krittika, Vishakha]                                               # mixed
+inauspicious_yogas: [Vishkambha, Atiganda, Shula, Ganda, Vyaghata, Vajra, Vyatipata, Parigha, Vaidhriti]
+riktha_tithis: [4, 9, 14, 19, 24, 29, 30]   # Chaturthi, Navami, Chaturdashi of both pakshas, plus Amavasya
+# Dishashoola: weekdays on which travel towards a direction is avoided.
+dishashoola: {east: [Monday, Saturday], south: [Thursday], west: [Sunday, Friday], north: [Tuesday, Wednesday]}
+kharmas_sun_signs: [Sagittarius, Pisces]     # Sun in Dhanu or Meena: auspicious ceremonies avoided

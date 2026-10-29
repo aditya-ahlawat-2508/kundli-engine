@@ -21,6 +21,21 @@ class EngineConfig(BaseModel):
     combustion_orbs: Literal["standard"] = "standard"
     language: Literal["en", "hi"] = "en"
     include_outer_planets: bool = False  # Uranus/Neptune/Pluto extras
+    # Conventions added for the API-compat layer (V2). Each currently has one value = today's behaviour; the Literal
+    # is widened in the phase that implements an alternative (see docs/conventions.md).
+    sunrise_definition: Literal["upper_limb_refracted", "center_no_refraction"] = "upper_limb_refracted"
+    observer_altitude_m: float = Field(default=0.0, ge=-500.0, le=9000.0)  # metres above sea level, for rise/set
+    festival_tradition: Literal["drik_amanta", "drik_purnimanta"] = "drik_amanta"
+    kp_ayanamsa: Literal["chart", "kp"] = "chart"  # KP endpoints: use the chart's ayanamsa, or Krishnamurti's
+    manglik_rules: Literal["lagna_only", "lagna_moon", "lagna_moon_venus"] = "lagna_moon_venus"
+    manglik_cancellations: Literal["standard_v1"] = "standard_v1"
+    kalsarpa_variant: Literal["full_only", "include_partial"] = "full_only"
+    solar_return_zodiac: Literal["sidereal", "tropical"] = "sidereal"  # which Sun longitude must return
+    mudda_dasha_basis: Literal["annual_moon", "natal_vimshottari"] = "annual_moon"
+    muhurta_ruleset_version: Literal["v1"] = "v1"
+    numerology_system: Literal["chaldean", "pythagorean"] = "chaldean"
+    lalkitab_edition: Literal["lagna_houses", "fixed_aries"] = "fixed_aries"  # see docs/conventions.md
+    content_version: str | None = None  # hash of the frozen content store once one exists
 
     @field_validator("dasha_year_days")
     @classmethod
