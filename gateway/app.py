@@ -35,15 +35,59 @@ app = FastAPI(title="timesastro-gateway", lifespan=lifespan)
 app.mount("/engine", engine)  # full engine API stays reachable (docs at /engine/docs)
 
 
+_TF = None
+
+
+def _tz(lat: float, lon: float) -> str:
+    global _TF
+    if _TF is None:
+        from timezonefinder import TimezoneFinder
+        _TF = TimezoneFinder()
+    return _TF.timezone_at(lat=lat, lng=lon) or "Asia/Kolkata"
+
+
+def photon(q: str, limit: int = 6) -> list[dict]:
+    """Free OpenStreetMap geocoder (no key, rate-limited). Returns [] on any failure so callers can fall back."""
+    try:
+        r = httpx.get("https://photon.komoot.io/api/", params={"q": q, "limit": limit}, timeout=4.0,
+                      headers={"User-Agent": "times-astro-demo"})
+        r.raise_for_status()
+        out = []
+        for f in r.json().get("features", []):
+            pr, (lon, lat) = f.get("properties", {}), f["geometry"]["coordinates"]
+            name = pr.get("name") or pr.get("city") or ""
+            label = ", ".join(dict.fromkeys(x for x in (name, pr.get("county"), pr.get("state"), pr.get("country")) if x))
+            if name:
+                out.append({"name": name, "label": label, "lat": lat, "lon": lon, "country": pr.get("country")})
+        return out
+    except Exception:  # noqa: BLE001 - network/parse problems must not break the page
+        return []
+
+
+def _offline(t: str) -> dict | None:
+    c = candidates(t, online=False)
+    if not c:
+        return None
+    p = sorted(c, key=lambda p: (p.country != "India", -(p.population or 0)))[0]
+    return {"lat": p.lat, "lon": p.lon, "tz": p.tz, "name": p.name}
+
+
 def resolve_place(q: str) -> dict:
-    """City text -> lat/lon/tz. Offline GeoNames; India preferred. Tries the full text, each comma part, then each word."""
+    """City text -> lat/lon/tz. Order: offline GeoNames (full text) -> Photon/OSM (full text) -> offline on comma parts and words."""
     q = q.strip()
-    tries = [q] + [x.strip() for x in q.split(",")] + [w for w in q.replace(",", " ").split() if len(w) >= 3]
+    r = _offline(q)
+    if r:
+        return r
+    hits = photon(q, 5)
+    if hits:
+        hits.sort(key=lambda h: h["country"] != "India")
+        h = hits[0]
+        return {"lat": h["lat"], "lon": h["lon"], "tz": _tz(h["lat"], h["lon"]), "name": h["name"]}
+    tries = [x.strip() for x in q.split(",")] + [w for w in q.replace(",", " ").split() if len(w) >= 3]
     for t in dict.fromkeys(x for x in tries if len(x) >= 2):
-        c = candidates(t, online=False)
-        if c:
-            p = sorted(c, key=lambda p: (p.country != "India", -(p.population or 0)))[0]
-            return {"lat": p.lat, "lon": p.lon, "tz": p.tz, "name": p.name}
+        r = _offline(t)
+        if r:
+            return r
     raise HTTPException(404, "place_not_found")
 
 
@@ -80,7 +124,16 @@ def health() -> dict:
 
 @app.get("/api/places")
 def places(q: str = Query(min_length=2)) -> list[dict]:
-    return [{"name": p.name, "admin1": p.admin1, "country": p.country} for p in candidates(q, online=False)[:8]]
+    """Autocomplete: local cities first, then OpenStreetMap results (e.g. small towns)."""
+    seen, out = set(), []
+    for p in candidates(q, online=False)[:6]:
+        lab = ", ".join(x for x in (p.name, p.admin1, p.country) if x)
+        if lab not in seen:
+            seen.add(lab); out.append({"label": lab})
+    for h in photon(q, 6):
+        if h["label"] not in seen:
+            seen.add(h["label"]); out.append({"label": h["label"]})
+    return out[:10]
 
 
 @app.post("/api/snapshot")

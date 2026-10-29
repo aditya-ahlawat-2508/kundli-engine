@@ -1646,5 +1646,20 @@ RENDER.report=function(){
   sheet(html,{label:T("reportTitle")});
 };
 
+
+/* city autocomplete (datalist) from /api/places */
+(function(){
+  var timers={};
+  function wire(id){
+    var el=$(id); if(!el||el.dataset.ac)return; el.dataset.ac="1";
+    var dl=document.createElement("datalist"); dl.id=id+"List"; el.setAttribute("list",dl.id); el.setAttribute("autocomplete","off"); el.parentNode.appendChild(dl);
+    el.addEventListener("input",function(){
+      clearTimeout(timers[id]); var v=el.value.trim(); if(v.length<3)return;
+      timers[id]=setTimeout(function(){fetch("/api/places?q="+encodeURIComponent(v)).then(function(r){return r.json();}).then(function(a){
+        dl.innerHTML=a.map(function(x){return '<option value="'+esc(x.label)+'">';}).join("");}).catch(function(){});},300);
+    });
+  }
+  ["fPlace","mBoyPlace","mGirlPlace"].forEach(wire);
+})();
 load(); renderStatic(); loadPanchang();
 </script>
