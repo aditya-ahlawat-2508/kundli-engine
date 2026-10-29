@@ -1,3 +1,8 @@
+<meta name="description" content="Times Astro: free kundli, kundli milan, today's panchang and rashifal from a Swiss-Ephemeris engine. Chat with Shreya or call Jyoti for personal guidance. Hindi, English, Hinglish.">
+<link rel="canonical" href="https://times-astro-live.onrender.com/">
+<meta property="og:title" content="Times Astro: free kundli, milan, panchang, chat with an astrologer"><meta property="og:description" content="Pehla jawab free. Aapki kundli, aapke sawaal.">
+<meta property="og:type" content="website"><meta name="theme-color" content="#e8943a">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Times Astro","url":"https://times-astro-live.onrender.com/","inLanguage":["en","hi"]}</script>
 <title>Times Astro</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1089,7 +1094,7 @@ $("kForm").addEventListener("submit",function(ev){
     if(S.dateErr){S.dateErr=false;S.snap=null;var fd=$("fErr");fd.textContent=S.lang==="en"?"Please check the date of birth (it cannot be in the future).":S.lang==="hi"?"जन्म तिथि जाँचिए (भविष्य की तिथि नहीं हो सकती)।":"Janm tithi check kijiye (future ki date nahi ho sakti).";fd.hidden=false;return;}
     if(S.placeErr){S.placeErr=false;S.snap=null;var fe=$("fErr");fe.textContent=S.lang==="en"?"We could not find this city. Try the nearest big city (e.g. Delhi, Jaipur, Lucknow).":S.lang==="hi"?"यह शहर नहीं मिला। नज़दीकी बड़े शहर का नाम डालिए (जैसे दिल्ली, जयपुर)।":"Yeh shehar nahi mila. Paas ka bada shehar likhiye (jaise Delhi, Jaipur, Lucknow).";fe.hidden=false;return;}
     renderResult();
-    $("kForm").hidden=true; $("kResult").hidden=false;
+    track("form_complete");track("snapshot_shown");$("kForm").hidden=true; $("kResult").hidden=false;
     $("kundli").scrollIntoView({behavior:"smooth",block:"start"});
   });
 });
@@ -1135,7 +1140,7 @@ function panRows(){
   return rows.slice(0,6).map(function(r,i){return [r[0],v[i]];}).concat(d.festivals&&d.festivals.length?[[S.lang==="en"?"Today":S.lang==="hi"?"आज":"Aaj",d.festivals.join(", ")]]:[]);
 }
 function openReportPdf(){
-  var s=S.snap; if(!s)return;
+  var s=S.snap; if(!s)return; track("report_download");
   var q="date="+encodeURIComponent(s.dob)+"&place="+encodeURIComponent(s.place)+"&name="+encodeURIComponent(s.name||"Guest")+(s.tob?"&time="+encodeURIComponent(s.tob):"");
   var w=window.open("","_blank");
   fetch("/api/report.pdf?"+q).then(function(r){if(!r.ok)throw new Error(r.status);return r.blob();}).then(function(b){
@@ -1150,13 +1155,13 @@ function renderResult(){
   var lines=[S.topic].concat(others).map(function(k,i){return '<div class="snap-line'+(i===0?" lead-line":"")+'"><b>'+esc(T("topics")[k].toUpperCase())+'</b><span>'+esc(LL&&LL[k]?LL[k]:f[k][0])+'</span></div>';}).join("");
   var q=S.qIndex>=0?T("questions")[S.qIndex][0]+" ":"";
   var cta;
-  if(S.mode==="chat"){var pl=PLANS[S.plan];cta='<div class="field"><span>'+esc(T("chatResPick"))+'</span><div class="plan-chips">'+PLANS.map(function(x,i){return '<button type="button" class="chip" data-plan="'+i+'" aria-pressed="'+(S.plan===i)+'">₹'+x[1]+'<small>'+x[0]+' min</small></button>';}).join("")+'</div></div><button type="button" class="btn btn-primary" data-act="buyChat">'+esc(fill(T("chatPlanLbl"),{m:pl[0]}))+' · ₹'+pl[1]+'</button>';}
+  if(S.mode==="chat"){var pl=PLANS[S.plan];cta='<div class="field"><span>'+esc(T("chatResPick"))+'</span><div class="plan-chips">'+PLANS.map(function(x,i){return '<button type="button" class="chip" data-plan="'+i+'" aria-pressed="'+(S.plan===i)+'">'+(i===0&&!freeUsed()?'FREE':'₹'+x[1])+'<small>'+x[0]+' min</small></button>';}).join("")+'</div></div><button type="button" class="btn btn-primary" data-act="buyChat">'+esc(fill(T("chatPlanLbl"),{m:pl[0]}))+' · ₹'+pl[1]+'</button>';}
   else{cta='<div class="field"><span>'+esc(T("slotQ"))+'</span><div class="slots">'+T("slots").map(function(sl,i){return '<button type="button" class="chip" data-slot="'+i+'" aria-pressed="'+(S.slot===i)+'">'+esc(sl)+'</button>';}).join("")+'</div></div><button type="button" class="btn btn-primary" data-act="buyCall">'+esc(T("resCtaCall"))+'</button><p class="small center" style="color:var(--ok-fg);font-weight:600">'+esc(T("callNoCharge"))+'</p>';}
   var name=firstName();
   $("kResult").innerHTML='<div><span class="kicker">'+esc(T("resKicker"))+'</span><h2 style="font-size:22px;font-weight:700">'+esc(name?fill(T("greetName"),{n:name}):T("greet"))+'</h2><p class="muted small">'+esc([s.dob,s.noTime?T("timeUnknown"):s.tob,s.place].filter(Boolean).join(" · "))+'</p></div>'
    +'<div class="modes" role="group">'+["chat","call"].map(function(m){var v=T("modes")[m];return '<button type="button" class="mode" data-mode="'+m+'" aria-pressed="'+(S.mode===m)+'"><b>'+esc(v[0])+'</b><span>'+esc(v[1])+'</span></button>';}).join("")+'</div>'
    +lines+'<div style="border-top:1px dashed var(--line);padding-top:10px"><b class="small">'+esc(T("pending"))+'</b><p class="small">'+esc(q+f[S.topic][1])+'</p></div>'
-   +cta+'<p class="muted small center">'+esc(fill(T("walletHint"),{b:rupee(S.balance)}))+'</p><button type="button" class="btn-link" data-act="editForm">'+esc(T("edit"))+'</button>';
+   +cta+nudgeBlock()+'<p class="muted small center">'+esc(fill(T("walletHint"),{b:rupee(S.balance)}))+'</p><button type="button" class="btn-link" data-act="editForm">'+esc(T("edit"))+'</button>';
 }
 
 /* ---------- rashifal ---------- */
@@ -1203,6 +1208,7 @@ RENDER.wallet=function(){
 
 /* checkout */
 function checkout(item){
+  track("payment_start");
   var method=(item.kind!=="recharge"&&S.balance>=item.amount)?"wallet":"upi";
   openLayer("checkout",{item:item,method:method,step:"choose"});
 }
@@ -1234,7 +1240,7 @@ function doPay(){
     if(S.failNext&&d.method!=="wallet"){S.failNext=false;d.step="failed";d.method=d.method==="upi"?"card":"upi";return overlay.render();}
     if(it.kind==="recharge"){S.balance+=it.amount+(it.bonus||0);addTxn("add",it.amount);if(it.bonus)addTxn("bonus",it.bonus);}
     else if(d.method==="wallet"){S.balance-=it.amount;addTxn(it.kind,-it.amount,it.m);}
-    save();renderWalletBtn();if(S.snap)renderResult();
+    track("payment_done");save();renderWalletBtn();if(S.snap)renderResult();
     var done=it.onSuccess; overlay.onCancel=null; closeLayer(); if(done)done();
   },1300);
 }
@@ -1244,7 +1250,7 @@ var chatTimer=null;
 function stopChatTimer(){if(chatTimer){clearInterval(chatTimer);chatTimer=null;}}
 function fmt(sec){sec=Math.max(0,sec);var m=Math.floor(sec/60),s=sec%60;return (m<10?"0":"")+m+":"+(s<10?"0":"")+s;}
 function startChat(mins){
-  mins=mins||30;
+  mins=mins||30; track("chat_started");
   var t=T("topics")[S.topic];
   var q=S.qIndex>=0?fill(T("openerQ"),{q:T("questions")[S.qIndex][0]}):"";
   var name=firstName()||"";
@@ -1266,7 +1272,17 @@ function detectTopic(text){
   for(var k in KEYWORDS){for(var j=0;j<KEYWORDS[k].length;j++){if(x.indexOf(KEYWORDS[k][j])>-1)return k;}}
   return null;
 }
+var HL_WORDS=/\b(kab|kya|hai|hain|mera|meri|mujhe|nahi|nhi|shaadi|shadi|naukri|paisa|kaise|kyun|batao|bataiye|aur|mein|mei|ho|hoga|hogi|karna|chahiye|rishta)\b/i;
+function detectLang(t){
+  if(/[\u0900-\u097F]/.test(t))return "hi";
+  if(HL_WORDS.test(t))return "hl";
+  if(/^[\x00-\x7F\s]+$/.test(t)&&/\b(the|my|will|when|what|how|is|are|should|can|job|marriage|money)\b/i.test(t))return "en";
+  return S.lang;
+}
 function reply(text){
+  var __prev=S.lang; S.lang=detectLang(text); try{ reply2(text); }finally{ S.lang=__prev; }
+}
+function reply2(text){
   var d=overlay.data,topic=detectTopic(text),out;
   if(topic==="distress"){d.distress=true;out=T("distress");}
   else{
@@ -1359,7 +1375,7 @@ document.addEventListener("click",function(e){
   if(ds.sign!=null){S.sign=Number(ds.sign);renderSigns();renderRas();return;}
   if(ds.svc){handleSvc(ds.svc);return;}
   if(ds.plan!=null){S.plan=Number(ds.plan);if(S.snap)renderResult();return;}
-  if(ds.buyplan!=null){S.plan=Number(ds.buyplan);var pl=PLANS[S.plan];overlay.onCancel=null;checkout({kind:"chat",amount:pl[1],m:pl[0],label:fill(T("chatPlanLbl"),{m:pl[0]}),onSuccess:function(){startChat(pl[0]);}});return;}
+  if(ds.buyplan!=null){S.plan=Number(ds.buyplan);var pl=PLANS[S.plan];if(S.plan===0&&!freeUsed()){markFree();track("free_chat_started");startChat(3);return;}overlay.onCancel=null;checkout({kind:"chat",amount:pl[1],m:pl[0],label:fill(T("chatPlanLbl"),{m:pl[0]}),onSuccess:function(){startChat(pl[0]);}});return;}
   if(ds.report!=null){buyReport(Number(ds.report));return;}
   if(ds.included!=null){closeLayer();startChat(Number(ds.included));return;}
   if(ds.pack!=null){overlay.data.pack=Number(ds.pack);overlay.data.custom="";overlay.data.notice="";overlay.render();return;}
@@ -1381,7 +1397,7 @@ document.addEventListener("click",function(e){
       if(overlay.type==="checkout"&&overlay.onCancel){var oc=overlay.onCancel;overlay.onCancel=null;oc();return;}
       closeLayer(); break;
     case "editForm": $("kForm").hidden=false;$("kResult").hidden=true;renderForm();break;
-    case "buyChat": overlay.onCancel=null;(function(){var pl=PLANS[S.plan];checkout({kind:"chat",amount:pl[1],m:pl[0],label:fill(T("chatPlanLbl"),{m:pl[0]}),onSuccess:function(){startChat(pl[0]);}});})(); break;
+    case "buyChat": overlay.onCancel=null;(function(){var pl=PLANS[S.plan];if(S.plan===0&&!freeUsed()){markFree();track("free_chat_started");startChat(3);return;}checkout({kind:"chat",amount:pl[1],m:pl[0],label:fill(T("chatPlanLbl"),{m:pl[0]}),onSuccess:function(){startChat(pl[0]);}});})(); break;
     case "buyCall": overlay.onCancel=null;checkout({kind:"call",amount:299,onSuccess:startCallFlow}); break;
     case "buyCallFromWallet": overlay.onCancel=null;S.mode="call";checkout({kind:"call",amount:299,onSuccess:startCallFlow}); break;
     case "recharge":
@@ -1553,7 +1569,7 @@ function renderPortal(){
   var d=new Date();
   $("panchang").innerHTML='<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b>'+esc(T("pLoc"))+'</b><span class="muted small">'+esc(d.toLocaleDateString(S.lang==="en"?"en-IN":"hi-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"}))+'</span></div><div class="kv">'+panRows().map(function(r){return '<div><span>'+esc(r[0])+'</span><b>'+esc(r[1])+'</b></div>';}).join("")+'</div><span class="tag-demo">'+esc(LIVE.panch?"Swiss Ephemeris · "+LIVE.panch.place:T("pDemo"))+'</span><button type="button" class="btn btn-dark" data-svc="muhuratAsk">'+esc(T("pCta"))+'</button>';
   $("rasTabs").innerHTML=T("rasTabs").map(function(t){return '<button type="button" role="tab" data-rtab="'+t[0]+'" aria-selected="'+(S.rasTab===t[0])+'">'+esc(t[1])+'</button>';}).join("");
-  $("festList").innerHTML=T("fests").map(function(f){return '<li><button type="button" data-svc="fest">'+esc(f)+'<small>'+esc(T("festNote"))+' [—]</small></button></li>';}).join("");
+  $("festList").innerHTML=festRows(); paintLanding();
   $("articles").innerHTML=T("articles").map(function(a){return '<li><button type="button" data-svc="article"><span>'+esc(a)+'</span><small>'+esc(T("read"))+' ›</small></button></li>';}).join("");
   $("footCols").innerHTML=T("footCols").map(function(c){return '<div><b>'+esc(c[0])+'</b>'+c[1].map(function(l){return '<a href="#top">'+esc(l)+'</a>';}).join("")+'</div>';}).join("");
   $("svcGrid").innerHTML=T("svc").map(function(s){return '<button type="button" class="svc" data-svc="'+s[0]+'">'+svcIcon(ICONS[s[0]]?s[0]:"kundli")+'<b>'+esc(s[1])+'</b></button>';}).join("");
@@ -1594,7 +1610,7 @@ $("milanInline").addEventListener("submit",function(e){
   var sub=$("milanInline").querySelector('button[type="submit"]'); if(sub)sub.disabled=true;
   var done=function(){if(sub)sub.disabled=false;renderMilanRes();};
   apiJson("/api/milan",{boy:{date:b,time:bt||null,place:bp},girl:{date:g,time:gt||null,place:gp}}).then(function(d){
-    milan={score:Math.round(d.total*10)/10,live:d,a:$("mBoyName").value.trim(),b:$("mGirlName").value.trim(),bd:[b,bt,bp],gd:[g,gt,gp]};done();
+    milan={score:Math.round(d.total*10)/10,live:d,a:$("mBoyName").value.trim(),b:$("mGirlName").value.trim(),bd:[b,bt,bp],gd:[g,gt,gp]};track("milan_done");done();
   }).catch(function(){scripted();});
   function scripted(){
   var s=(b+g+bt+gt).replace(/\D/g,"").split("").reduce(function(a,c){return a+Number(c);},0)+bp.length+gp.length;
@@ -1618,7 +1634,7 @@ Object.assign(I18N.hi,{allPlansTitle:"सभी प्लान · स्क्�
 function renderAllPlans(){
   var tr=$("aPlans"); if(!tr)return;
   var sh='<img src="'+SHREYA_AV+'" alt="">', jy='<img src="'+JYOTI_AV+'" alt="">', rp='<i aria-hidden="true">'+ZSYM[0]+'\uFE0E</i>';
-  var h=PLANS.map(function(p,i){var t=T("plans")[i];return '<div class="ap'+(i===3?" hot":"")+'">'+(i===3?'<span class="rib">'+esc(T("popular"))+'</span>':'')+'<span class="who">'+sh+esc(T("grpChat"))+'</span><b class="name">'+esc(t[0])+'</b><strong>₹'+p[1]+'</strong><span class="per">'+p[0]+' min · '+esc(fill(T("perMin"),{p:(p[1]/p[0]).toFixed(1)}))+'</span><button type="button" class="btn '+(i===3?"btn-primary":"btn-ghost")+'" data-buyplan="'+i+'">'+esc(T("startChatBtn"))+'</button></div>';}).join("");
+  var h=PLANS.map(function(p,i){var t=T("plans")[i];return '<div class="ap'+(i===3?" hot":"")+'">'+(i===3?'<span class="rib">'+esc(T("popular"))+'</span>':'')+'<span class="who">'+sh+esc(T("grpChat"))+'</span><b class="name">'+esc(t[0])+'</b><strong>'+(i===0&&!freeUsed()?'FREE':'₹'+p[1])+'</strong><span class="per">'+p[0]+' min · '+esc(fill(T("perMin"),{p:(p[1]/p[0]).toFixed(1)}))+'</span><button type="button" class="btn '+(i===3?"btn-primary":"btn-ghost")+'" data-buyplan="'+i+'">'+esc(T("startChatBtn"))+'</button></div>';}).join("");
   h+='<div class="ap"><span class="who">'+jy+esc(T("grpCall"))+'</span><b class="name">'+esc(T("priceCall"))+'</b><strong>₹299</strong><span class="per">15 min · '+esc(fill(T("perMin"),{p:(299/15).toFixed(1)}))+'</span><button type="button" class="btn btn-primary" data-svc="call">'+esc(T("callPlanBtn"))+'</button></div>';
   h+=REPORTS.map(function(r,i){var t=T("reports")[i];return '<div class="ap'+(i===1?" hot":"")+'">'+(i===1?'<span class="rib">'+esc(t[1])+'</span>':'')+'<span class="who">'+rp+esc(T("grpReport"))+'</span><b class="name">'+esc(t[0])+'</b><strong>'+(i<2?'FREE':'₹'+r[0])+'</strong><span class="per">'+esc(t[2][t[2].length-1])+'</span><button type="button" class="btn btn-dark" data-report="'+i+'">'+esc((i<2?fill(T("buyReport"),{p:r[0]}).replace(/₹\s*\d+/,"FREE · testing"):fill(T("buyReport"),{p:r[0]})))+'</button></div>';}).join("");
   tr.innerHTML=h;
@@ -1628,7 +1644,7 @@ document.addEventListener("click",function(e){var b=e.target.closest("[data-pscr
 function renderPlans(){
   renderAllPlans();
   var pc=$("chatPlans"); if(!pc)return;
-  pc.innerHTML=PLANS.map(function(p,i){var t=T("plans")[i];var rib=i===3?T("popular"):i===2?T("bestValue"):"";return '<div class="plan'+(i===3?" hot":"")+'">'+(rib?'<span class="ribbon">'+esc(rib)+'</span>':'')+'<span class="mins">'+esc(t[0])+'</span><strong>₹'+p[1]+'</strong><span class="per">'+p[0]+' min · '+esc(fill(T("perMin"),{p:(p[1]/p[0]).toFixed(1)}))+'</span><span class="use">'+esc(t[1])+'</span><button type="button" class="btn '+(i===3?"btn-primary":"btn-ghost")+'" data-buyplan="'+i+'">'+esc(T("startChatBtn"))+'</button></div>';}).join("");
+  pc.innerHTML=PLANS.map(function(p,i){var t=T("plans")[i];var rib=i===3?T("popular"):i===2?T("bestValue"):"";return '<div class="plan'+(i===3?" hot":"")+'">'+(rib?'<span class="ribbon">'+esc(rib)+'</span>':'')+'<span class="mins">'+esc(t[0])+'</span><strong>'+(i===0&&!freeUsed()?'FREE':'₹'+p[1])+'</strong><span class="per">'+p[0]+' min · '+esc(fill(T("perMin"),{p:(p[1]/p[0]).toFixed(1)}))+'</span><span class="use">'+esc(t[1])+'</span><button type="button" class="btn '+(i===3?"btn-primary":"btn-ghost")+'" data-buyplan="'+i+'">'+esc(T("startChatBtn"))+'</button></div>';}).join("");
   $("reportPlans").innerHTML=REPORTS.map(function(r,i){var t=T("reports")[i];return '<div class="report'+(i===1?" hot":"")+'">'+(i===1?'<span class="ribbon">'+esc(t[1])+'</span>':'<span class="kicker">'+esc(t[1])+'</span>')+'<h3>'+esc(t[0])+'</h3><strong>'+(i<2?'FREE':'₹'+r[0])+'</strong><ul class="ticks small">'+t[2].map(function(x){return "<li>"+TICK+"<span>"+esc(x)+"</span></li>";}).join("")+'</ul><button type="button" class="btn '+(i===1?"btn-primary":"btn-dark")+'" data-report="'+i+'">'+esc((i<2?fill(T("buyReport"),{p:r[0]}).replace(/₹\s*\d+/,"FREE · testing"):fill(T("buyReport"),{p:r[0]})))+'</button></div>';}).join("");
 }
 function buyReport(i){
@@ -1650,6 +1666,61 @@ RENDER.report=function(){
 };
 
 
+
+/* ---------- growth layer: tracking, topic landing, free first chat, live festivals, date reminders ---------- */
+var SID=(function(){try{var v=sessionStorage.getItem("ta-sid");if(!v){v=Math.random().toString(36).slice(2,12);sessionStorage.setItem("ta-sid",v);}return v;}catch(e){return "anon"+Math.random().toString(36).slice(2,8);}})();
+function track(name){
+  try{var body=JSON.stringify({name:name,sid:SID,lang:S.lang,topic:LANDING||"",path:location.pathname});
+    if(navigator.sendBeacon){navigator.sendBeacon("/api/event",new Blob([body],{type:"application/json"}));}
+    else fetch("/api/event",{method:"POST",headers:{"content-type":"application/json"},body:body,keepalive:true});}catch(e){}
+}
+function freeUsed(){try{return localStorage.getItem("ta-free")==="1";}catch(e){return false;}}
+function markFree(){try{localStorage.setItem("ta-free","1");}catch(e){} renderStatic(); if(S.snap)renderResult();}
+var LANDING="";
+var LAND={career:{hl:"Career ke sawaal? Apni free kundli snapshot dekhein",en:"Career questions? See your free kundli snapshot",hi:"करियर के सवाल? अपना फ्री कुंडली स्नैपशॉट देखें"},
+ marriage:{hl:"Shaadi kab hogi? Apni free kundli snapshot dekhein",en:"When will you marry? See your free kundli snapshot",hi:"शादी कब होगी? अपना फ्री कुंडली स्नैपशॉट देखें"},
+ love:{hl:"Love aur rishton ke sawaal? Free kundli snapshot",en:"Love and relationship questions? Free kundli snapshot",hi:"लव और रिश्तों के सवाल? फ्री कुंडली स्नैपशॉट"},
+ money:{hl:"Paisa kab aayega? Apni free kundli snapshot dekhein",en:"When will money come? See your free kundli snapshot",hi:"पैसा कब आएगा? अपना फ्री कुंडली स्नैपशॉट देखें"},
+ abroad:{hl:"Videsh jaana hai? Apni free kundli snapshot dekhein",en:"Moving abroad? See your free kundli snapshot",hi:"विदेश जाना है? अपना फ्री कुंडली स्नैपशॉट देखें"}};
+function applyLanding(){
+  var m=location.pathname.match(/^\/t\/(\w+)/); if(!m)return;
+  var t=m[1]==="foreign"?"abroad":m[1]; if(!LAND[t])return;
+  LANDING=t; S.topic=t;
+  var b=document.createElement("p"); b.className="notice ok"; b.id="landBanner"; b.setAttribute("role","status");
+  var host=document.querySelector("#kundli .tool-body"); if(host)host.insertBefore(b,host.firstChild);
+  paintLanding();
+  setTimeout(function(){var k=$("kundli");if(k)k.scrollIntoView({behavior:"smooth",block:"start"});},400);
+}
+function paintLanding(){var b=$("landBanner");if(b&&LANDING){b.textContent=LAND[LANDING][S.lang]||LAND[LANDING].hl;document.title=b.textContent+" · Times Astro";}}
+/* festivals from the engine */
+function loadFests(){fetch("/api/festivals?days=60").then(function(r){return r.json();}).then(function(a){
+  var skip=/Ekadashi|Pradosh|Sankashti|Amavasya|Purnima$|Sankranti/;var seen={},out=[];
+  a.forEach(function(f){if(skip.test(f.name)&&!/Dev Uthani|Kartik/.test(f.name))return;if(seen[f.name])return;seen[f.name]=1;out.push(f);});
+  LIVE.fests=out.slice(0,8);renderStatic();}).catch(function(){});}
+function festRows(){
+  if(!LIVE.fests||!LIVE.fests.length)return T("fests").map(function(f){return '<li><button type="button" data-svc="fest">'+esc(f)+'<small>'+esc(T("festNote"))+' [—]</small></button></li>';}).join("");
+  return LIVE.fests.map(function(f){var d=new Date(f.date+"T00:00:00");var ds=d.toLocaleDateString(S.lang==="en"?"en-IN":"hi-IN",{day:"numeric",month:"short"});
+    return '<li><button type="button" data-svc="fest">'+esc(f.name)+'<small>'+esc(ds)+'</small></button></li>';}).join("");
+}
+/* date reminders: opt-in with consent, concern from topic, one-tap stop */
+function nudgeBlock(){
+  var L={hl:["Important dates par mujhe reminder chahiye (mahine mein max 2, kabhi bhi STOP)","Reminder on hai. Band karne ke liye dabayein:","Band karein"],
+         en:["Remind me about important dates for my chart (max 2 a month, stop any time)","Reminders are on. Tap to stop:","Stop"],
+         hi:["मेरी कुंडली की ज़रूरी तारीखों पर रिमाइंडर चाहिए (महीने में अधिकतम 2, कभी भी STOP)","रिमाइंडर चालू है। बंद करने के लिए दबाइए:","बंद करें"]}[S.lang]||[];
+  if(S.nudgeId)return '<p class="small" style="color:var(--ok-fg)">'+esc(L[1])+' <button type="button" class="btn-link" data-act="nudgeStop">'+esc(L[2])+'</button></p>';
+  return '<label class="checkline small" for="nudgeCk" style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="nudgeCk"><span>'+esc(L[0])+'</span></label>';
+}
+document.addEventListener("change",function(e){
+  if(!e.target||e.target.id!=="nudgeCk"||!e.target.checked||!S.snap)return;
+  var t=S.topic==="love"?"marriage":S.topic==="abroad"?"foreign":S.topic; var s=S.snap;
+  apiJson("/api/nudge/optin",{name:s.name||"Guest",date:s.dob,time:s.tob||null,place:s.place,concern:t,consent:true}).then(function(d){S.nudgeId=d.id;renderResult();}).catch(function(){e.target.checked=false;toast("Could not save reminder");});
+});
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act=nudgeStop]"); if(b&&S.nudgeId){fetch("/api/nudge/stop/"+S.nudgeId,{method:"POST"}).then(function(){S.nudgeId=null;renderResult();});return;}
+  var c=e.target.closest("[data-svc],[data-buyplan],[data-report],[data-act=buyChat],[data-act=buyCall]"); if(c)track("cta_click");
+},true);
+var __fs=false;document.addEventListener("focusin",function(e){if(!__fs&&e.target.closest&&e.target.closest("#kForm")){__fs=true;track("form_start");}});
+
 /* city autocomplete (datalist) from /api/places */
 (function(){
   var timers={};
@@ -1664,5 +1735,5 @@ RENDER.report=function(){
   }
   ["fPlace","mBoyPlace","mGirlPlace"].forEach(wire);
 })();
-load(); renderStatic(); loadPanchang();
+load(); renderStatic(); loadPanchang(); loadFests(); applyLanding(); track("page_view");
 </script>

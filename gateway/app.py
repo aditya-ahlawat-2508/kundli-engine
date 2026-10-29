@@ -32,6 +32,8 @@ async def lifespan(_a):  # type: ignore[no-untyped-def]
 
 
 app = FastAPI(title="timesastro-gateway", lifespan=lifespan)
+from .extras import router as extras_router  # noqa: E402
+app.include_router(extras_router)
 app.mount("/engine", engine)  # full engine API stays reachable (docs at /engine/docs)
 
 
@@ -241,6 +243,19 @@ def chart_svg(date: str, place: str, time: str | None = None, style: str = "nort
     from kundli.render.common import view_for
     kd, _ = build(Person(date=date, time=time, place=place))
     return Response((north_indian if style == "north" else south_indian).render(view_for(kd, "D1")), media_type="image/svg+xml")
+
+
+@app.get("/t/{topic}")
+def topic_page(topic: str) -> FileResponse:
+    """Topic landing pages (/t/career, /t/marriage, /t/money, /t/foreign): same app, topic preselected client-side."""
+    if topic not in ("career", "marriage", "love", "money", "abroad", "foreign"):
+        raise HTTPException(404, "unknown topic")
+    return FileResponse(STATIC / "index.html")
+
+
+@app.get("/funnel")
+def funnel_page() -> FileResponse:
+    return FileResponse(STATIC / "funnel.html")
 
 
 @app.get("/")

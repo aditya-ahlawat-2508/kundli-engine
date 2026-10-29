@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Funnel</title>
+<style>body{font:15px system-ui;margin:0;padding:16px;background:#fbf7f1;color:#1b1410}table{border-collapse:collapse;width:100%;max-width:760px}td,th{padding:8px 10px;border-bottom:1px solid #e6ddd0;text-align:left}th{font-size:12px;text-transform:uppercase;color:#7a6a58}.bar{height:8px;background:#e8943a;border-radius:4px}input,select,button{font:inherit;padding:6px}</style></head><body>
+<h1>Funnel</h1><p><select id="d"><option>1</option><option selected>7</option><option>30</option></select> days · token <input id="t" type="password"> <button onclick="go()">Load</button></p>
+<div id="o"></div><script>
+function go(){fetch("/api/funnel?days="+d.value+"&token="+encodeURIComponent(t.value)).then(r=>r.ok?r.json():Promise.reject(r.status)).then(j=>{
+o.innerHTML="<table><tr><th>Step</th><th>Users</th><th>Events</th><th>% of visitors</th><th></th></tr>"+j.funnel.map(s=>"<tr><td>"+s.step+"</td><td>"+s.users+"</td><td>"+s.events+"</td><td>"+s.pct_of_visitors+"%</td><td style='width:160px'><div class='bar' style='width:"+Math.min(100,s.pct_of_visitors)+"%'></div></td></tr>").join("")+"</table><p>Landing pages (visitors): "+JSON.stringify(j.landing_topics)+"</p>"}).catch(e=>o.textContent="Error "+e)}
+go();</script></body></html>
