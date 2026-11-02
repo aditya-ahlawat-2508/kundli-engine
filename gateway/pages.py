@@ -26,92 +26,52 @@ SIGNS = [("aries", "Aries", "मेष"), ("taurus", "Taurus", "वृषभ"), 
 SLUGS = [s[0] for s in SIGNS]
 
 CSS = """
-:root{--bg:#F7F6F2;--card:#fff;--fg:#1B1936;--muted:#5B5873;--line:#E4E2EC;--ink:#17143A;--ink2:#26225C;--gold:#F6A21A;--goldink:#8A4F00;--teal:#0B6B6A;--tealbg:#E3F3F1;--band:#EFEDF7;--bad:#B3261E;--onink:#F1F0FA;--mut2:#B9B6D6}
-:root[data-theme=dark]{--bg:#0F0E24;--card:#1A1838;--fg:#F1F0FA;--muted:#AEABC8;--line:#2E2B57;--ink:#0A0918;--ink2:#1A1838;--goldink:#F6B94A;--teal:#6FD3CF;--tealbg:#12312F;--band:#16143A}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0F0E24;--card:#1A1838;--fg:#F1F0FA;--muted:#AEABC8;--line:#2E2B57;--ink:#0A0918;--ink2:#1A1838;--goldink:#F6B94A;--teal:#6FD3CF;--tealbg:#12312F;--band:#16143A}}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 Mukta,"Noto Sans Devanagari",system-ui,sans-serif;padding-bottom:72px}
-a{color:var(--goldink)}:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-header{background:var(--ink);color:var(--onink)}.w{max-width:1040px;margin:0 auto;padding:0 18px}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
-.logo{font-weight:800;font-size:22px;letter-spacing:-.3px;text-decoration:none;color:#fff}.logo b{color:var(--gold)}
-nav{display:flex;gap:18px;align-items:center;font-size:15px}nav a{color:var(--onink);text-decoration:none;opacity:.88}nav a:hover{opacity:1}
-nav .dsk{display:none}@media(min-width:820px){nav .dsk{display:inline}body{padding-bottom:0}.tabs{display:none!important}}
-.tg{background:transparent;border:1px solid #ffffff44;color:#fff;border-radius:10px;min-width:44px;height:40px;font:600 14px Mukta,sans-serif;cursor:pointer}
-.btn,button.btn,button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border:0;border-radius:12px;background:var(--gold);color:#1A1208;font:700 17px Mukta,sans-serif;text-decoration:none;cursor:pointer}
-.btn.sec{background:transparent;color:var(--fg);border:1.5px solid var(--line)}.btn:active{transform:translateY(1px)}
-main{padding:26px 0 40px}h1{font-size:clamp(28px,6.4vw,44px);line-height:1.15;margin:.1em 0 .3em;letter-spacing:-.5px;font-weight:800}
-h2{font-size:clamp(21px,4.4vw,28px);line-height:1.25;margin:1.6em 0 .5em;font-weight:800}h3{margin:0 0 .2em;font-size:19px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:12px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
-.sign{display:block;text-align:center;text-decoration:none;color:var(--fg);padding:16px 8px;background:var(--card);border:1px solid var(--line);border-radius:12px;min-height:64px}
-.sign:hover{border-color:var(--gold)}.sign b{display:block;font-size:19px}.sign span{color:var(--muted);font-size:14px}
-.muted{color:var(--muted);font-size:15px}.bar2{height:10px;background:var(--line);border-radius:6px;overflow:hidden}.bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#E4572E)}
-.row{display:grid;grid-template-columns:84px 1fr 44px;gap:10px;align-items:center;margin:8px 0}
-label{display:block;font-size:15px;margin:12px 0 4px;color:var(--muted);font-weight:600}
-input,select{width:100%;min-height:50px;padding:0 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg);font:inherit}
-input:focus,select:focus{border-color:var(--gold);outline:0}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:9px 6px;border-bottom:1px solid var(--line);text-align:left}
-.pill{display:inline-block;padding:3px 12px;border-radius:99px;font-size:14px;background:var(--band);border:1px solid var(--line);color:var(--fg);text-decoration:none}
-.ai{background:var(--tealbg);color:var(--teal);border-color:transparent;font-weight:700}
-.cta{background:var(--band);border-radius:16px;padding:22px;margin:24px 0;text-align:center}
-footer{background:var(--ink);color:var(--mut2);padding:28px 0;font-size:14px}footer a{color:var(--onink);margin-right:16px}
-.chart svg{max-width:100%;height:auto}.err{background:#FCE9E7;color:var(--bad);padding:12px 14px;border-radius:12px;margin:12px 0}
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-.tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:60px;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--muted)}
-.tabs a svg{width:23px;height:23px}.tabs a.on{color:var(--goldink)}.tabs a.mid span.dot{background:var(--gold);color:#1A1208;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;margin-top:-22px;box-shadow:0 4px 12px #0003}
-/* home */
-.hero{background:var(--ink);color:var(--onink);position:relative;overflow:hidden;padding:30px 0 40px}
-.hero .w{position:relative;z-index:1;display:grid;gap:22px;grid-template-columns:1fr}@media(min-width:820px){.hero .w{grid-template-columns:1.1fr .9fr;align-items:center}}
-.hero h1{color:#fff;font-size:clamp(32px,8vw,54px)}.hero p{color:var(--mut2);margin:.2em 0 0;max-width:34ch}
-.hero .card{background:var(--ink2);border-color:#ffffff22;color:var(--onink)}.hero label{color:var(--mut2)}.hero input{background:#0E0C2A;border-color:#ffffff30;color:#fff}
-.hero .chartbg{position:absolute;right:-60px;top:-40px;width:420px;opacity:.28;z-index:0}.hero .chartbg path{stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.4s ease-out forwards}
-@keyframes draw{to{stroke-dashoffset:0}}@media(prefers-reduced-motion:reduce){.hero .chartbg path{animation:none;stroke-dashoffset:0}}
-.today{display:flex;gap:10px 22px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:-22px 0 0;position:relative;z-index:2;font-size:15px}
-.today b{color:var(--fg)}.today span{color:var(--muted)}
-.ast{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center}.ast img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)}
-.price{font-weight:800;font-size:20px}.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.tile{display:flex;align-items:center;gap:10px;min-height:56px;padding:0 14px;background:var(--card);border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--fg);font-weight:700}
-.tile:hover{border-color:var(--gold)}.prom{display:grid;gap:16px 28px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.prom div{padding:2px 0}
-@media(max-width:560px){.two{grid-template-columns:1fr 1fr}.row{grid-template-columns:70px 1fr 40px}}
+:root{--bg:#FFFBF5;--card:#fff;--fg:#1A1714;--muted:#5E574F;--line:#EADFD1;--acc:#F28C1E;--ink:#B45309;--band:#FDF4E8}
+:root[data-theme=dark]{--bg:#13100E;--card:#211B17;--fg:#F4EEE8;--muted:#BDB2A6;--line:#3A312A;--acc:#F29A3A;--ink:#F5B26B;--band:#1C1714}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#13100E;--card:#211B17;--fg:#F4EEE8;--muted:#BDB2A6;--line:#3A312A;--acc:#F29A3A;--ink:#F5B26B;--band:#1C1714}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans Devanagari",Roboto,sans-serif}
+a{color:var(--ink)}header{border-bottom:1px solid var(--line);background:var(--card)}
+.w{max-width:960px;margin:0 auto;padding:0 16px}.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px;text-decoration:none;color:var(--fg)}.logo b{color:var(--acc)}
+nav{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;align-items:center}nav a{text-decoration:none;color:var(--fg)}nav a:hover{color:var(--ink)}
+button,.btn{background:var(--acc);color:#1A1208;border:0;border-radius:10px;padding:11px 18px;font:600 15px inherit;cursor:pointer;text-decoration:none;display:inline-block}
+.ghost{background:transparent;color:var(--fg);border:1px solid var(--line);padding:6px 10px;border-radius:8px;font-size:13px}
+main{padding:24px 0 48px}h1{font-size:28px;line-height:1.25;margin:.2em 0 .4em}h2{font-size:20px;margin:1.4em 0 .4em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sign{display:block;text-align:center;text-decoration:none;color:var(--fg);padding:14px 8px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.sign:hover{border-color:var(--acc)}.sign b{display:block;font-size:17px}.sign span{color:var(--muted);font-size:13px}
+.muted{color:var(--muted);font-size:14px}.bar2{height:10px;background:var(--line);border-radius:6px;overflow:hidden}.bar2 i{display:block;height:100%;background:var(--acc)}
+.row{display:grid;grid-template-columns:90px 1fr 44px;gap:10px;align-items:center;margin:8px 0}
+label{display:block;font-size:14px;margin:10px 0 4px;color:var(--muted)}input,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);font:inherit}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:13px;background:var(--band);border:1px solid var(--line)}
+.cta{background:var(--band);border:1px solid var(--line);border-radius:14px;padding:18px;margin:22px 0;text-align:center}
+footer{border-top:1px solid var(--line);padding:22px 0;font-size:13px;color:var(--muted)}footer a{margin-right:14px}
+.chart svg{max-width:100%;height:auto}.err{background:#FCE9E7;color:#A0281C;padding:10px 12px;border-radius:10px;margin:10px 0}
+@media(max-width:560px){.two{grid-template-columns:1fr}.row{grid-template-columns:70px 1fr 40px}h1{font-size:23px}}
 """
 
 THEME_JS = """<script>(function(){try{var t=localStorage.getItem('ta-theme');if(t)document.documentElement.dataset.theme=t}catch(e){}})();
 function tt(){var d=document.documentElement,n=(d.dataset.theme==='dark'||(!d.dataset.theme&&matchMedia('(prefers-color-scheme:dark)').matches))?'light':'dark';d.dataset.theme=n;try{localStorage.setItem('ta-theme',n)}catch(e){}}</script>"""
 
 
-ICON = {
-    "home": '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
-    "kundli": '<path d="M12 2l10 10-10 10L2 12z"/><path d="M2 12h20M12 2v20"/>',
-    "star": '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
-    "chat": '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
-    "wallet": '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/>'}
-
-
-def ic(n: str) -> str:
-    return f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICON[n]}</svg>'
-
-
-def page(title: str, body: str, desc: str = "", path: str = "", lang: str = "en", wide: bool = False) -> HTMLResponse:
+def page(title: str, body: str, desc: str = "", path: str = "", lang: str = "en") -> HTMLResponse:
     hi = lang == "hi"
-    nav = [("/rashifal" + ("?lang=hi" if hi else ""), "राशिफल" if hi else "Rashifal"), ("/kundli", "Free Kundli"), ("/tools/muhurat", "Muhurat"),
-           ("/panchang/delhi", "Panchang"), ("/astrologers", "Astrologers")]
-    links = "".join(f'<a class="dsk" href="{u}">{t}</a>' for u, t in nav)
+    nav = [("/rashifal" + ("?lang=hi" if hi else ""), "राशिफल" if hi else "Rashifal"), ("/kundli", "Free Kundli"),
+           ("/#milan", "Kundli Milan"), ("/panchang/delhi", "Panchang"), ("/tools/moon-sign", "Moon Sign"), ("/tools/muhurat", "Muhurat"), ("/astrologers", "Astrologers"), ("/wallet", "Wallet"), ("/", "Chat with Shreya")]
+    links = "".join(f'<a href="{u}">{t}</a>' for u, t in nav)
     foot = " ".join(f'<a href="{u}">{t}</a>' for u, t in
                     [("/about", "About"), ("/contact", "Contact"), ("/privacy", "Privacy"), ("/terms", "Terms"), ("/refund", "Refund policy")])
-    tabs = [("/", "Home", "home"), ("/kundli", "Kundli", "kundli"), ("/app", "Ask", "chat"), ("/rashifal", "Rashifal", "star"), ("/wallet", "Wallet", "wallet")]
-    tb = "".join(f'<a href="{u}" class="{"on" if (path == u or (u != "/" and path.startswith(u))) else ""}{" mid" if k == "chat" else ""}">'
-                 + (f'<span class="dot">{ic(k)}</span>' if k == "chat" else ic(k)) + f"<span>{t}</span></a>" for u, t, k in tabs)
-    inner = body if wide else f'<div class="w">{body}</div>'
     return HTMLResponse(f"""<!doctype html><html lang="{lang}"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{e(title)} | Times Astro</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)} | Times Astro</title>
 <meta name="description" content="{e(desc)}"><link rel="canonical" href="{BASE}{path}">
-<meta name="theme-color" content="#17143A"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700;800&display=swap">{THEME_JS}<style>{CSS}</style></head><body>
+<meta name="theme-color" content="#F28C1E">{THEME_JS}<style>{CSS}</style></head><body>
 <header><div class="w bar"><a class="logo" href="/">Times<b>Astro</b></a><nav>{links}
-<a href="/login" class="dsk">Login</a><button class="tg" onclick="tt()" aria-label="Switch day or night theme">☀/☾</button></nav></div></header>
-<main{' style="padding:0"' if wide else ''}>{inner}</main>
-<footer><div class="w"><p>{foot}</p><p>Shreya and Jyoti are AI astrologers. Astrology is guidance for reflection, not medical, legal or financial advice. Calculations use the Swiss Ephemeris (Lahiri ayanamsa).</p></div></footer>
-<nav class="tabs" aria-label="Main">{tb}</nav></body></html>""")
+<button class="ghost" onclick="tt()" aria-label="Toggle day / night">☀/☾</button></nav></div></header>
+<main><div class="w">{body}</div></main>
+<footer><div class="w"><p>{foot}</p><p>Astrology is guidance for reflection, not a substitute for medical, legal or financial advice.
+Calculations use the Swiss Ephemeris (Lahiri ayanamsa).</p></div></footer></body></html>""")
 
 
 # ---------------------------------------------------------------- trust pages
@@ -426,70 +386,3 @@ async def muhurat(kind: str = "marriage", city: str = "delhi") -> HTMLResponse:
             f'<div class="card"><h2 style="margin-top:0">{title}: next dates</h2><div style="overflow-x:auto"><table><tr><th>Date</th><th>Day</th><th>Nakshatra</th><th>Tithi</th></tr>{rows}</table></div>'
             f'<p class="muted">Nakshatra and tithi are taken at sunrise for {city.title()}. They can change during the day.</p></div>')
     return page(f"{title} Muhurat", body, f"Upcoming auspicious dates for {title.lower()}.", "/tools/muhurat")
-
-
-# ---------------------------------------------------------------- new home page
-HOME = {
-    "hl": {"h1": "Aapki kundli. Free. Abhi.", "sub": "Janam ki details daaliye, 10 second mein poori kundli. Login nahi chahiye.",
-           "dob": "Janam tithi", "tob": "Samay (pata ho to)", "pob": "Janam sthan (shehar)", "go": "Meri kundli dekhein", "fine": "Free · Private · Bina login",
-           "ask": "Astrologer se poochiye", "ask_s": "Pehla jawab free. Uske baad kitna lagega, shuru karne se pehle dikhega.",
-           "chat": "Shreya se chat", "call": "Jyoti se call", "free1": "Pehla jawab free", "permin": "per minute",
-           "topics": "Aap kya jaanna chahte hain?", "ras": "Aaj ka rashifal", "ras_s": "Apni rashi chuniye. Aaj ke grahon se gina gaya hai.",
-           "tools": "Aur free tools", "why": "Hamara vaada", "p1": "Keemat pehle", "p1d": "Chat ya call shuru karne se pehle aapko rate aur kul kharch dikhta hai. Koi chhupa charge nahi.",
-           "p2": "AI hai, saaf likha hai", "p2d": "Shreya aur Jyoti AI astrologers hain. Yeh har jagah likha hota hai, paise dene se pehle bhi.",
-           "p3": "Refund wahin, jahan se aaya", "p3d": "Hamari galti se chat ya call nahi hui to paisa original payment method mein wapas.",
-           "p4": "Spam nahi", "p4d": "Reminder sirf tab, jab aap haan kahein. Mahine mein 2 se zyada nahi, aur STOP likhte hi band."},
-    "en": {"h1": "Your kundli. Free. Right now.", "sub": "Enter your birth details and see your full kundli in 10 seconds. No login.",
-           "dob": "Date of birth", "tob": "Time of birth (if known)", "pob": "Place of birth (city)", "go": "Show my kundli", "fine": "Free · Private · No login",
-           "ask": "Ask an astrologer", "ask_s": "Your first answer is free. After that, you see the price before you start.",
-           "chat": "Chat with Shreya", "call": "Call Jyoti", "free1": "First answer free", "permin": "per minute",
-           "topics": "What do you want to know?", "ras": "Today’s rashifal", "ras_s": "Pick your sign. Calculated from today’s planets.",
-           "tools": "More free tools", "why": "Our promises", "p1": "Price first", "p1d": "Before a chat or call starts, you see the rate and the total. No hidden charges.",
-           "p2": "AI, clearly labelled", "p2d": "Shreya and Jyoti are AI astrologers. We say so everywhere, including before you pay.",
-           "p3": "Refunds to where it came from", "p3d": "If a chat or call fails on our side, the money goes back to your original payment method.",
-           "p4": "No spam", "p4d": "Reminders only if you say yes. At most 2 a month, and STOP ends them."}}
-TOPICS = [("💼", "Career", "कैरियर", "/t/career"), ("💍", "Marriage", "शादी", "/t/marriage"), ("❤️", "Love", "प्यार", "/t/love"),
-          ("💰", "Money", "पैसा", "/t/money"), ("✈️", "Videsh", "विदेश", "/t/foreign"), ("📅", "Muhurat", "मुहूर्त", "/tools/muhurat")]
-CHART = ('<svg class="chartbg" viewBox="0 0 400 400" fill="none" stroke="#F6A21A" stroke-width="2" aria-hidden="true">'
-         '<path d="M10 10H390V390H10Z M10 10L390 390 M390 10L10 390 M200 10L390 200L200 390L10 200Z"/></svg>')
-
-
-@router.get("/", response_class=HTMLResponse, include_in_schema=False)
-async def home(lang: str = "hl") -> HTMLResponse:
-    lang = lang if lang in HOME else "hl"
-    t = HOME[lang]
-    en = lang == "en"
-    try:
-        from .app import panchang
-        d = await panchang(place="Delhi")
-        today = (f'<div class="today"><span>{"Today, Delhi" if en else "Aaj, Delhi"}</span><b>{e(d["tithi"].title())}</b><span>Nakshatra <b>{e(d["nakshatra"])}</b></span>'
-                 f'<span>{"Sunrise" if en else "Suryoday"} <b>{d["sunrise"]}</b></span><a href="/panchang/delhi">Panchang</a></div>')
-    except Exception:  # noqa: BLE001 - home must render even if the engine is slow
-        today = ""
-    hero = (f'<section class="hero">{CHART}<div class="w"><div><h1>{t["h1"]}</h1><p>{t["sub"]}</p></div>'
-            f'<form class="card" method="get" action="/kundli"><label for="d">{t["dob"]}</label><input id="d" type="date" name="date" required>'
-            f'<label for="tm">{t["tob"]}</label><input id="tm" type="time" name="time">'
-            f'<label for="pl">{t["pob"]}</label><input id="pl" name="place" required list="pls" autocomplete="off" placeholder="Jaipur">'
-            f'<datalist id="pls"></datalist><p style="margin:14px 0 6px"><button class="btn" style="width:100%">{t["go"]}</button></p>'
-            f'<div class="muted" style="color:var(--mut2);text-align:center">{t["fine"]}</div></form></div></section>')
-    def ast(name, img, role, price, cta, href):
-        return (f'<div class="card"><div class="ast"><img src="/static/{img}" alt="{name}" width="76" height="76"><div><h3>{name} <span class="pill ai">AI</span></h3>'
-                f'<div class="muted">{role}</div></div></div><p style="margin:14px 0 4px"><span class="price">{price}</span> <span class="muted">· {t["free1"]}</span></p>'
-                f'<a class="btn" style="width:100%" href="{href}">{cta}</a></div>')
-    cards = ('<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">'
-             + ast("Shreya", "shreya.webp", "Chat · career, shaadi, paisa" if not en else "Chat · career, marriage, money", "₹299 / 30 min", t["chat"], "/app?svc=chat")
-             + ast("Jyoti", "jyoti.webp", "Call · seedhi baat" if not en else "Call · talk it through", "₹299 / 15 min", t["call"], "/app?svc=call") + "</div>")
-    topics = '<div class="tiles">' + "".join(f'<a class="tile" href="{u}"><span aria-hidden="true">{i}</span>{n}</a>' for i, n, _h, u in TOPICS) + "</div>"
-    signs = '<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(104px,1fr))">' + "".join(
-        f'<a class="sign" href="/rashifal/{s}"><b>{h}</b><span>{n}</span></a>' for s, n, h in SIGNS) + "</div>"
-    tools = '<div class="tiles">' + "".join(f'<a class="tile" href="{u}">{n}</a>' for n, u in [
-        ("Kundli Milan", "/app#milan"), ("Panchang", "/panchang/delhi"), ("Moon sign", "/tools/moon-sign"), ("Muhurat", "/tools/muhurat"), ("Astrologers", "/astrologers")]) + "</div>"
-    prom = '<div class="prom">' + "".join(f"<div><h3>{t[k]}</h3><div class='muted'>{t[k + 'd']}</div></div>" for k in ("p1", "p2", "p3", "p4")) + "</div>"
-    sw = f'<a class="pill" href="/?lang={"hl" if en else "en"}">{"Hinglish" if en else "English"}</a>'
-    body = (hero + f'<div class="w">{today}<h2>{t["ask"]}</h2><p class="muted" style="margin-top:-6px">{t["ask_s"]}</p>{cards}'
-            f'<h2>{t["topics"]}</h2>{topics}<h2>{t["ras"]}</h2><p class="muted" style="margin-top:-6px">{t["ras_s"]}</p>{signs}'
-            f'<h2>{t["tools"]}</h2>{tools}<h2>{t["why"]}</h2><div class="card">{prom}</div><p>{sw}</p></div>'
-            "<script>(function(){var p=document.getElementById('pl'),l=document.getElementById('pls'),tm;p.addEventListener('input',function(){clearTimeout(tm);var q=p.value;if(q.length<2)return;"
-            "tm=setTimeout(function(){fetch('/api/places?q='+encodeURIComponent(q)).then(function(r){return r.json()}).then(function(a){l.innerHTML=(a.places||a||[]).slice(0,6).map(function(x){return '<option value=\"'+(x.label||x.name||x)+'\">'}).join('')}).catch(function(){})},250)})})();</script>")
-    return page("Free Kundli, Rashifal, Panchang and AI Astrologers", body,
-                "Free kundli in 10 seconds, daily rashifal, panchang, kundli milan. Chat with Shreya or call Jyoti, AI astrologers. Prices shown upfront.", "/", "en" if en else "hi", wide=True)
