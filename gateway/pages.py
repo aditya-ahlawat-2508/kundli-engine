@@ -59,7 +59,7 @@ function tt(){var d=document.documentElement,n=(d.dataset.theme==='dark'||(!d.da
 def page(title: str, body: str, desc: str = "", path: str = "", lang: str = "en") -> HTMLResponse:
     hi = lang == "hi"
     nav = [("/rashifal" + ("?lang=hi" if hi else ""), "राशिफल" if hi else "Rashifal"), ("/kundli", "Free Kundli"),
-           ("/#milan", "Kundli Milan"), ("/#panchang", "Panchang"), ("/", "Chat with Shreya")]
+           ("/#milan", "Kundli Milan"), ("/panchang/delhi", "Panchang"), ("/tools/moon-sign", "Moon Sign"), ("/astrologers", "Astrologers"), ("/", "Chat with Shreya")]
     links = "".join(f'<a href="{u}">{t}</a>' for u, t in nav)
     foot = " ".join(f'<a href="{u}">{t}</a>' for u, t in
                     [("/about", "About"), ("/contact", "Contact"), ("/privacy", "Privacy"), ("/terms", "Terms"), ("/refund", "Refund policy")])
@@ -291,3 +291,56 @@ def kundli_page(request: Request, name: str = "", date: str = "", time: str = ""
             f'<div class="cta"><b>Want to know what this means for your career, marriage or money?</b><p class="muted">First answer is free.</p>'
             f'<a class="btn" href="/">Ask Shreya</a> <a class="btn" href="/api/report.pdf?{q}">Download PDF</a></div>')
     return page("Your Kundli", body, "Free janam kundli.", "/kundli")
+
+
+# ---------------------------------------------------------------- astrologers, tools, city panchang
+@router.get("/astrologers", response_class=HTMLResponse, include_in_schema=False)
+def astrologers() -> HTMLResponse:
+    def card(n, role, price, langs, topics, cta):
+        return (f'<div class="card"><h2 style="margin:0">{n} <span class="pill">AI astrologer</span></h2><p class="muted">{role}</p>'
+                f'<p><b>{price}</b> · {langs}<br>{topics}</p><a class="btn" href="/">{cta}</a></div>')
+    body = ("<h1>Our astrologers</h1><p class='muted'>Both are AI astrologers. They read your computed kundli and today’s transits. First answer is free.</p>"
+            + card("Shreya", "Chat · career, marriage, money, relationships", "₹299 / 30 min", "Hindi, English, Hinglish", "Also: plans from ₹49", "Chat with Shreya")
+            + card("Jyoti", "Call · talk it through in her voice", "₹299 / 15 min", "Hindi, English, Hinglish", "Best for a quick, focused question", "Call Jyoti"))
+    return page("Astrologers", body, "Chat with Shreya or call Jyoti, AI astrologers on Times Astro.", "/astrologers")
+
+
+@router.get("/tools/moon-sign", response_class=HTMLResponse, include_in_schema=False)
+def moon_sign(date: str = "", time: str = "", place: str = "") -> HTMLResponse:
+    form = f"""<h1>Moon Sign (Rashi) Calculator</h1><p class="muted">Vedic moon sign, nakshatra and sun sign from your birth details.</p>
+<form class="card" method="get"><div class="two"><div><label>Date of birth</label><input type="date" name="date" value="{e(date)}" required></div>
+<div><label>Time of birth</label><input type="time" name="time" value="{e(time)}"></div></div>
+<label>Place of birth</label><input name="place" value="{e(place)}" required maxlength="120"><p></p><button>Find my rashi</button></form>"""
+    if not (date and place):
+        return page("Moon Sign Calculator", form, "Find your Vedic moon sign (rashi) and nakshatra.", "/tools/moon-sign")
+    from .app import Person, build
+    try:
+        kd, pl = build(Person(date=date, time=time or None, place=place))
+    except HTTPException:
+        return page("Moon Sign Calculator", form + '<div class="err">Could not read those details. Check the date and place.</div>', "", "/tools/moon-sign")
+    k = to_dict(kd)
+    pm = {p["name"]: p for p in k["planets"]}
+    note = "" if time else '<p class="muted">No time given, used 12:00. The Moon changes sign about every 2.5 days, so this is usually right but not on a sign-change day.</p>'
+    res = (f'<div class="card"><h2 style="margin-top:0">Your Moon sign: {e(pm["Moon"]["sign_name"])}</h2><p>Nakshatra: <b>{e(pm["Moon"]["nakshatra_name"])}</b> pada {pm["Moon"]["pada"]}'
+           f'<br>Vedic Sun sign: <b>{e(pm["Sun"]["sign_name"])}</b><br>Lagna: <b>{e(k["lagna"]["sign_name"])}</b></p>{note}'
+           f'<a class="btn" href="/kundli?date={e(date)}&time={e(time)}&place={e(place)}">See full kundli</a></div>')
+    return page("Moon Sign Calculator", form + res, "Your Vedic moon sign.", "/tools/moon-sign")
+
+
+CITIES = ["delhi", "mumbai", "bengaluru", "kolkata", "chennai", "hyderabad", "pune", "jaipur", "lucknow", "ahmedabad", "chandigarh", "patna", "bhopal", "indore", "varanasi", "kanpur", "nagpur", "surat", "ranchi", "guwahati"]
+
+
+@router.get("/panchang/{city}", response_class=HTMLResponse, include_in_schema=False)
+async def city_panchang(city: str) -> HTMLResponse:
+    if city not in CITIES:
+        raise HTTPException(404)
+    from .app import panchang
+    d = await panchang(place=city.title())
+    rows = [("Date", d["date"] + " · " + d["vara"]), ("Tithi", f'{d["tithi"]} (till {d["tithi_end"]})'), ("Nakshatra", f'{d["nakshatra"]} (till {d["nakshatra_end"]})'),
+            ("Yoga", d["yoga"]), ("Karana", d["karana"]), ("Hindu month", d["month"]), ("Sunrise", d["sunrise"]), ("Sunset", d["sunset"]), ("Moonrise", d["moonrise"])]
+    if d["festivals"]:
+        rows.append(("Festival", ", ".join(d["festivals"])))
+    t = "".join(f"<tr><td>{a}</td><td><b>{e(str(b))}</b></td></tr>" for a, b in rows if b and b != "None")
+    links = " ".join(f'<a class="pill" href="/panchang/{c}">{c.title()}</a>' for c in CITIES)
+    body = f'<h1>Aaj ka Panchang: {city.title()}</h1><div class="card"><table>{t}</table></div><p class="muted">Times are local for {city.title()}.</p><h2>Other cities</h2><p>{links}</p>'
+    return page(f"Panchang today in {city.title()}", body, f"Today's panchang for {city.title()}: tithi, nakshatra, yoga, sunrise and sunset.", f"/panchang/{city}")

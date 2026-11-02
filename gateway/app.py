@@ -317,8 +317,8 @@ def robots() -> Response:
 
 @app.get("/sitemap.xml")
 def sitemap() -> Response:
-    from .pages import SLUGS
-    u = ["/", "/kundli", "/rashifal", "/about", "/contact", "/privacy", "/terms", "/refund"] + [f"/rashifal/{s}" for s in SLUGS] + \
+    from .pages import CITIES, SLUGS
+    u = ["/", "/kundli", "/rashifal", "/about", "/contact", "/privacy", "/terms", "/refund"] + [f"/rashifal/{s}" for s in SLUGS] + ["/astrologers", "/tools/moon-sign"] + [f"/panchang/{c}" for c in CITIES] + \
         [f"/t/{t}" for t in ("career", "marriage", "love", "money", "abroad")]
     body = "".join(f"<url><loc>https://times-astro-live.onrender.com{p}</loc></url>" for p in u)
     return Response(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>', media_type="application/xml")
