@@ -8,6 +8,7 @@ from pathlib import Path
 import httpx
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, Response
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from kundli import ops
@@ -38,6 +39,7 @@ app.include_router(extras_router)
 app.include_router(pages_router)
 from .account import router as account_router  # noqa: E402
 app.include_router(account_router)
+app.mount("/static", StaticFiles(directory=STATIC), name="static")
 app.mount("/engine", engine)  # full engine API stays reachable (docs at /engine/docs)
 
 
@@ -320,7 +322,7 @@ def robots() -> Response:
 @app.get("/sitemap.xml")
 def sitemap() -> Response:
     from .pages import CITIES, SLUGS
-    u = ["/", "/kundli", "/rashifal", "/about", "/contact", "/privacy", "/terms", "/refund"] + [f"/rashifal/{s}" for s in SLUGS] + ["/astrologers", "/tools/moon-sign", "/tools/muhurat", "/login"] + [f"/panchang/{c}" for c in CITIES] + \
+    u = ["/", "/app", "/kundli", "/rashifal", "/about", "/contact", "/privacy", "/terms", "/refund"] + [f"/rashifal/{s}" for s in SLUGS] + ["/astrologers", "/tools/moon-sign", "/tools/muhurat", "/login"] + [f"/panchang/{c}" for c in CITIES] + \
         [f"/t/{t}" for t in ("career", "marriage", "love", "money", "abroad")]
     body = "".join(f"<url><loc>https://times-astro-live.onrender.com{p}</loc></url>" for p in u)
     return Response(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>', media_type="application/xml")
@@ -331,6 +333,6 @@ def funnel_page() -> FileResponse:
     return FileResponse(STATIC / "funnel.html")
 
 
-@app.get("/")
-def home() -> FileResponse:
+@app.get("/app")
+def spa() -> FileResponse:
     return FileResponse(STATIC / "index.html")
