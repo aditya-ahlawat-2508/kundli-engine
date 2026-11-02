@@ -59,7 +59,7 @@ function tt(){var d=document.documentElement,n=(d.dataset.theme==='dark'||(!d.da
 def page(title: str, body: str, desc: str = "", path: str = "", lang: str = "en") -> HTMLResponse:
     hi = lang == "hi"
     nav = [("/rashifal" + ("?lang=hi" if hi else ""), "राशिफल" if hi else "Rashifal"), ("/kundli", "Free Kundli"),
-           ("/#milan", "Kundli Milan"), ("/panchang/delhi", "Panchang"), ("/tools/moon-sign", "Moon Sign"), ("/astrologers", "Astrologers"), ("/", "Chat with Shreya")]
+           ("/#milan", "Kundli Milan"), ("/panchang/delhi", "Panchang"), ("/tools/moon-sign", "Moon Sign"), ("/tools/muhurat", "Muhurat"), ("/astrologers", "Astrologers"), ("/wallet", "Wallet"), ("/", "Chat with Shreya")]
     links = "".join(f'<a href="{u}">{t}</a>' for u, t in nav)
     foot = " ".join(f'<a href="{u}">{t}</a>' for u, t in
                     [("/about", "About"), ("/contact", "Contact"), ("/privacy", "Privacy"), ("/terms", "Terms"), ("/refund", "Refund policy")])
@@ -336,7 +336,7 @@ async def city_panchang(city: str) -> HTMLResponse:
         raise HTTPException(404)
     from .app import panchang
     d = await panchang(place=city.title())
-    rows = [("Date", d["date"] + " · " + d["vara"]), ("Tithi", f'{d["tithi"]} (till {d["tithi_end"]})'), ("Nakshatra", f'{d["nakshatra"]} (till {d["nakshatra_end"]})'),
+    rows = [("Date", d["date"] + " · " + WEEKDAY[dt.date.fromisoformat(d["date"]).weekday()][0]), ("Tithi", f'{d["tithi"]} (till {d["tithi_end"]})'), ("Nakshatra", f'{d["nakshatra"]} (till {d["nakshatra_end"]})'),
             ("Yoga", d["yoga"]), ("Karana", d["karana"]), ("Hindu month", d["month"]), ("Sunrise", d["sunrise"]), ("Sunset", d["sunset"]), ("Moonrise", d["moonrise"])]
     if d["festivals"]:
         rows.append(("Festival", ", ".join(d["festivals"])))
@@ -344,3 +344,45 @@ async def city_panchang(city: str) -> HTMLResponse:
     links = " ".join(f'<a class="pill" href="/panchang/{c}">{c.title()}</a>' for c in CITIES)
     body = f'<h1>Aaj ka Panchang: {city.title()}</h1><div class="card"><table>{t}</table></div><p class="muted">Times are local for {city.title()}.</p><h2>Other cities</h2><p>{links}</p>'
     return page(f"Panchang today in {city.title()}", body, f"Today's panchang for {city.title()}: tithi, nakshatra, yoga, sunrise and sunset.", f"/panchang/{city}")
+
+
+# ---------------------------------------------------------------- muhurat finder (INDICATIVE: rules not astrologer-verified)
+MUH = {
+    "marriage": ("Marriage (Vivah)", {"Rohini", "Mrigashira", "Magha", "Uttara Phalguni", "Hasta", "Swati", "Anuradha", "Mula", "Uttara Ashadha", "Uttara Bhadrapada", "Revati"}),
+    "griha-pravesh": ("Griha Pravesh (house warming)", {"Rohini", "Mrigashira", "Uttara Phalguni", "Uttara Ashadha", "Uttara Bhadrapada", "Anuradha", "Dhanishta", "Shatabhisha", "Revati"}),
+    "vehicle": ("Vehicle purchase", {"Ashwini", "Rohini", "Punarvasu", "Pushya", "Hasta", "Anuradha", "Shravana", "Revati"}),
+}
+GOOD_DAYS = {"Monday", "Wednesday", "Thursday", "Friday", "Moon", "Mercury", "Jupiter", "Venus"}  # engine returns the weekday lord
+RIKTA = ("Chaturthi", "Navami", "Chaturdashi", "Amavasya")
+_pc: dict = {}
+
+
+@router.get("/tools/muhurat", response_class=HTMLResponse, include_in_schema=False)
+async def muhurat(kind: str = "marriage", city: str = "delhi") -> HTMLResponse:
+    from .app import panchang
+    if kind not in MUH:
+        kind = "marriage"
+    if city not in CITIES:
+        city = "delhi"
+    title, naks = MUH[kind]
+    today = dt.date.today()
+    found = []
+    for n in range(45):
+        d = (today + dt.timedelta(days=n)).isoformat()
+        key = (d, city)
+        if key not in _pc:
+            _pc[key] = await panchang(date=d, place=city.title())
+        p = _pc[key]
+        if p["vara"] in GOOD_DAYS and p["nakshatra"] in naks and not any(t in p["tithi"] for t in RIKTA):
+            found.append(p)
+        if len(found) >= 10:
+            break
+    opts = "".join(f'<option value="{k}"{" selected" if k == kind else ""}>{v[0]}</option>' for k, v in MUH.items())
+    copts = "".join(f'<option value="{c}"{" selected" if c == city else ""}>{c.title()}</option>' for c in CITIES)
+    rows = "".join(f'<tr><td>{p["date"]}</td><td>{WEEKDAY[dt.date.fromisoformat(p["date"]).weekday()][0]}</td><td>{e(p["nakshatra"])}</td><td>{e(p["tithi"])}</td></tr>' for p in found) or "<tr><td colspan=4>No matching day in the next 45 days.</td></tr>"
+    body = (f'<h1>Shubh Muhurat Finder</h1><div class="err" style="background:var(--band);color:var(--fg)"><b>Indicative only.</b> Days are picked by simple rules (good weekday, auspicious nakshatra, no Rikta tithi) and have not been verified by a pandit. '
+            f'Check the exact time with your family astrologer before you fix a date.</div>'
+            f'<form class="card" method="get"><div class="two"><div><label>For</label><select name="kind">{opts}</select></div><div><label>City</label><select name="city">{copts}</select></div></div><p></p><button>Find dates</button></form>'
+            f'<div class="card"><h2 style="margin-top:0">{title}: next dates</h2><div style="overflow-x:auto"><table><tr><th>Date</th><th>Day</th><th>Nakshatra</th><th>Tithi</th></tr>{rows}</table></div>'
+            f'<p class="muted">Nakshatra and tithi are taken at sunrise for {city.title()}. They can change during the day.</p></div>')
+    return page(f"{title} Muhurat", body, f"Upcoming auspicious dates for {title.lower()}.", "/tools/muhurat")
