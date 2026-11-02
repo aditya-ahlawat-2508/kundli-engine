@@ -1283,8 +1283,25 @@ function detectLang(t){
   if(/^[\x00-\x7F\s]+$/.test(t)&&/\b(the|my|will|when|what|how|is|are|should|can|job|marriage|money)\b/i.test(t))return "en";
   return S.lang;
 }
+var LLM=false;
+fetch("/api/config").then(function(r){return r.json();}).then(function(c){LLM=!!c.llm;}).catch(function(){});
+function scriptedReply(text){var __prev=S.lang; S.lang=detectLang(text); try{ reply2(text); }finally{ S.lang=__prev; }}
 function reply(text){
-  var __prev=S.lang; S.lang=detectLang(text); try{ reply2(text); }finally{ S.lang=__prev; }
+  var d=overlay.data;
+  if(!(LLM&&S.snap)||detectTopic(text)==="distress"){scriptedReply(text);return;}
+  var msgs=d.msgs.filter(function(m){return m.who==="u"||m.who==="s";}).map(function(m){return {role:m.who==="u"?"user":"assistant",content:m.text};});
+  while(msgs.length&&msgs[0].role!=="user")msgs.shift();
+  d.typing=true;renderChatBody();
+  var sn=S.snap;
+  fetch("/api/chat",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({sid:SID,messages:msgs,profile:{name:sn.name||"",date:sn.dob,time:sn.tob||null,place:sn.place},remaining:d.remaining})})
+   .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+   .then(function(j){
+     var i=0;(function next(){
+       if(overlay.type!=="chat")return;
+       d.typing=false;d.msgs.push({who:"s",text:j.bubbles[i]});i++;renderChatBody();
+       if(i<j.bubbles.length){d.typing=true;renderChatBody();setTimeout(next,900+Math.min(j.bubbles[i].length*10,1400));}
+     })();
+   }).catch(function(){d.typing=false;scriptedReply(text);});
 }
 function reply2(text){
   var d=overlay.data,topic=detectTopic(text),out;

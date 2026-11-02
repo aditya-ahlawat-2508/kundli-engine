@@ -3,6 +3,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends libpango-1.0-0 
 RUN pip install --no-cache-dir uv
 WORKDIR /app
 COPY . .
-RUN uv sync --no-dev --frozen || uv sync --no-dev
+RUN uv sync --no-dev --extra llm --frozen || uv sync --no-dev --extra llm
 ENV PATH="/app/.venv/bin:$PATH"
 CMD ["sh","-c","uvicorn gateway.app:app --host 0.0.0.0 --port ${PORT:-8000}"]

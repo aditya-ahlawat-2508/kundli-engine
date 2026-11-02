@@ -125,7 +125,7 @@ def occupants(k: dict, h: int) -> list[str]:
 def config() -> dict:
     """Public settings. Set WA_NUMBER (digits with country code, e.g. 919876543210) on Render to route to your WhatsApp."""
     import os
-    return {"wa_number": os.environ.get("WA_NUMBER", "")}
+    return {"wa_number": os.environ.get("WA_NUMBER", ""), "llm": bool(os.environ.get("ANTHROPIC_API_KEY") or (os.environ.get("AZURE_OPENAI_API_KEY") and os.environ.get("AZURE_OPENAI_ENDPOINT")))}
 
 
 @app.get("/api/health")
@@ -250,6 +250,54 @@ def chart_svg(date: str, place: str, time: str | None = None, style: str = "nort
     from kundli.render.common import view_for
     kd, _ = build(Person(date=date, time=time, place=place))
     return Response((north_indian if style == "north" else south_indian).render(view_for(kd, "D1")), media_type="image/svg+xml")
+
+
+class ChatReq(BaseModel):
+    sid: str = Field(max_length=40)
+    messages: list[dict]
+    profile: Person
+    remaining: int = 1800
+
+
+@app.post("/api/chat")
+def chat(req: ChatReq) -> dict:
+    """Shreya (LLM) answering from the engine's chart data. Azure OpenAI if configured, else Anthropic. 503 -> site falls back to its script."""
+    import os
+    from . import shreya
+    az = shreya.azure_client()
+    if not az and not os.environ.get("ANTHROPIC_API_KEY"):
+        raise HTTPException(503, "llm_not_configured")
+    if not shreya.rate_ok(req.sid):
+        raise HTTPException(429, "slow_down")
+    if not req.messages or any(m.get("role") not in ("user", "assistant") or not isinstance(m.get("content"), str) for m in req.messages):
+        raise HTTPException(422, "bad_messages")
+    kd, _ = build(req.profile)
+    try:
+        if az:
+            bubbles = shreya.run_chat_azure(az, os.environ.get("SHREYA_AZURE_DEPLOYMENT", os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-4o")),
+                                            kd, req.profile.model_dump(), req.messages, req.remaining <= 0)
+        else:
+            import anthropic
+            bubbles = shreya.run_chat(anthropic.Anthropic(), kd, req.profile.model_dump(), req.messages, req.remaining <= 0)
+    except Exception:  # noqa: BLE001
+        raise HTTPException(502, "llm_error") from None
+    return {"bubbles": bubbles}
+
+
+@app.get("/api/llm-health")
+def llm_health() -> dict:
+    """Open this in a browser after deploying: one tiny real call to the configured model. Shows the error TYPE only, never keys."""
+    import os
+    from . import shreya
+    az = shreya.azure_client()
+    if not az:
+        return {"ok": False, "why": "AZURE_OPENAI_API_KEY / AZURE_OPENAI_ENDPOINT not set"}
+    dep = os.environ.get("SHREYA_AZURE_DEPLOYMENT", os.environ.get("AZURE_OPENAI_DEPLOYMENT", "gpt-4o"))
+    try:
+        r = az.chat.completions.create(model=dep, messages=[{"role": "user", "content": "Say OK"}], max_completion_tokens=20)
+        return {"ok": True, "deployment": dep, "reply": (r.choices[0].message.content or "")[:40]}
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "deployment": dep, "error_type": type(e).__name__, "status": getattr(e, "status_code", None)}
 
 
 @app.get("/t/{topic}")
