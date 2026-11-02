@@ -33,7 +33,9 @@ async def lifespan(_a):  # type: ignore[no-untyped-def]
 
 app = FastAPI(title="timesastro-gateway", lifespan=lifespan)
 from .extras import router as extras_router  # noqa: E402
+from .pages import router as pages_router  # noqa: E402
 app.include_router(extras_router)
+app.include_router(pages_router)
 app.mount("/engine", engine)  # full engine API stays reachable (docs at /engine/docs)
 
 
@@ -306,6 +308,20 @@ def topic_page(topic: str) -> FileResponse:
     if topic not in ("career", "marriage", "love", "money", "abroad", "foreign"):
         raise HTTPException(404, "unknown topic")
     return FileResponse(STATIC / "index.html")
+
+
+@app.get("/robots.txt")
+def robots() -> Response:
+    return Response("User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /funnel\nSitemap: https://times-astro-live.onrender.com/sitemap.xml\n", media_type="text/plain")
+
+
+@app.get("/sitemap.xml")
+def sitemap() -> Response:
+    from .pages import SLUGS
+    u = ["/", "/kundli", "/rashifal", "/about", "/contact", "/privacy", "/terms", "/refund"] + [f"/rashifal/{s}" for s in SLUGS] + \
+        [f"/t/{t}" for t in ("career", "marriage", "love", "money", "abroad")]
+    body = "".join(f"<url><loc>https://times-astro-live.onrender.com{p}</loc></url>" for p in u)
+    return Response(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>', media_type="application/xml")
 
 
 @app.get("/funnel")
